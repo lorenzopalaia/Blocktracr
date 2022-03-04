@@ -2,7 +2,7 @@
   <div class="home">
     <div class="container">
       <div class="row">
-        <div class="col">
+        <div class="col text-center text-md-start">
           <h1>BLOCKTRACR</h1>
           <p>
             Tieni traccia dell'andamento dei tuoi portafogli crypto e DeFi
@@ -11,13 +11,12 @@
           <button
             type="button"
             class="btn btn-primary"
-            style="font-family: 'Sequel100Black-85', Helvetica, Arial"
           >
             Registrati
           </button>
         </div>
         <div class="col d-none d-sm-block d-sm-none d-md-block">
-          <img src="../assets/images/eth.svg" alt="eth" />
+          <img class="img-fluid float-end" src="../assets/images/eth.svg" alt="eth" />
         </div>
       </div>
       <div class="container" style="padding-top: 20px">
@@ -100,6 +99,7 @@ h3 {
 
 button {
   background-color: #2ab2fc;
+  font-family: "Sequel100Black-85", Helvetica, Arial;
 }
 .card:hover {
   transform: scale(1.1);
@@ -120,9 +120,5 @@ button {
 
 .card-img-top {
   height: 256px;
-}
-
-.container {
-  padding: 0;
 }
 </style>

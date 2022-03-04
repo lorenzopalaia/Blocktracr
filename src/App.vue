@@ -1,51 +1,15 @@
 <template>
   <CoinsBar></CoinsBar>
-  <nav class="navbar navbar-expand-lg navbar-dark navbar-inverse">
-    <div class="container-fluid">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <router-link to="/">HOME</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/livestats">LIVE STATS</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/dashboard">DASHBOARD</router-link>
-          </li>
-        </ul>
-        <div class="collapse navbar-collapse justify-content-end">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link to="/login">LOGIN</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/register">REGISTER</router-link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </nav>
+  <Navbar></Navbar>
   <router-view />
 </template>
 
 <script>
 import CoinsBar from "./components/CoinsBar.vue";
+import Navbar from "./components/Navbar.vue";
 export default {
   name: "App",
-  components: { CoinsBar },
+  components: { CoinsBar, Navbar },
 };
 </script>
 
@@ -66,25 +30,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-  background-color: transparent;
-}
-
-nav a {
-  font-weight: bold;
-  color: #f5f5f5;
-  padding: 20px;
-  text-decoration: none;
-}
-
-nav a:hover {
-  color: #7067cf;
-}
-
-nav a.router-link-exact-active {
-  color: #2ab2fc;
 }
 </style>
