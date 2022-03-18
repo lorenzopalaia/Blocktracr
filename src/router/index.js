@@ -26,10 +26,15 @@ const routes = [
     component: () => import ('../views/DashboardView.vue')
   },
   {
-    path: '/livestats',
+    path: '/livestats/:page',
     name: 'livestats',
-    component: () => import ('../views/LiveStatsView.vue')
-  }
+    component: () => import ('../views/LiveStatsView.vue'),
+  },
+  {
+    path: '/coin/:id',
+    name: 'livestatsDetails',
+    component: () => import ('../views/LiveStatsDetailsView.vue')
+  },
 ]
 
 const router = createRouter({

@@ -8,21 +8,20 @@
             Tieni traccia dell'andamento dei tuoi portafogli crypto e DeFi
             Wallet
           </p>
-          <button
-            type="button"
-            class="btn btn-primary"
-          >
-            Registrati
-          </button>
+          <button type="button" class="btn btn-primary">Registrati</button>
         </div>
         <div class="col d-none d-sm-block d-sm-none d-md-block">
-          <img class="img-fluid float-end" src="../assets/images/eth.svg" alt="eth" />
+          <img
+            class="img-fluid float-end"
+            src="../assets/images/eth.svg"
+            alt="eth"
+          />
         </div>
       </div>
       <div class="container" style="padding-top: 20px">
         <h3 class="cardsIntro">BENEFITS</h3>
         <p style="color: #e0e0e0; text-align: center">
-          There are the advantages of minting a NFT with our service
+          These are the advantages of minting a NFT with our service
         </p>
         <div>
           <div class="row">

@@ -31,7 +31,6 @@ export default {
       this.coins = res.data;
     },
   },
-  components: {},
   mounted() {
     this.getData();
     setInterval(this.getData, 60000);

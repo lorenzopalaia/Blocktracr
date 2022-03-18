@@ -18,7 +18,7 @@
             <router-link to="/">HOME</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/livestats">LIVE STATS</router-link>
+            <router-link to="/livestats/1">LIVE STATS</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/dashboard">DASHBOARD</router-link>
@@ -66,5 +66,9 @@ nav a:hover {
 
 nav a.router-link-exact-active {
   color: #2ab2fc;
+}
+
+.nav-item {
+  font-family: "Sequel100Black-45", Helvetica, Arial;
 }
 </style>
