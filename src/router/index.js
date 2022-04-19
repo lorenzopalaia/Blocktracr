@@ -26,7 +26,7 @@ const routes = [
     component: () => import ('../views/DashboardView.vue')
   },
   {
-    path: '/livestats/:page',
+    path: '/livestats',
     name: 'livestats',
     component: () => import ('../views/LiveStatsView.vue'),
   },
