@@ -5,7 +5,7 @@
         <div class="card">
           <div class="card-body">
             <p>Invested</p>
-            <h3>$ 56.000</h3>
+            <h3>$ 156.000</h3>
           </div>
         </div>
       </div>
@@ -13,7 +13,7 @@
         <div class="card">
           <div class="card-body">
             <p>Portfolio Value</p>
-            <h3>$ 56.000</h3>
+            <h3>$ 156.000</h3>
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
         <div class="card">
           <div class="card-body">
             <p>Profit</p>
-            <h3>$ 56.000</h3>
+            <h3>$ 156.000</h3>
           </div>
         </div>
       </div>
@@ -37,6 +37,12 @@ export default {
   },
   methods: {
     async getData() {
+      let binance = new ccxt.binance ({
+        apiKey: "eTTdvdRluP7o3P3egzbaHH2inaRCX7ZV6EwokdracUitTtiAnXlRSxpgJCgxUgL5",
+        secret: "bpqwwR0pBrxwGVsuVTg6H1FNjybVBo8Bu96rtSvJEV70YhBqXuCC2zcoBRMvQXJT",
+        proxy: "https://dashboard-cors.herokuapp.com/"
+      })
+      console.log(binance.id, await binance.fetchBalance())
     },
   },
   mounted() {

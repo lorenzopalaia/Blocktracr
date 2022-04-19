@@ -24,8 +24,7 @@ export default {
   },
   methods: {
     async getData() {
-      let uri =
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100";
+      let uri = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100";
       let config = { headers: { Accept: "application/json" } };
       const res = await axios.get(uri, config);
       this.coins = res.data;

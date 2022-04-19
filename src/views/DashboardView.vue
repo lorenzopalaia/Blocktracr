@@ -6,12 +6,12 @@
 
 <script>
 // @ is an alias to /src
-import Dashboard from '@/components/Dashboard.vue'
+import Dashboard from "@/components/Dashboard.vue";
 
 export default {
-  name: 'DashboardView',
+  name: "DashboardView",
   components: {
-    Dashboard
-  }
-}
+    Dashboard,
+  },
+};
 </script>
