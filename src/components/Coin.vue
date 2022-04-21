@@ -1,47 +1,64 @@
 <template>
   <div v-if="coinData.image && historicalCoinData" class="container">
     <div class="row">
-      <div class="card">
-        <div class="row">
-          <div class="col">
-            <img :src="coinData.image.large" style="width: 2rem" class="me-2" />
-            <span class="fw-bold">{{ coinData.name }}</span>
-            <span class="text-wrap bg-primary badge">{{
-              coinData.symbol.toUpperCase()
-            }}</span>
-          </div>
-          <div class="col">
-            <span class="fs-1"
-              >${{ coinData.market_data.current_price.usd }}</span
-            >
-            <span
-              v-if="coinData.market_data.price_change_percentage_24h >= 0"
-              class="fs-5 badge bg-success text-wrap"
-              >{{
-                coinData.market_data.price_change_percentage_24h.toFixed(2)
-              }}%</span
-            >
-            <span v-else class="fs-5 badge bg-danger text-wrap">{{
-              coinData.market_data.price_change_percentage_24h.toFixed(2)
-            }}</span>
+      <div class="col">
+        <div class="card">
+          <div class="row">
+            <div class="col">
+              <span class="fw-bold">
+                <img
+                  :src="coinData.image.large"
+                  style="width: 2rem"
+                  class="me-2"
+                />
+                <p>
+                  {{ coinData.name }}
+                </p>
+                <p class="text-wrap bg-primary badge">
+                  {{ coinData.symbol.toUpperCase() }}
+                </p>
+              </span>
+            </div>
+            <div class="col">
+              <p class="fs-1">
+                ${{ coinData.market_data.current_price.usd.toLocaleString() }}
+              </p>
+              <span
+                v-if="coinData.market_data.price_change_percentage_24h >= 0"
+                class="fs-5 badge bg-success text-wrap"
+                >{{
+                  coinData.market_data.price_change_percentage_24h.toFixed(2)
+                }}%</span
+              >
+              <span v-else class="fs-5 badge bg-danger text-wrap"
+                >{{
+                  coinData.market_data.price_change_percentage_24h.toFixed(2)
+                }}%</span
+              >
+            </div>
           </div>
         </div>
-        <div class="card-body"></div>
       </div>
     </div>
     <div class="row">
       <div v-if="coinData.description.en" class="col">
         <div class="card">
-          <div class="card-header fw-bold">About {{ coinData.name }}</div>
-          <div v-html="coinData.description.en" class="card-body"></div>
+          <p class="card-header fw-bold">About {{ coinData.name }}</p>
+          <p
+            v-html="coinData.description.en"
+            class="card-body"
+            style="color: #e0e0e0"
+          ></p>
         </div>
       </div>
       <div class="col">
         <div class="row">
           <div class="col">
             <div class="card">
-              <p>Market Cap</p>
-              <p>${{ coinData.market_data.market_cap.usd.toLocaleString() }}</p>
+              <p class="fs-6" style="color: #e0e0e0">Market Cap</p>
+              <p class="fs-5">
+                ${{ coinData.market_data.market_cap.usd.toLocaleString() }}
+              </p>
             </div>
           </div>
           <div class="col">
@@ -107,43 +124,71 @@
       </div>
     </div>
     <div v-if="coinData.sentiment_votes_up_percentage" class="row">
-      <div class="card">
-        <div class="card-header fw-bold">
-          Sentiment Score
-        </div>
-        <div class="card-body fw-bold">
-          <div class="progress" style="height: 24px">
-            <div
-              class="progress-bar bg-success"
-              role="progressbar"
-              :style="{ width: coinData.sentiment_votes_up_percentage + '%' }"
-              :aria-valuenow="coinData.sentiment_votes_up_percentage"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            >
-              {{ coinData.sentiment_votes_up_percentage }}%
-            </div>
-            <div
-              class="progress-bar bg-danger"
-              role="progressbar"
-              :style="{ width: coinData.sentiment_votes_down_percentage + '%' }"
-              :aria-valuenow="coinData.sentiment_votes_down_percentage"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            >
-              {{ coinData.sentiment_votes_down_percentage }}%
+      <div class="col-12">
+        <div class="card">
+          <p class="card-header fw-bold">Sentiment Score</p>
+          <div class="card-body fw-bold">
+            <div class="progress" style="height: 24px">
+              <div
+                class="progress-bar bg-success"
+                role="progressbar"
+                :style="{ width: coinData.sentiment_votes_up_percentage + '%' }"
+                :aria-valuenow="coinData.sentiment_votes_up_percentage"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                {{ coinData.sentiment_votes_up_percentage }}%
+              </div>
+              <div
+                class="progress-bar bg-danger"
+                role="progressbar"
+                :style="{
+                  width: coinData.sentiment_votes_down_percentage + '%',
+                }"
+                :aria-valuenow="coinData.sentiment_votes_down_percentage"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                {{ coinData.sentiment_votes_down_percentage }}%
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="container">
+    <Line v-if="historicalCoinData.loaded" :chart-data="chartData" :height="100" />
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+import { Line } from "vue-chartjs";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  LinearScale,
+  PointElement,
+  CategoryScale,
+  Plugin,
+} from "chart.js";
+
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  LinearScale,
+  PointElement,
+  CategoryScale
+);
 
 export default {
+  components: { Line },
   name: "Coin",
   props: {
     coin: String,
@@ -151,7 +196,25 @@ export default {
   data() {
     return {
       coinData: [],
-      historicalCoinData: [],
+      historicalCoinData: {
+        loaded: false,
+        timestamps: [],
+        data: [],
+      },
+      chartData: {
+        labels: [],
+        datasets: [
+          {
+            label: "Price",
+            borderColor: "#f87979",
+            pointBackgroundColor: "transparent",
+            borderWidth: 1,
+            pointBorderColor: "transparent",
+            backgroundColor: "#f87979",
+            data: [],
+          },
+        ],
+      },
     };
   },
   methods: {
@@ -163,7 +226,10 @@ export default {
       let config = { headers: { Accept: "application/json" } };
       const res = await axios.get(uri, config);
       // little function to get a shortest description if exists
-      if (res.data.description.en && res.data.description.en.indexOf(".") != -1) {
+      if (
+        res.data.description.en &&
+        res.data.description.en.indexOf(".") != -1
+      ) {
         let found = false;
         let position = 0;
         while (!found) {
@@ -184,8 +250,15 @@ export default {
         "/market_chart?vs_currency=usd&days=max";
       let config = { headers: { Accept: "application/json" } };
       const res = await axios.get(uri, config);
-      console.log(res.data);
-      this.historicalCoinData = res.data;
+      //console.log(res.data.prices);
+      for (let idx = 0; idx < res.data.prices.length; ++idx) {
+        var date = new Date(res.data.prices[idx][0]).toLocaleDateString(
+          "en-US"
+        );
+        this.chartData.labels.push(date);
+        this.chartData.datasets[0].data.push(res.data.prices[idx][1]);
+      }
+      this.historicalCoinData.loaded = true;
     },
     async getAll() {
       this.getData();
@@ -193,10 +266,25 @@ export default {
     },
   },
   mounted() {
-    this.getAll();
-    setInterval(this.getAll, 60000);
+    //this.getAll();
+    //setInterval(this.getAll, 60000);
+    this.getData();
+    this.getHistoricalData();
+    setInterval(this.getData(), 60000);
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.card {
+  height: 100%;
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+  background-color: rgba(112, 103, 207, 0.1);
+  border-radius: 10px;
+}
+p {
+  color: #f5f5f5;
+  font-family: "Sequel100Black-45", Helvetica, Arial;
+}
+</style>

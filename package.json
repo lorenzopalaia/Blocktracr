@@ -12,6 +12,7 @@
     "axios": "^0.26.0",
     "browserify-zlib": "^0.2.0",
     "ccxt": "^1.75.15",
+    "chart.js": "^3.7.1",
     "constants-browserify": "^1.0.0",
     "core-js": "^3.8.3",
     "crypto": "^1.0.1",
@@ -22,6 +23,7 @@
     "stream-http": "^3.2.0",
     "util": "^0.12.4",
     "vue": "^3.2.13",
+    "vue-chartjs": "^4.0.5",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
