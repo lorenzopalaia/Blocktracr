@@ -1,14 +1,14 @@
 <template>
-  <div v-if="coinData.image && historicalCoinData" class="container">
+  <div v-if="coinData.image" class="container">
     <div class="row">
       <div class="col">
         <div class="card">
           <div class="row">
             <div class="col">
-              <span class="fw-bold">
+              <div class="fw-bold">
                 <img
                   :src="coinData.image.large"
-                  style="width: 2rem"
+                  style="width: 48px"
                   class="me-2"
                 />
                 <p>
@@ -17,7 +17,7 @@
                 <p class="text-wrap bg-primary badge">
                   {{ coinData.symbol.toUpperCase() }}
                 </p>
-              </span>
+              </div>
             </div>
             <div class="col">
               <p class="fs-1">
@@ -26,13 +26,37 @@
               <span
                 v-if="coinData.market_data.price_change_percentage_24h >= 0"
                 class="fs-5 badge bg-success text-wrap"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-caret-up-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"
+                  /></svg
                 >{{
                   coinData.market_data.price_change_percentage_24h.toFixed(2)
                 }}%</span
               >
-              <span v-else class="fs-5 badge bg-danger text-wrap"
+              <span v-else class="fs-5 badge bg-danger text-wrap">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-caret-down-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+                  /></svg
                 >{{
-                  coinData.market_data.price_change_percentage_24h.toFixed(2)
+                  Math.abs(
+                    coinData.market_data.price_change_percentage_24h
+                  ).toFixed(2)
                 }}%</span
               >
             </div>
@@ -156,9 +180,63 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="container">
-    <Line v-if="historicalCoinData.loaded" :chart-data="chartData" :height="100" />
+    <div v-if="chartLoaded" class="row">
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          v-on:click="getHistoricalData('1')"
+          :disabled="interval==='1'"
+        >
+          24h
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          v-on:click="getHistoricalData('7')"
+          :disabled="interval==='7'"
+        >
+          7d
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          v-on:click="getHistoricalData('30')"
+          :disabled="interval==='30'"
+        >
+          30d
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          v-on:click="getHistoricalData('90')"
+          :disabled="interval==='90'"
+        >
+          90d
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          v-on:click="getHistoricalData('365')"
+          :disabled="interval==='365'"
+        >
+          1y
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          v-on:click="getHistoricalData('max')"
+          :disabled="interval==='max'"
+        >
+          Max
+        </button>
+      </div>
+      <Line
+        :chart-data="chartData"
+        :chart-options="chartOptions"
+        :height="100"
+      />
+    </div>
   </div>
 </template>
 
@@ -195,11 +273,21 @@ export default {
   },
   data() {
     return {
+      interval: "1",
       coinData: [],
-      historicalCoinData: {
-        loaded: false,
-        timestamps: [],
-        data: [],
+      chartLoaded: false,
+      chartOptions: {
+        responsive: true,
+        scales: {
+          xAxis: {
+            ticks: {
+              autoSkip: true,
+              maxTicksLimit: 7,
+              minRotation: 0,
+              maxRotation: 0,
+            },
+          },
+        },
       },
       chartData: {
         labels: [],
@@ -212,6 +300,7 @@ export default {
             pointBorderColor: "transparent",
             backgroundColor: "#f87979",
             data: [],
+            cubicInterpolationMode: "monotone",
           },
         ],
       },
@@ -243,14 +332,17 @@ export default {
       console.log(res.data);
       this.coinData = res.data;
     },
-    async getHistoricalData() {
+    async getHistoricalData(interval) {
       let uri =
         "https://api.coingecko.com/api/v3/coins/" +
         this.$props.coin +
-        "/market_chart?vs_currency=usd&days=max";
+        "/market_chart?vs_currency=usd&days=" +
+        interval;
       let config = { headers: { Accept: "application/json" } };
       const res = await axios.get(uri, config);
       //console.log(res.data.prices);
+      this.chartData.labels = [];
+      this.chartData.datasets[0].data = [];
       for (let idx = 0; idx < res.data.prices.length; ++idx) {
         var date = new Date(res.data.prices[idx][0]).toLocaleDateString(
           "en-US"
@@ -258,18 +350,19 @@ export default {
         this.chartData.labels.push(date);
         this.chartData.datasets[0].data.push(res.data.prices[idx][1]);
       }
-      this.historicalCoinData.loaded = true;
+      this.interval = interval;
+      this.chartLoaded = true;
     },
     async getAll() {
       this.getData();
-      this.getHistoricalData();
+      this.getHistoricalData("1");
     },
   },
   mounted() {
     //this.getAll();
     //setInterval(this.getAll, 60000);
     this.getData();
-    this.getHistoricalData();
+    this.getHistoricalData("1");
     setInterval(this.getData(), 60000);
   },
 };

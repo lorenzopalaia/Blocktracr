@@ -2,14 +2,16 @@
   <CoinsBar></CoinsBar>
   <Navbar></Navbar>
   <router-view />
+  <Footer></Footer>
 </template>
 
 <script>
 import CoinsBar from "./components/CoinsBar.vue";
 import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
 export default {
   name: "App",
-  components: { CoinsBar, Navbar },
+  components: { CoinsBar, Navbar, Footer },
 };
 </script>
 

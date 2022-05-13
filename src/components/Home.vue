@@ -5,10 +5,18 @@
         <div class="col text-center text-md-start">
           <h1>BLOCKTRACR</h1>
           <p>
-            Tieni traccia dell'andamento dei tuoi portafogli crypto e DeFi
-            Wallet
+            Tieni traccia dell'andamento del tuo portafoglio crypto.<br />Analizza
+            ogni crypto presente sul mercato tramite un'interfaccia semplice e
+            interattiva
           </p>
-          <button type="button" class="btn btn-primary">Registrati</button>
+          <button type="button" class="btn btn-primary btn-lg" style="margin-right: 10px;">
+            <router-link class="router-link" to="/register" style="color: white"
+              >Registrati</router-link
+            >
+          </button>
+          <button type="button" class="btn btn-outline-primary btn-lg">
+            <router-link class="router-link" to="/login">Login</router-link>
+          </button>
         </div>
         <div class="col d-none d-sm-block d-sm-none d-md-block">
           <img
@@ -19,22 +27,23 @@
         </div>
       </div>
       <div class="container" style="padding-top: 20px">
-        <h3 class="cardsIntro">BENEFITS</h3>
+        <h3 class="cardsIntro">PERCHÉ BLOCKTRACR?</h3>
         <p style="color: #e0e0e0; text-align: center">
-          These are the advantages of minting a NFT with our service
+          I vantaggi di tracciare l'andamento del tuo portafoglio crypto sono
+          molteplici
         </p>
         <div>
           <div class="row">
             <div class="col-sm d-flex justify-content-center">
               <div class="card">
                 <img
-                  src="../assets/images/eth-outline.svg"
+                  src="../assets/images/plot.svg"
                   class="card-img-top"
-                  alt="ethOutline"
+                  alt="plot"
                 />
                 <div class="card-body">
                   <p class="card-text">
-                    The reliability of Ethereum blockchain
+                    Grafico dell'andamento temporale e delle allocazioni
                   </p>
                 </div>
               </div>
@@ -42,26 +51,26 @@
             <div class="col-sm d-flex justify-content-center">
               <div class="card">
                 <img
-                  src="../assets/images/eth-nft.svg"
+                  src="../assets/images/transaction.svg"
                   class="card-img-top"
-                  alt="ethNft"
+                  alt="transaction"
                 />
                 <div class="card-body">
-                  <p class="card-text">
-                    The uniqueness of<br />non-fungible tokens
-                  </p>
+                  <p class="card-text">Raccolta delle transazioni eseguite</p>
                 </div>
               </div>
             </div>
             <div class="col-sm d-flex justify-content-center">
               <div class="card">
                 <img
-                  src="../assets/images/eth-two-color.svg"
+                  src="../assets/images/profit.svg"
                   class="card-img-top"
-                  alt="ethTwoColor"
+                  alt="profit"
                 />
                 <div class="card-body">
-                  <p class="card-text">The guarantee of decentralization</p>
+                  <p class="card-text">
+                    Statistiche dettagliate su profitti e perdite
+                  </p>
                 </div>
               </div>
             </div>
@@ -96,8 +105,16 @@ h3 {
   font-family: "Sequel100Black-85", Helvetica, Arial;
 }
 
-button {
+.router-link {
+  text-decoration: none;
+}
+
+.btn-primary {
   background-color: #2ab2fc;
+  font-family: "Sequel100Black-85", Helvetica, Arial;
+}
+.btn-outline-primary {
+  color: #2ab2fc;
   font-family: "Sequel100Black-85", Helvetica, Arial;
 }
 .card:hover {
