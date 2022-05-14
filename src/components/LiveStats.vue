@@ -18,7 +18,7 @@
       <p v-if="change24h >= 0" class="text-success market-info-text">
         {{ change24h.toFixed(2) }}%
       </p>
-      <p v-else class="text-danger market-info-text">{{ change24h }}%</p>
+      <p v-else class="text-danger market-info-text">{{ change24h.toFixed(2) }}%</p>
       <p class="market-info-text">. Il volume scambiato oggi ammonta a </p>
       <p class="text-primary market-info-text">{{volume24h.toLocaleString()}}$</p>
     </div>
@@ -88,13 +88,13 @@
     <div class="row">
       <input
         type="text"
-        class="form-control rounder-0 border-0 my-4 d-flex coin-search"
+        class="form-control rounded border-primary my-4 d-flex coin-search"
         placeholder="Ricerca Coin"
         @keyup="searchCoin()"
         v-model="coinSearch"
         id="search"
       />
-      <table class="table text-white">
+      <table class="table rounded text-white">
         <thead>
           <tr>
             <th v-for="title in titles" :key="title">
