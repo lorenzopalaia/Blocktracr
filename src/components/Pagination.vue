@@ -8,7 +8,7 @@
           @click="onCLickFirstPage(), scrollToTop()"
           :disabled="isInFirstPage"
         >
-          First
+          Prima
         </button>
       </li>
       <li class="pagination-item">
@@ -48,7 +48,7 @@
           @click="onClickLastPage(), scrollToTop()"
           :disabled="isInLastPage"
         >
-          Last
+          Ultima
         </button>
       </li>
     </ul>

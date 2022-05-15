@@ -58,7 +58,7 @@
           <p class="footer-text">
             A cura di Apa Giorgio e Palaia Lorenzo. Blocktracr è un progetto
             realizzato per il corso di Linguaggi e Tecnologie per il Web
-            dell'Università La Sapienza di Roma, A.A. 2021/2022.
+            dell'Università La Sapienza di Roma, A.A. 2021/2022
           </p>
         </div>
       </div>

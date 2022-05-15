@@ -141,7 +141,7 @@
                     v-if="coinData.market_data.market_cap.usd"
                     class="fs-5 m-0"
                   >
-                    ${{ coinData.market_data.market_cap.usd.toLocaleString() }}
+                    {{ Intl.NumberFormat('en-US', { notation: 'compact', currency: 'USD', style: 'currency' }).format(coinData.market_data.market_cap.usd) }}
                   </p>
                   <p v-else class="fs-5 m-0">N/D</p>
                   <p class="fs-6 m-0" style="color: rgba(112, 103, 207, 0.8)">
@@ -176,7 +176,7 @@
                     class="fs-5 m-0"
                   >
                     {{
-                      coinData.market_data.circulating_supply.toLocaleString()
+                      Intl.NumberFormat('en-US', { notation: 'compact' }).format(coinData.market_data.circulating_supply)
                     }}
                   </p>
                   <p v-else class="fs-5 m-0">N/D</p>
@@ -214,8 +214,8 @@
                     v-if="coinData.market_data.total_volume.usd"
                     class="fs-5 m-0"
                   >
-                    ${{
-                      coinData.market_data.total_volume.usd.toLocaleString()
+                    {{
+                      Intl.NumberFormat('en-US', { notation: 'compact', currency: 'USD', style: 'currency' }).format(coinData.market_data.total_volume.usd)
                     }}
                   </p>
                   <p v-else class="fs-5 m-0">N/D</p>
@@ -253,7 +253,7 @@
                 </div>
                 <div class="col my-auto">
                   <p v-if="coinData.market_data.total_supply" class="fs-5 m-0">
-                    {{ coinData.market_data.total_supply.toLocaleString() }}
+                    {{ Intl.NumberFormat('en-US', { notation: 'compact' }).format(coinData.market_data.total_supply) }}
                   </p>
                   <p v-else class="fs-5 m-0">N/D</p>
                   <p class="fs-6 m-0" style="color: rgba(112, 103, 207, 0.8)">
@@ -287,7 +287,7 @@
                 </div>
                 <div class="col my-auto">
                   <p v-if="coinData.market_data.ath.usd" class="fs-5 m-0">
-                    ${{ coinData.market_data.ath.usd.toLocaleString() }}
+                    {{ Intl.NumberFormat('en-US', { notation: 'compact', currency: 'USD', style: 'currency' }).format(coinData.market_data.ath.usd) }}
                   </p>
                   <p v-else class="fs-5 m-0">N/D</p>
                   <p class="fs-6 m-0" style="color: rgba(112, 103, 207, 0.8)">
@@ -319,14 +319,14 @@
                 </div>
                 <div class="col my-auto">
                   <p v-if="coinData.market_data.high_24h.usd" class="fs-5 m-0">
-                    ${{ coinData.market_data.high_24h.usd.toLocaleString() }}
+                    {{ Intl.NumberFormat('en-US', { notation: 'compact', currency: 'USD', style: 'currency' }).format(coinData.market_data.high_24h.usd) }}
                   </p>
                   <p v-else class="fs-5 m-0">N/D</p>
                   <p class="fs-6 m-0" style="color: rgba(112, 103, 207, 0.8)">
                     24h High
                   </p>
                   <p v-if="coinData.market_data.low_24h.usd" class="fs-5 m-0">
-                    ${{ coinData.market_data.low_24h.usd.toLocaleString() }}
+                    {{ Intl.NumberFormat('en-US', { notation: 'compact', currency: 'USD', style: 'currency' }).format(coinData.market_data.low_24h.usd) }}
                   </p>
                   <p v-else class="fs-5 m">N/D</p>
                   <p class="fs-6 m-0" style="color: rgba(112, 103, 207, 0.8)">
@@ -450,6 +450,10 @@ import {
   Plugin,
 } from "chart.js";
 
+//deepai API for text summarization
+const deepai = require('deepai');
+deepai.setApiKey('d54933d4-963d-43b4-88ce-7490423f790f');
+
 ChartJS.register(
   Title,
   Tooltip,
@@ -508,23 +512,12 @@ export default {
     async getData() {
       let uri = "https://api.coingecko.com/api/v3/coins/" + this.$props.coin;
       let config = { headers: { Accept: "application/json" } };
-      const res = await axios.get(uri, config);
-      // little function to get a shortest description if exists
-      if (
-        res.data.description.en &&
-        res.data.description.en.indexOf(".") != -1
-      ) {
-        let found = false;
-        let position = 0;
-        while (!found) {
-          let idx = res.data.description.en.indexOf(". ", position);
-          if (this.isUpperCase(res.data.description.en[idx + 2])) {
-            res.data.description.en = res.data.description.en.substring(0, idx);
-            found = true;
-          } else position = idx + 1;
-        }
+      let res = await axios.get(uri, config);
+      // little function to get a summarize description via deepai API
+      if (res.data.description.en) {
+        var resp = await deepai.callStandardApi("summarization", { text: res.data.description.en });
+        res.data.description.en = resp.output;
       }
-      console.log(res.data);
       this.coinData = res.data;
     },
     async getHistoricalData(interval) {
@@ -563,7 +556,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .card {
   box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
   background-color: rgba(112, 103, 207, 0.1);
@@ -575,5 +568,10 @@ export default {
 p {
   color: #f5f5f5;
   font-family: "Sequel100Black-45", Helvetica, Arial;
+}
+
+a {
+  text-decoration: none;
+  color: rgba(112, 103, 207, 0.8);
 }
 </style>
