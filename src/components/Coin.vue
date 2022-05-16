@@ -9,9 +9,9 @@
                 v-if="coinData.image.large"
                 :src="coinData.image.large"
                 style="width: 48px; display: inline"
-                class="me-2"
+                class="me-2 align-items-center"
               />
-              <p v-if="coinData.name" class="fs-1 me-2" style="display: inline">
+              <p v-if="coinData.name" class="fs-1 justify-content-center" style="display: inline">
                 {{ coinData.name }}
               </p>
               <p
