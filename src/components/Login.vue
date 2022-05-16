@@ -14,6 +14,7 @@
                     class="form-control form-control-lg"
                     placeholder="Email"
                     id="email"
+                    v-model="email"
                     required
                   />
                   <br />
@@ -22,17 +23,20 @@
                     class="form-control form-control-lg"
                     placeholder="Password"
                     id="password"
+                    v-model="password"
                     required
                   />
                 </div>
                 <div class="form-check d-flex justify-content-center">
-                  <input class="form-check-input m-2" type="checkbox" id="rememberMe">
-                  <p class="form-check-label my-2" for="rememberMe">Ricordami</p>
                 </div>
                 <br />
-                <button class="btn btn-primary brn-block" type="submit">
-                  Invia
-                </button>
+                <div>
+                  <input type="checkbox" id="rememberMe" value="true" checked>
+                  <label for="rememberMe"> Remember me</label>
+                </div>
+                <a href="#" class="btn btn-primary brn-block" @click="login">
+                  Login
+                </a>
               </form>
               <div>
                 <p class="mb-0">
@@ -49,14 +53,42 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "Login",
   data() {
     return {
       isLogin: false,
+      email: '',
+      password: '',
     };
   },
+  methods:{
+    login() {
+      let user = {
+        email: this.email,
+        password: this.password
+      }
+      axios.post('http://localhost:5000/login', user)
+        .then(res => {
+          if (res.status === 200) {
+            //inserimento token in memoria in base al checkbox
+            if(document.getElementById("rememberMe").checked){
+            localStorage.setItem('token', res.data.token);
+            } 
+            else{
+              sessionStorage.setItem('token', res.data.token);
+            }
+            this.$router.push('/dashboard');
+          }
+        }, err => {
+          console.log(err.response);
+          this.error = err.response.data.error
+        })
+    }
+  }
 };
+
 </script>
 
 <style scoped>

@@ -29,13 +29,14 @@
           id="navbarNav"
         >
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link to="/login">LOGIN</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/register">REGISTER</router-link>
+            <li class="nav-item" >
+              <router-link to="/login" v-if="!islog()" >LOGIN</router-link>
+              <router-link to="/login" v-if="islog()" @click="logout()">LOGOUT</router-link>
             </li>
           </ul>
+          <li class="nav-item">
+            <router-link to="/register">REGISTER</router-link>
+          </li>
         </div>
       </div>
     </div>
@@ -45,6 +46,25 @@
 <script>
 export default {
   name: "Navbar",
+    data() {
+    return {
+      log: "LOGIN"
+    }
+  },
+  methods:{
+    islog(){ 
+      if(localStorage.getItem("token")){
+        this.$forceUpdate();
+        return true;
+      }
+      else return false;
+    },
+    logout(){
+      localStorage.clear();
+      sessionStorage.clear();
+      this.$forceUpdate();
+    }
+  }
 };
 </script>
 

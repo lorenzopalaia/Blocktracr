@@ -13,6 +13,7 @@
                     class="form-control form-control-lg"
                     placeholder="Username"
                     id="name"
+                    v-model="name"
                     required
                   />
                   <br />
@@ -21,6 +22,7 @@
                     class="form-control form-control-lg"
                     placeholder="Email"
                     id="email"
+                    v-model="email"
                     required
                   />
                   <br />
@@ -29,6 +31,7 @@
                     class="form-control form-control-lg"
                     placeholder="Password"
                     id="password"
+                    v-model="password"
                     required
                   />
                 </div>
@@ -39,9 +42,9 @@
                 </div>
                 -->
                 <br />
-                <button class="btn btn-primary brn-block" type="submit">
-                  Invia
-                </button>
+                <a href="#" class="btn btn-primary brn-block"  @click="signup">
+                Submit
+                </a>
               </form>
               <div>
                 <p class="mb-0">
@@ -58,8 +61,33 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "Register",
+
+  data(){
+    return{
+      name: '',
+      email:'',
+      password: '',
+    }
+  },
+  methods: {
+    signup() {
+      let newUser = {
+        name: this.name,
+        email: this.email,
+        password: this.password
+      }
+      axios.post('http://localhost:5000/register', newUser)
+        .then(res => {
+          this.$router.push('/login'); //utente appena registrato viene reindirizzato nella pagina di login
+        }, err => {
+          console.log(err.response)
+          err.response.data.error
+        })
+    }
+  },
 };
 </script>
 
