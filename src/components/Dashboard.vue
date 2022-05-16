@@ -51,9 +51,15 @@ export default {
         //mi prendo le informazioni dell'utente dal server
     axios.get('http://localhost:5000/user', { headers: { token: localStorage.getItem('token')}})
       .then(res => {
-        this.name = res.data.user.name;
-        this.email = res.data.user.email;
+        if(res.status()===401){
+          this.$router.push('/login');
+        }
+        else{
+          this.name = res.data.user.name;
+          this.email = res.data.user.email;
+        }
       })
+      
   },
 };
 </script>

@@ -108,7 +108,7 @@ export default {
           return this.currentPage - 1;
         }
         return this.currentPage;
-      } else return this.currentPage + 1;
+      } else return this.currentPage+1;
     },
     isInCurrentPage() {
       if (this.isInLastPage) {
@@ -145,19 +145,13 @@ export default {
       this.$emit("pagechanged", 1);
     },
     onClickPreviousPage() {
-      if (!this.isInLastPage)
         this.$emit("pagechanged", this.currentPage - 1);
-      else
-        this.$emit("pagechanged", this.currentPage - 2);
     },
     onClickPage(page) {
       this.$emit("pagechanged", page);
     },
     onClickNextPage() {
-      if (!this.isInFirstPage)
         this.$emit("pagechanged", this.currentPage + 1);
-      else
-        this.$emit("pagechanged", this.currentPage + 2);
     },
     onClickLastPage() {
       this.$emit("pagechanged", this.totalPages);

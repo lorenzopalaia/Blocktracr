@@ -3,31 +3,29 @@
     <div class="row">
       <div class="col my-4">
         <div class="row">
-          <div class="col">
-            <div class="fw-bold">
-              <img
-                v-if="coinData.image.large"
-                :src="coinData.image.large"
-                style="width: 48px; display: inline"
-                class="me-2 align-items-center"
-              />
-              <p v-if="coinData.name" class="fs-1 justify-content-center" style="display: inline">
-                {{ coinData.name }}
-              </p>
-              <p
-                v-if="coinData.symbol"
-                class="fs-5 text-wrap bg-primary badge me-2"
-                style="display: inline"
-              >
-                {{ coinData.symbol.toUpperCase() }}
-              </p>
-            </div>
+          <div class="col fw-bold d-flex align-items-center">
+            <img
+              v-if="coinData.image.large"
+              :src="coinData.image.large"
+              style="width: 48px; display: inline"
+              class="m-2"
+            />
+            <p v-if="coinData.name" class="fs-1 m-2" style="display: inline">
+              {{ coinData.name }}
+            </p>
+            <p
+              v-if="coinData.symbol"
+              class="fs-5 text-wrap bg-primary badge m-2"
+              style="display: inline"
+            >
+              {{ coinData.symbol.toUpperCase() }}
+            </p>
           </div>
-          <div class="col">
+          <div class="col d-flex align-items-center">
             <p
               v-if="coinData.market_data.current_price.usd"
               style="display: inline"
-              class="fs-1 me-2"
+              class="fs-1 m-2"
             >
               ${{ coinData.market_data.current_price.usd.toLocaleString() }}
             </p>
@@ -36,7 +34,7 @@
                 coinData.market_data.price_change_percentage_24h &&
                 coinData.market_data.price_change_percentage_24h >= 0
               "
-              class="fs-5 badge bg-success text-wrap me-2"
+              class="fs-5 badge bg-success text-wrap m-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +55,7 @@
                 coinData.market_data.price_change_percentage_24h &&
                 coinData.market_data.price_change_percentage_24h < 0
               "
-              class="fs-5 badge bg-danger text-wrap me-2"
+              class="fs-5 badge bg-danger text-wrap m-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +80,7 @@
       </div>
     </div>
     <div class="row">
-      <div v-if="coinData.description.en" class="col my-4">
+      <div class="col mb-4">
         <div class="card">
           <p class="card-header fw-bold">Informazioni su {{ coinData.name }}</p>
           <div class="card-body">
@@ -116,8 +114,8 @@
         </div>
       </div>
       <div class="col">
-        <div class="row my-4">
-          <div class="col">
+        <div class="row">
+          <div class="col mb-4">
             <div class="card">
               <div class="row my-auto">
                 <div
@@ -151,7 +149,7 @@
               </div>
             </div>
           </div>
-          <div class="col">
+          <div class="col mb-4">
             <div class="card">
               <div class="row my-auto">
                 <div
@@ -188,8 +186,8 @@
             </div>
           </div>
         </div>
-        <div class="row my-4">
-          <div class="col">
+        <div class="row">
+          <div class="col mb-4">
             <div class="card">
               <div class="row my-auto">
                 <div
@@ -226,7 +224,7 @@
               </div>
             </div>
           </div>
-          <div class="col">
+          <div class="col mb-4">
             <div class="card">
               <div class="row my-auto">
                 <div
@@ -264,8 +262,8 @@
             </div>
           </div>
         </div>
-        <div class="row my-4">
-          <div class="col">
+        <div class="row">
+          <div class="col mb-4">
             <div class="card">
               <div class="row my-auto">
                 <div
@@ -297,7 +295,7 @@
               </div>
             </div>
           </div>
-          <div class="col">
+          <div class="col mb-4">
             <div class="card">
               <div class="row my-auto">
                 <div
@@ -372,10 +370,10 @@
         </div>
       </div>
     </div>
-    <div v-if="chartLoaded" class="row">
+    <div v-if="chartLoaded">
       <div class="card">
         <p class="card-header fw-bold">Grafico</p>
-        <div class="btn-group" role="group">
+        <div class="btn-group mx-4" role="group">
           <button
             type="button"
             class="btn btn-outline-primary"
@@ -425,11 +423,12 @@
             Max
           </button>
         </div>
-        <Line
-          :chart-data="chartData"
-          :chart-options="chartOptions"
-          :height="200"
-        />
+          <Line
+            :chart-data="chartData"
+            :chart-options="chartOptions"
+            :height="200"
+            class="m-4"
+          />
       </div>
     </div>
   </div>
@@ -447,12 +446,15 @@ import {
   LinearScale,
   PointElement,
   CategoryScale,
-  Plugin,
+  Filler,
 } from "chart.js";
 
 //deepai API for text summarization
 const deepai = require('deepai');
 deepai.setApiKey('d54933d4-963d-43b4-88ce-7490423f790f');
+
+//chart gradient
+
 
 ChartJS.register(
   Title,
@@ -461,7 +463,8 @@ ChartJS.register(
   LineElement,
   LinearScale,
   PointElement,
-  CategoryScale
+  CategoryScale,
+  Filler
 );
 
 export default {
@@ -472,6 +475,7 @@ export default {
   },
   data() {
     return {
+      gradient: null,
       interval: "1",
       coinData: [],
       chartLoaded: false,
@@ -497,9 +501,10 @@ export default {
             pointBackgroundColor: "transparent",
             borderWidth: 1,
             pointBorderColor: "transparent",
-            backgroundColor: "#7067cf",
+            backgroundColor: "rgba(112, 103, 207, 0.1)",
             data: [],
             cubicInterpolationMode: "monotone",
+            fill: true
           },
         ],
       },
@@ -539,7 +544,9 @@ export default {
         this.chartData.datasets[0].data.push(res.data.prices[idx][1]);
       }
       this.interval = interval;
-      if (this.chartData.datasets[0].data.length > 1) this.chartLoaded = true;
+      if (this.chartData.datasets[0].data.length > 1) {
+        this.chartLoaded = true;
+      }
     },
     async getAll() {
       this.getData();

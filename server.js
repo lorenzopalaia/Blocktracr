@@ -107,6 +107,17 @@ app.get('/user', (req, res, next) => {
       })
     })
 })
+//eliminazione account
+app.delete("/user", (req,res)=>{
+    try{
+        const user = User.findById(req.params.id);
+        res.send({data: user});
+    } catch{
+        return res.status(410).json({
+            title: "utente non trovato"
+        })
+    }
+})
 
 
 const port = process.env.PORT || 5000;

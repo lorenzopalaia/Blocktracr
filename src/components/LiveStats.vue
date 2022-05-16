@@ -1,34 +1,36 @@
 <template>
   <div class="container">
-    <p class="h1 market-info-text">I </p>
-    <p class="h1 market-info-text" style="color: #7067cf">prezzi di oggi</p>
-    <p class="h1 market-info-text">
-       delle criptovalute in ordine di capitalizzazione di mercato
-    </p>
-    <div v-if="totalMCap && change24h && volume24h">
-      <p class="market-info-text">
-        La capitalizzazione totale del mercato crypto oggi è di 
+    <div>
+      <p class="h1 market-info-text">I </p>
+      <p class="h1 market-info-text" style="color: #7067cf">prezzi di oggi</p>
+      <p class="h1 market-info-text">
+        delle criptovalute in ordine di capitalizzazione di mercato
       </p>
-      <p class="text-primary market-info-text">
-        {{ totalMCap.toLocaleString() }}$
-      </p>
-      <p class="market-info-text">, con un</p>
-      <p v-if="change24h >= 0" class="market-info-text"> aumento</p>
-      <p v-else class="market-info-text">a diminuzione</p>
-      <p class="market-info-text"> percentuale nelle ultime 24 ore del </p>
-      <p v-if="change24h >= 0" class="text-success market-info-text">
-        {{ change24h.toFixed(2) }}%
-      </p>
-      <p v-else class="text-danger market-info-text">
-        {{ change24h.toFixed(2) }}%
-      </p>
-      <p class="market-info-text">. Il volume scambiato oggi ammonta a </p>
-      <p class="text-primary market-info-text">
-        {{ volume24h.toLocaleString() }}$
-      </p>
+      <div v-if="totalMCap && change24h && volume24h">
+        <p class="market-info-text">
+          La capitalizzazione totale del mercato crypto oggi è di 
+        </p>
+        <p class="text-primary market-info-text">
+          {{ totalMCap.toLocaleString() }}$
+        </p>
+        <p class="market-info-text">, con un</p>
+        <p v-if="change24h >= 0" class="market-info-text"> aumento</p>
+        <p v-else class="market-info-text">a diminuzione</p>
+        <p class="market-info-text"> percentuale nelle ultime 24 ore del </p>
+        <p v-if="change24h >= 0" class="text-success market-info-text">
+          {{ change24h.toFixed(2) }}%
+        </p>
+        <p v-else class="text-danger market-info-text">
+          {{ change24h.toFixed(2) }}%
+        </p>
+        <p class="market-info-text">. Il volume scambiato oggi ammonta a </p>
+        <p class="text-primary market-info-text">
+          {{ volume24h.toLocaleString() }}$
+        </p>
+      </div>
     </div>
-    <div class="row" style="margin-top: 16px">
-      <div v-if="activeCryptos && activeMarkets && activeICOs" class="col">
+    <div class="row">
+      <div v-if="activeCryptos && activeMarkets && activeICOs" class="col mt-4">
         <div class="card market-info-card">
           <div class="card-header">
             <p class="market-info-text market-info-title">Info di mercato</p>
@@ -51,7 +53,7 @@
           </div>
         </div>
       </div>
-      <div v-if="top3dominance" class="col">
+      <div v-if="top3dominance" class="col mt-4">
         <div class="card market-info-card">
           <div class="card-header">
             <p class="market-info-text market-info-title">Dominance</p>
@@ -98,7 +100,7 @@
           </div>
         </div>
       </div>
-      <div v-if="top3trending" class="col">
+      <div v-if="top3trending" class="col mt-4">
         <div class="card market-info-card">
           <div class="card-header">
             <p class="market-info-text market-info-title">Trending</p>
@@ -119,14 +121,7 @@
         </div>
       </div>
     </div>
-    <input
-      type="text"
-      class="form-control rounded border my-4 d-flex coin-search"
-      placeholder="Ricerca Coin"
-      @keyup="searchCoin()"
-      v-model="coinSearch"
-    />
-    <table class="table rounded text-white">
+    <table class="table rounded text-white mt-4">
       <thead>
         <tr>
           <th v-for="title in titles" :key="title">
@@ -200,7 +195,6 @@ export default {
       coins: [],
       filterCoins: [],
       titles: ["#", "Nome", "Prezzo", "24h%"],
-      coinSearch: "",
       totalMCap: null,
       change24h: null,
       volume24h: null,
@@ -248,14 +242,7 @@ export default {
       const res = await axios.get(uri, config);
       console.log(res.data);
       this.top3trending = res.data.coins.slice(0, 3);
-    },
-    searchCoin() {
-      this.filterCoins = this.coins.filter(
-        (coin) =>
-          coin.name.toLowerCase().includes(this.coinSearch.toLowerCase()) ||
-          coin.symbol.toLowerCase().includes(this.coinSearch.toLowerCase())
-      );
-    },
+    }
   },
   mounted() {
     this.getData();
@@ -303,13 +290,6 @@ ul {
 
 .market-info-card:hover {
   transform: scale(1.1);
-}
-
-.coin-search {
-  background-color: rgba(112, 103, 207, 0.1);
-  color: #7067cf;
-  font-family: "Sequel100Black-45", Helvetica, Arial;
-  border-color: rgba(42, 178, 252, 0.5) !important;
 }
 
 .router-link {
