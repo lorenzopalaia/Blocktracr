@@ -12,7 +12,7 @@ const password = 'progettoLTW';
 
 //connessione
 mongoose.connect(`mongodb+srv://${user}:${password}@progettoltw.xfdbm.mongodb.net/Blocktracr?retryWrites=true&w=majority`)
-    .then(()=>console.log('database connesso 2'))
+    .then(()=>console.log('database connesso'))
     .catch(e=>console.log(e));
 const app = express();
 
@@ -22,7 +22,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-//routes
+//registrazione
 app.post('/register', (req,res,next)=>{
     const newUser = new User({
         name: req.body.name,
@@ -41,12 +41,6 @@ app.post('/register', (req,res,next)=>{
             title: 'registration success'
         })
     })
-})
-//eliminazione
-app.post('/delete', (req,res,next)=>{
-    console.log("req: " + req);
-    console.log("sto per eliminare l'utente")
-    User.find({email: req}).deleteOne()
 })
 
 //reindirizzamento utenti non registrati
@@ -88,10 +82,7 @@ app.get('/user', (req, res, next) => {
       if (err) return res.status(401).json({
         title: 'unauthorized'
       })
-    
-      console.log("req " + req);
-      console.log("res " + res);
-      
+        
       //token valido
       User.findOne({ _id: decoded.userId }, (err, user)=>{
         if (err) return console.log(err)
@@ -107,18 +98,112 @@ app.get('/user', (req, res, next) => {
       })
     })
 })
+
 //eliminazione account
-app.delete("/user", (req,res)=>{
-    try{
-        const user = User.findById(req.params.id);
-        res.send({data: user});
-    } catch{
-        return res.status(410).json({
-            title: "utente non trovato"
+app.delete("/delete", (req,res)=>{
+    let token = req.headers.token;
+
+    jwt.verify(token, 'secretkey', (err, decoded)=>{
+        if(err) return res.status(410).json({
+            title: 'utente non trovato'
         })
-    }
+
+    console.log('ID: account da elimianre' + decoded.userId);
+
+    User.deleteOne({_id: decoded.userId})
+    .then(()=>{
+        console.log('account eliminato con successo');
+        return res.status(200).json({
+            title: "account eliminato"
+        });
+    }).catch ((err)=>{
+        console.log(err);
+        return res.status(404).json({
+            title: "errore, account non eliminato"
+        })
+    })
+    })
+    
 })
 
+//aggiunta wallet
+app.put('/user', (req, res)=>{
+    let token = req.body.token;
+
+    jwt.verify(token, 'secretkey', (err, decoded)=>{
+        if(err) return res.status(410).json({
+            title: 'utente non trovato'
+        })
+        
+        console.log('utente da modificare trovato: ' + decoded.userId);
+
+        User.updateOne(
+            {_id: decoded.userId}, 
+            {name_exchange: req.body.name_exchange, api_key: req.body.api_key, api_secret: req.body.api_secret},
+            (err, user)=>{
+            if(err){
+                console.log('errore utente non modificato: ' + err);
+                return res.status(405).json({
+                    title: "account non modificato",
+                    err: err
+                })
+            }
+            else{
+                console.log('informazioni dashboard aggiunte: \n name exchange: ' 
+                + req.body.name_exchange + 
+                '\n api key: ' + req.body.api_key + '\n api secret ' + req.body.api_secret);
+            }
+        })
+
+    })
+})
+
+//modifica profilo
+app.post('/user', (req,res)=>{
+    let token = req.body.token;
+    jwt.verify(token, 'secretkey', (err, decoded)=>{
+        if(err) return res.status(410).json({
+            title: 'utente non trovato'
+        })
+
+        if(req.body.email!=null){
+            User.updateOne(
+                {_id: decoded.userId},
+                {email: req.body.email},
+                (err, user)=>{
+                    if(err){
+                        console.log("errore utente non modificato: " + err);
+                        return res.status(405).json({
+                            title: "account non modificato",
+                            err: err
+                        })
+                    }
+                    else{
+                        console.log("email modificata \n nuvoa email: " + user.email + '\n' +'\n'+ User.email);
+                    }
+                }
+            )
+        }
+        if(req.body.password!=null){
+            User.updateOne(
+                {_id: decoded.userId},
+                {password: bcrypt.hashSync(req.body.password, 10)},
+                (err, user)=>{
+                    if(err){
+                        console.log("errore utente non modificato " + err);
+                        return res.status(405).json({
+                            title: "account non modificato",
+                            err: err
+                        })
+                    }
+                    else{
+                        console.log( "password modificata con successo");
+                    }
+                }
+            )
+        }
+    })
+})
 
 const port = process.env.PORT || 5000;
 

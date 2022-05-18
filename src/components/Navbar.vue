@@ -53,11 +53,11 @@ export default {
   },
   methods:{
     islog(){ 
-      if(localStorage.getItem("token")){
+      if(localStorage.getItem("token") || sessionStorage.getItem('token')){
         this.$forceUpdate();
         return true;
       }
-      else return false;
+      return false;
     },
     logout(){
       localStorage.clear();

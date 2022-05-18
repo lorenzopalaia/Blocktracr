@@ -27,7 +27,8 @@
                     required
                   />
                 </div>
-                <div class="form-check d-flex justify-content-center">
+                <div class="alert alert-warning" role="alert" v-if="this.isLogin===false">
+                  Email o password errata
                 </div>
                 <br />
                 <div>
@@ -58,7 +59,7 @@ export default {
   name: "Login",
   data() {
     return {
-      isLogin: false,
+      isLogin: "",
       email: '',
       password: '',
     };
@@ -83,10 +84,11 @@ export default {
           }
         }, err => {
           console.log(err.response);
+          this.isLogin = false;
           this.error = err.response.data.error
         })
     }
-  }
+  },
 };
 
 </script>
