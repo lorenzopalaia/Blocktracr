@@ -92,7 +92,10 @@ app.get('/user', (req, res, next) => {
             user: {
                 email: user.email,
                 name: user.name,
-                _id: user.id
+                _id: user.id, 
+                name_exchange: user.name_exchange,
+                api_key: user.api_key,
+                api_secret: user.api_secret
             }
         })
       })
