@@ -449,13 +449,6 @@ import {
   Filler,
 } from "chart.js";
 
-//deepai API for text summarization
-const deepai = require('deepai');
-deepai.setApiKey('d54933d4-963d-43b4-88ce-7490423f790f');
-
-//chart gradient
-
-
 ChartJS.register(
   Title,
   Tooltip,
@@ -466,6 +459,10 @@ ChartJS.register(
   CategoryScale,
   Filler
 );
+
+//deepai API for text summarization
+const deepai = require('deepai');
+deepai.setApiKey('d54933d4-963d-43b4-88ce-7490423f790f');
 
 export default {
   components: { Line },

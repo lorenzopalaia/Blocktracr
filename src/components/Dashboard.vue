@@ -227,6 +227,14 @@
             </table>
           </div>
         </div>
+        <div class="card">
+          <Doughnut
+            :chart-data="chartData"
+            :chart-options="chartOptions"
+            :height="100"
+            class="m-4"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -234,8 +242,28 @@
 
 <script>
 import axios from "axios";
+import palette from "google-palette";
+import { Doughnut } from "vue-chartjs";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+} from "chart.js";
+
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale
+)
+
 export default {
   name: "Dashboard",
+  components: { Doughnut },
   data() {
     return {
       titles: ["Coin", "Amount", "Total", "Price", "24 Hours P/L"],
@@ -250,6 +278,20 @@ export default {
       exchanges: [],
       user_data: {},
       user_total: 0,
+      user_percentages: [],
+      chartData: {
+        labels: [],
+        datasets: [
+          {
+            label: "Allocazione",
+            data: [],
+            backgroundColor: [],
+          },
+        ],
+      },
+      chartOptions: {
+        responsive: true
+      },
     };
   },
   methods: {
@@ -286,6 +328,13 @@ export default {
       Object.keys(this.user_data).forEach((key) => {
         this.user_total += this.user_data[key].amount * this.user_data[key].last;
       });
+      //add data to doughnut chart
+      this.chartData.labels = Object.keys(this.user_data);
+      Object.keys(this.user_data).forEach(key => {
+        this.user_percentages.push(this.user_data[key].amount * this.user_data[key].last / this.user_total * 100);
+      });
+      this.chartData.datasets[0].data = this.user_percentages;
+      this.chartData.datasets[0].backgroundColor = palette('tol', this.user_percentages.length).map(function(hex) {return '#' + hex});
     },
     async getExchanges() {
       this.exchanges = await ccxt.exchanges;
