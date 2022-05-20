@@ -7,6 +7,7 @@
             <div class="mb-md-5 mt-md-4 pb-5">
               <form action="post" name="formLogin">
                 <p class="h2">Registrati</p>
+                <p>Inserisci Username, Email e Password</p>
                 <div class="form-outline form-white">
                   <input
                     type="text"
@@ -35,19 +36,13 @@
                     required
                   />
                 </div>
-                <!--
-                <div class="form-check d-flex justify-content-center">
-                  <input class="form-check-input" type="checkbox" id="rememberMe">
-                  <label class="form-check-label" for="rememberMe"> Remember me</label>
-                </div>
-                -->
                 <br />
                 <a href="#" class="btn btn-primary brn-block"  @click="signup">
-                Submit
+                  Invia
                 </a>
               </form>
               <div>
-                <p class="mb-0">
+                <p class="m-2">
                   Hai già un account?
                   <router-link to="/login">Login</router-link>
                 </p>
@@ -114,5 +109,10 @@ input {
 input:focus {
   background: transparent;
   outline-width: 0;
+  outline: none;
+}
+
+input::placeholder {
+  color: #7067cf;
 }
 </style>

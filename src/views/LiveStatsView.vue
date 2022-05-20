@@ -1,7 +1,7 @@
 <template>
   <div class="livestats">
-    <LiveStats :page="currentPage"></LiveStats>
-    <pagination
+    <LiveStats :page="currentPage" />
+    <Pagination
       :totalPages="totalPages"
       :perPage="10"
       :currentPage="currentPage"

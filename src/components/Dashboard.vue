@@ -181,7 +181,7 @@
         <div class="card">
           <div class="card-body">
             <p>Coin possedute</p>
-            <p>Il bilancio totale è di ${{ user_total }}</p>
+            <p>Il bilancio totale è di ${{ user_total.toFixed(2) }}</p>
             <table class="table rounded text-uppercase text-muted mt-4">
               <thead>
                 <tr>
@@ -196,29 +196,29 @@
                     {{ coin }}
                   </td>
                   <td class="text-muted">
-                    ${{ key.amount }}
+                    {{ key.amount }}
                   </td>
                   <td class="text-muted">
-                    {{ key.last * key.amount }}
+                    ${{ (key.last * key.amount).toFixed(2) }}
                   </td>
                   <td class="text-muted">
-                    {{ key.last }}
+                    ${{ key.last }}
                   </td>
                   <td class="text-muted">
                     <div v-if="key.change < 0" class="text-danger">
                       <p>
-                        -${{ Math.abs(key.change * key.amount) }}
+                        -${{ Math.abs(key.change * key.amount).toFixed(2) }}
                       </p>
                       <p>
-                        {{ key.changePercentage }}%
+                        {{ key.changePercentage.toFixed(2) }}%
                       </p>
                     </div>
                     <div v-else class="text-success">
                       <p>
-                        ${{ key.change * key.amount }}
+                        ${{ (key.change * key.amount).toFixed(2) }}
                       </p>
                       <p>
-                        {{ key.changePercentage }}%
+                        {{ key.changePercentage.toFixed(2) }}%
                       </p>
                     </div>
                   </td>
@@ -303,6 +303,7 @@ export default {
           secret: this.api_secret, //"bpqwwR0pBrxwGVsuVTg6H1FNjybVBo8Bu96rtSvJEV70YhBqXuCC2zcoBRMvQXJT"
           proxy: "https://dashboard-cors.herokuapp.com/",
         });
+      console.log(exchange);
       let data = await exchange.fetchBalance();
       data = data.total;
       Object.keys(data).forEach((key) => {
@@ -314,7 +315,7 @@ export default {
       symbols = await exchange.fetchTickers(symbols);
       Object.keys(symbols).forEach((key) => {
         symbols[key.replace("/USDT", "")] = symbols[key];
-        delete symbols[key ];
+        delete symbols[key];
       });
       Object.keys(this.user_data).forEach((key) => {
         this.user_data[key] = {
@@ -325,16 +326,20 @@ export default {
         }
       });
       //compute user total in USD
+      this.user_total = 0;
       Object.keys(this.user_data).forEach((key) => {
         this.user_total += this.user_data[key].amount * this.user_data[key].last;
       });
       //add data to doughnut chart
+      this.user_percentages = [];
       this.chartData.labels = Object.keys(this.user_data);
       Object.keys(this.user_data).forEach(key => {
         this.user_percentages.push(this.user_data[key].amount * this.user_data[key].last / this.user_total * 100);
       });
       this.chartData.datasets[0].data = this.user_percentages;
       this.chartData.datasets[0].backgroundColor = palette('tol', this.user_percentages.length).map(function(hex) {return '#' + hex});
+      //fetch orders
+      console.log(await exchange.fetchOrders(["BTC/USDT", "ETH/USDT"]));
     },
     async getExchanges() {
       this.exchanges = await ccxt.exchanges;
@@ -381,7 +386,15 @@ export default {
         api_key: this.api_key,
         api_secret: this.api_secret,
       };
-
+      //check validity
+      //const exchangeId = wallet.name_exchange,
+      //  exchangeClass = ccxt[exchangeId],
+      //  exchange = new exchangeClass({
+      //    apiKey: wallet.api_key,
+      //    secret: wallet.api_secret,
+      //    proxy: "https://dashboard-cors.herokuapp.com/",
+      //  });
+      
       axios.put("http://localhost:5000/user", wallet).then((res) => {
         if (res.status === 405) {
           console.log("account non modificato");

@@ -29,9 +29,9 @@
           id="navbarNav"
         >
           <ul class="navbar-nav">
-            <li class="nav-item" >
-              <router-link to="/login" v-if="!islog()" >LOGIN</router-link>
-              <router-link to="/login" v-if="islog()" @click="logout()">LOGOUT</router-link>
+            <li class="nav-item">
+              <router-link to="/login" :v-if="isLog()">LOGIN</router-link>
+              <router-link to="/" :v-if="isLog()" @click="logout()">LOGOUT</router-link>
             </li>
           </ul>
           <li class="nav-item">
@@ -46,25 +46,27 @@
 <script>
 export default {
   name: "Navbar",
-    data() {
+  data() {
     return {
-      log: "LOGIN"
+      log: "LOGIN",
     }
   },
+  props: {
+    isLog: false,
+  },
   methods:{
-    islog(){ 
-      if(localStorage.getItem("token") || sessionStorage.getItem('token')){
-        this.$forceUpdate();
+    isLog(){
+      if(localStorage.getItem('token') || sessionStorage.getItem('token')) {
         return true;
       }
-      return false;
+     return false;
     },
     logout(){
       localStorage.clear();
       sessionStorage.clear();
       this.$forceUpdate();
-    }
-  }
+    },
+  },
 };
 </script>
 

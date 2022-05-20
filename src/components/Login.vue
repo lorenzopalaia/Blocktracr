@@ -32,15 +32,15 @@
                 </div>
                 <br />
                 <div>
-                  <input type="checkbox" id="rememberMe" value="true" checked>
-                  <label for="rememberMe"> Remember me</label>
+                  <input class="me-2" type="checkbox" id="rememberMe" value="true" checked>
+                  <label for="rememberMe"><p>Ricordami</p></label>
                 </div>
                 <a href="#" class="btn btn-primary brn-block" @click="login">
-                  Login
+                  Entra
                 </a>
               </form>
               <div>
-                <p class="mb-0">
+                <p class="m-2">
                   Non hai un account?
                   <router-link to="/register">Registrati</router-link>
                 </p>
@@ -57,6 +57,7 @@
 import axios from 'axios'
 export default {
   name: "Login",
+
   data() {
     return {
       isLogin: "",
@@ -80,6 +81,7 @@ export default {
             else{
               sessionStorage.setItem('token', res.data.token);
             }
+            this.$emit("onlogin", true);
             this.$router.push('/dashboard');
           }
         }, err => {
@@ -116,5 +118,9 @@ input {
 input:focus {
   background: transparent;
   outline-width: 0;
+}
+
+input::placeholder {
+  color: #7067cf;
 }
 </style>

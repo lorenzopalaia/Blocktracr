@@ -56,6 +56,7 @@
 </template>
 
 <script>
+name: "Pagination";
 export default {
   props: {
     maxVisibleButtons: {
@@ -145,13 +146,20 @@ export default {
       this.$emit("pagechanged", 1);
     },
     onClickPreviousPage() {
+        if(this.isInLastPage){
+        this.$emit("pagechanged", this.currentPage -2);
+        }
+        else
         this.$emit("pagechanged", this.currentPage - 1);
     },
     onClickPage(page) {
       this.$emit("pagechanged", page);
     },
     onClickNextPage() {
-        this.$emit("pagechanged", this.currentPage + 1);
+      if(this.isInFirstPage){
+      this.$emit("pagechanged", this.currentPage + 2);
+      }else
+      this.$emit("pagechanged", this.currentPage + 1);
     },
     onClickLastPage() {
       this.$emit("pagechanged", this.totalPages);
@@ -167,13 +175,12 @@ export default {
     },
     pageCurrent() {
       if (this.isInFirstPage) {
-        return this.onClickNextPage();
+        this.$emit("pagechanged", this.currentPage + 1);
       }
       if (this.isInLastPage) {
-        return this.onClickPreviousPage();
-      } else {
-        return this.currentPage;
+        this.$emit("pagechanged", this.currentPage -1);
       }
+      return this.currentPage;
     },
   },
 };

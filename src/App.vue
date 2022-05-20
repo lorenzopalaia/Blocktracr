@@ -1,6 +1,6 @@
 <template>
-  <CoinsBar></CoinsBar>
-  <Navbar></Navbar>
+  <CoinsBar/>
+  <Navbar />
   <router-view />
   <Footer></Footer>
 </template>
@@ -12,6 +12,11 @@ import Footer from "./components/Footer.vue";
 export default {
   name: "App",
   components: { CoinsBar, Navbar, Footer },
+  data() {
+    return {
+      isLog: false,
+    }
+  },
 };
 </script>
 

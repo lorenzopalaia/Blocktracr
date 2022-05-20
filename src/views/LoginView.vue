@@ -1,6 +1,8 @@
 <template>
   <div class="login">
-    <Login></Login>
+    <Login
+      @onlogin="onLogin"
+    />
   </div>
 </template>
 
@@ -13,5 +15,15 @@ export default {
   components: {
     Login,
   },
+  data: {
+    return() {
+      isLog: false
+    }
+  },
+  methods: {
+    onLogin() {
+      console.log("Ho informato LoginView");
+    }
+  }
 };
 </script>
