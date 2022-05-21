@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row mb-4">
       <div class="col">
         <div class="card">
           <div class="card-body">
-            <p>Bentornato, {{ this.name }} 👋🏻</p>
+            <h1 class="m-2 text-white">Bentornato, {{ this.name }} 👋🏻</h1>
             <br />
             <!-- Bottone modifica profilo-->
             <button
@@ -19,7 +19,8 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <!--Header-->
-                  <div class="modal-header">
+                <form>
+                <div class="modal-header">
                     <h4 class="modal-title">Modifica Profilo</h4>
                     <button
                       type="button"
@@ -30,21 +31,10 @@
                   </div>
 
                   <!-- Body -->
-                  <div class="moda l-body justify-content-center">
+                  <div class="modal-body justify-content-center">
                     <!--modifica email-->
-                    <a
-                      class="btn btn-primary"
-                      href="#collapseEmail"
-                      data-bs-toggle="collapse"
-                      role="button"
-                      aria-expanded="false"
-                      aria-controls="collapseEmail"
-                    >
-                      Modifica email
-                    </a>
-                    <div class="collapse" id="collapseEmail">
-                      <!--<label for="disabledEmail" class="form-label">Vecchia emial</label>
-                        <input type="email" id="disabledEmial" class="fomr-control"  value={{this.email}} disabled>-->
+                    <p>La tua email è {{ email }}</p>
+                    <div>
                       <label for="nuovaEmail" class="form-label"
                         >Inserisci la nuova email</label
                       >
@@ -52,40 +42,31 @@
                         type="email"
                         id="nuovaEmail"
                         placeholder="inserisci nuova email"
-                        v-model="email"
+                        v-model="newEmail"
                         autocomplete="off"
-                        required
-                      />
+                      />  
                     </div>
                     <br />
 
                     <!--modifica password-->
-                    <a
-                      class="btn btn-primary"
-                      href="#collapsePassword"
-                      data-bs-toggle="collapse"
-                      role="button"
-                      aria-expanded="false"
-                      aria-controls="collapsePassword"
-                    >
-                      Modifica password
-                    </a>
-                    <div class="collapse" id="collapsePassword">
+                    <div id="collapsePassword">
                       <input
                         type="password"
                         placeholder="inserisci nuova password"
                         v-model="password"
                         autocomplete="off"
-                        required
                       />
+                    </div>
+                    <div class="alert alert-primary" role="alert" v-if="modifica">
+                      Account modificato
                     </div>
                   </div>
 
                   <!-- Footer -->
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" @click="edit">
+                    <a class="btn btn-primary" @click="edit">
                       Modifica account
-                    </button>
+                    </a>
                     <button
                       type="button"
                       class="btn btn-danger"
@@ -94,6 +75,7 @@
                       Annulla
                     </button>
                   </div>
+                </form>
                 </div>
               </div>
             </div>
@@ -112,6 +94,7 @@
           <div class="modal" id="wallet">
             <div class="modal-dialog">
               <div class="modal-content">
+              <form>
                 <!--Header
                     <div class="modal-header">
                       <h4 class="modal-title">Aggiungi wallet</h4>
@@ -120,7 +103,7 @@
 
                 <!-- Body -->
                 <div class="modal-body justify-content-center">
-                  <form action="post">
+                  
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01"
@@ -154,7 +137,7 @@
                       placeholder="api secret"
                       required
                     /><br />
-                  </form>
+                  
                 </div>
 
                 <!-- Footer -->
@@ -170,55 +153,60 @@
                     Annulla
                   </button>
                 </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-4">
       <div class="col">
         <div class="card">
           <div class="card-body">
-            <p>Coin possedute</p>
-            <p>Il bilancio totale è di ${{ user_total.toFixed(2) }}</p>
-            <table class="table rounded text-uppercase text-muted mt-4">
+            <h1 class="text-white m-2">
+              ${{ user_total.toFixed(2) }}
+            </h1>
+            <h5 style="display: inline;" class="m-2 text-success" v-if="user_24h_PL >= 0">${{ user_24h_PL.toFixed(2) }}</h5>
+            <h5 style="display: inline;" class="m-2 text-danger" v-else>-${{ Math.abs(user_24h_PL).toFixed(2) }}</h5>
+            <h5 style="display: inline;" class="m-2 text-success" v-if="user_24h_PL_percent >= 0">{{ user_24h_PL_percent.toFixed(2) }}%</h5>
+            <h5 style="display: inline;" class="m-2 text-danger" v-else>-${{ Math.abs(user_24h_PL_percent).toFixed(2) }}%</h5>
+            <table class="table rounded text-uppercase text-white mt-4">
               <thead>
                 <tr>
                   <th v-for="title in titles" :key="title">
                     {{ title }}
                   </th>
+                  <th class="d-none d-md-table-cell">24 Hours P/L</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(key, coin) in user_data" :key="key">
-                  <td class="text-muted">
+                  <td class="text-white">
                     {{ coin }}
                   </td>
-                  <td class="text-muted">
+                  <td class="text-white">
                     {{ key.amount }}
                   </td>
-                  <td class="text-muted">
+                  <td class="text-white">
                     ${{ (key.last * key.amount).toFixed(2) }}
                   </td>
-                  <td class="text-muted">
-                    ${{ key.last }}
-                  </td>
-                  <td class="text-muted">
+                  <td class="text-white">${{ key.last }}</td>
+                  <td class="text-white d-none d-md-table-cell">
                     <div v-if="key.change < 0" class="text-danger">
-                      <p>
+                      <p class="m-2" style="display: inline">
                         -${{ Math.abs(key.change * key.amount).toFixed(2) }}
                       </p>
-                      <p>
+                      <p class="m-2" style="display: inline">
                         {{ key.changePercentage.toFixed(2) }}%
                       </p>
                     </div>
                     <div v-else class="text-success">
-                      <p>
+                      <p class="m-2" style="display: inline">
                         ${{ (key.change * key.amount).toFixed(2) }}
                       </p>
-                      <p>
-                        {{ key.changePercentage.toFixed(2) }}%
+                      <p class="m-2" style="display: inline">
+                        {{ key.changePercentage /*.toFixed(2)*/ }}%
                       </p>
                     </div>
                   </td>
@@ -227,11 +215,25 @@
             </table>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col">
         <div class="card">
           <Doughnut
-            :chart-data="chartData"
+            :chart-data="doughnutChartData"
             :chart-options="chartOptions"
             :height="100"
+            class="m-4"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <Bar
+            :chart-data="barChartData"
+            :chart-options="chartOptions"
+            :height="400"
             class="m-4"
           />
         </div>
@@ -244,53 +246,65 @@
 import axios from "axios";
 import palette from "google-palette";
 import { Doughnut } from "vue-chartjs";
+import { Bar } from "vue-chartjs";
 import {
   Chart as ChartJS,
   Title,
   Tooltip,
+  LinearScale,
   Legend,
   ArcElement,
+  BarElement,
   CategoryScale,
 } from "chart.js";
 
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-  CategoryScale
-)
+ChartJS.register(Title, Tooltip, Legend, BarElement, ArcElement, LinearScale, CategoryScale);
 
 export default {
   name: "Dashboard",
-  components: { Doughnut },
+  components: { Doughnut, Bar },
   data() {
     return {
-      titles: ["Coin", "Amount", "Total", "Price", "24 Hours P/L"],
+      titles: ["Coin", "Amount", "Total", "Price"],
       token: "",
       name: "",
       email: "",
-      //newEmail: "",
+      newEmail: "",
       password: "",
       name_exchange: "",
       api_key: "",
       api_secret: "",
+      modifica:false,
       exchanges: [],
       user_data: {},
       user_total: 0,
+      user_24h_PL: 0,
+      user_24h_PL_percent: 0,
       user_percentages: [],
-      chartData: {
+      doughnutChartData: {
         labels: [],
         datasets: [
           {
             label: "Allocazione",
             data: [],
             backgroundColor: [],
+            borderColor: "transparent",
+          },
+        ],
+      },
+      barChartData: {
+        labels: [],
+        datasets: [
+          {
+            label: "24h% P/L",
+            data: [],
+            backgroundColor: [],
+            borderColor: "transparent",
           },
         ],
       },
       chartOptions: {
-        responsive: true
+        responsive: true,
       },
     };
   },
@@ -307,11 +321,10 @@ export default {
       let data = await exchange.fetchBalance();
       data = data.total;
       Object.keys(data).forEach((key) => {
-        if (data[key] <= 0)
-          delete data[key];
+        if (data[key] <= 0) delete data[key];
       });
       this.user_data = data;
-      let symbols = Object.keys(this.user_data).map(key => key + "/USDT");
+      let symbols = Object.keys(this.user_data).map((key) => key + "/USDT");
       symbols = await exchange.fetchTickers(symbols);
       Object.keys(symbols).forEach((key) => {
         symbols[key.replace("/USDT", "")] = symbols[key];
@@ -322,24 +335,51 @@ export default {
           amount: this.user_data[key],
           last: symbols[key].last,
           changePercentage: symbols[key].percentage, //last 24h percentage
-          change: symbols[key].change //last 24h change in USD
-        }
+          change: symbols[key].change, //last 24h change in USD
+        };
       });
       //compute user total in USD
       this.user_total = 0;
       Object.keys(this.user_data).forEach((key) => {
-        this.user_total += this.user_data[key].amount * this.user_data[key].last;
+        this.user_total +=
+          this.user_data[key].amount * this.user_data[key].last;
       });
-      //add data to doughnut chart
-      this.user_percentages = [];
-      this.chartData.labels = Object.keys(this.user_data);
-      Object.keys(this.user_data).forEach(key => {
-        this.user_percentages.push(this.user_data[key].amount * this.user_data[key].last / this.user_total * 100);
+      //compute cumulative user 24h P/L
+      this.user_24h_PL = 0;
+      Object.keys(this.user_data).forEach((key) => {
+        this.user_24h_PL += this.user_data[key].amount * this.user_data[key].change;
       });
-      this.chartData.datasets[0].data = this.user_percentages;
-      this.chartData.datasets[0].backgroundColor = palette('tol', this.user_percentages.length).map(function(hex) {return '#' + hex});
+      //compute cumulative user 24h P/L percentage
+      this.user_24h_PL_percent = this.user_24h_PL / ( this.user_total - this.user_24h_PL ) * 100;
+      //add data to charts
+      this.doughnutChartData.labels = Object.keys(this.user_data);
+      this.barChartData.labels = Object.keys(this.user_data);
+      let user_24h_PLs_percent = [];
+      Object.keys(this.user_data).forEach((key) => {
+        this.user_percentages.push(
+          ((this.user_data[key].amount * this.user_data[key].last) /
+            this.user_total) *
+            100
+        );
+        //console.log(this.user_data[key].changePercentage);
+        user_24h_PLs_percent.push(
+          this.user_data[key].changePercentage
+        );
+      });
+      this.doughnutChartData.datasets[0].data = this.user_percentages;
+      this.barChartData.datasets[0].data = user_24h_PLs_percent;
+      console.log(this.barChartData.datasets[0].data);
+      //generate color palette
+      const pal = palette(
+        "tol",
+        this.user_percentages.length
+      ).map(function (hex) {
+        return "#" + hex;
+      });
+      this.doughnutChartData.datasets[0].backgroundColor = pal;
+      this.barChartData.datasets[0].backgroundColor = pal;
       //fetch orders
-      console.log(await exchange.fetchOrders(["BTC/USDT", "ETH/USDT"]));
+      //console.log(await exchange.fetchOrders(["BTC/USDT", "ETH/USDT"]));
     },
     async getExchanges() {
       this.exchanges = await ccxt.exchanges;
@@ -363,19 +403,21 @@ export default {
 
     //modifica profilo
     edit() {
-      if (this.newEmail != null) {
-        this.email = this.newEmail;
-      }
-      let user = {
-        token: this.token,
-        email: this.email,
-        password: this.password,
-      };
-      axios.post("http://localhost:5000/user", user).then((res) => {
-        if (res.status === 405) {
-          console.log("account non modificato");
-        } else controle.log("account modificato");
-      });
+        let user = {
+          token: this.token,
+          email: this.newEmail,
+          password: this.password,
+        };
+          axios.post("http://localhost:5000/user", user).then((res) => {
+            if (res.status === 405) {
+              console.log("account non modificato");
+            } else controle.log("account modificato");
+          });
+        this.password="";
+        if(this.newEmail!=""){
+          this.email=this.newEmail;
+        }
+
     },
 
     //aggiungi wallet
@@ -394,12 +436,13 @@ export default {
       //    secret: wallet.api_secret,
       //    proxy: "https://dashboard-cors.herokuapp.com/",
       //  });
-      
-      axios.put("http://localhost:5000/user", wallet).then((res) => {
-        if (res.status === 405) {
-          console.log("account non modificato");
-        } else console.log("account modificato");
-      });
+      if(api_key!="" && api_secret!=""){
+        axios.put("http://localhost:5000/user", wallet).then((res) => {
+          if (res.status === 405) {
+            console.log("account non modificato");
+          } else console.log("account modificato");
+        });
+      }
     },
     async getDataFromServer() {
       await axios
@@ -423,7 +466,7 @@ export default {
       this.token = sessionStorage.getItem("token");
     //mi prendo le informazioni dell'utente dal server
     this.getDataFromServer();
-    setInterval(this.getData, 60000);
+    this.getData;
   },
 
   created() {
@@ -437,4 +480,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+table {
+  background-color: transparent;
+}
+
+.card {
+  background-color: rgba(112, 103, 207, 0.1);
+  border-radius: 10px;
+  border-width: 1px;
+  height: 100%;
+}
+</style>

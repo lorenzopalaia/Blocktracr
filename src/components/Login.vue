@@ -81,7 +81,7 @@ export default {
             else{
               sessionStorage.setItem('token', res.data.token);
             }
-            this.$emit("onlogin", true);
+            this.emitter.emit("loggedIn");
             this.$router.push('/dashboard');
           }
         }, err => {

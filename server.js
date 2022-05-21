@@ -169,7 +169,7 @@ app.post('/user', (req,res)=>{
             title: 'utente non trovato'
         })
 
-        if(req.body.email!=null){
+        if(req.body.email!=""){
             User.updateOne(
                 {_id: decoded.userId},
                 {email: req.body.email},
@@ -182,12 +182,12 @@ app.post('/user', (req,res)=>{
                         })
                     }
                     else{
-                        console.log("email modificata \n nuvoa email: " + user.email + '\n' +'\n'+ User.email);
+                        console.log("nuova email: " + req.body.email);
                     }
                 }
             )
         }
-        if(req.body.password!=null){
+        if(req.body.password!=""){
             User.updateOne(
                 {_id: decoded.userId},
                 {password: bcrypt.hashSync(req.body.password, 10)},

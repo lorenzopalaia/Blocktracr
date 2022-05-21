@@ -9,13 +9,18 @@
             ogni crypto presente sul mercato tramite un'interfaccia semplice e
             interattiva
           </p>
-          <button type="button" class="btn btn-primary btn-lg" style="margin-right: 10px;">
+          <button v-if="!isLog" type="button" class="btn btn-primary btn-lg" style="margin-right: 10px;">
             <router-link class="router-link" to="/register" style="color: white"
               >Registrati</router-link
             >
           </button>
-          <button type="button" class="btn btn-outline-primary btn-lg">
+          <button v-if="!isLog" type="button" class="btn btn-outline-primary btn-lg">
             <router-link class="router-link" to="/login">Login</router-link>
+          </button>
+          <button v-if="isLog" type="button" class="btn btn-primary btn-lg" style="margin-right: 10px;">
+            <router-link class="router-link" to="/dashboard" style="color: white"
+              >Dashboard</router-link
+            >
           </button>
         </div>
         <div class="col d-none d-sm-block d-sm-none d-md-block">
@@ -84,6 +89,21 @@
 <script>
 export default {
   name: "Home",
+  data() {
+    return {
+      isLog: false
+    }
+  },
+  mounted() {
+    if (localStorage.getItem('token') || sessionStorage.getItem('token')) //check if token exists
+      this.isLog = true;
+    this.emitter.on("loggedIn", () => { //event handler
+      this.isLog = true;
+    })
+    this.emitter.on("loggedOut", () => {
+      this.isLog = false;
+    })
+  },
 };
 </script>
 

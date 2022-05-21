@@ -30,13 +30,22 @@
         >
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link to="/login" :v-if="isLog()">LOGIN</router-link>
-              <router-link to="/" :v-if="isLog()" @click="logout()">LOGOUT</router-link>
+              <router-link to="/login" v-if="!isLog">LOGIN</router-link>
+              <router-link data-bs-toggle="modal" data-bs-target="#logout" to="/" v-else @click="logout()">LOGOUT</router-link>
+              <div class="modal" id="logout">
+                <div class="modal-dialog">
+                  <div class="modal-content text-white">
+                    <div style="backgroundColor: #7067cf" class="modal-body justify-content-center text-center">
+                      <p class="m-0">Ti sei disconnesso correttamente</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <router-link data-bs-toggle="modal" data-bs-target="#register" to="/register" v-if="!isLog">REGISTRATI</router-link>
             </li>
           </ul>
-          <li class="nav-item">
-            <router-link to="/register">REGISTER</router-link>
-          </li>
         </div>
       </div>
     </div>
@@ -48,25 +57,25 @@ export default {
   name: "Navbar",
   data() {
     return {
-      log: "LOGIN",
+      isLog: false
     }
   },
-  props: {
-    isLog: false,
-  },
-  methods:{
-    isLog(){
-      if(localStorage.getItem('token') || sessionStorage.getItem('token')) {
-        return true;
-      }
-     return false;
-    },
+  methods: {
     logout(){
       localStorage.clear();
       sessionStorage.clear();
-      this.$forceUpdate();
+      this.isLog = false;
+      this.emitter.emit("loggedOut");
+      this.$router.push("/")
     },
   },
+  mounted() {
+    if (localStorage.getItem('token') || sessionStorage.getItem('token')) //check if token exists
+      this.isLog = true;
+    this.emitter.on("loggedIn", () => { //event handler
+      this.isLog = true;
+    })
+  }
 };
 </script>
 

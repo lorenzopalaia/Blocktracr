@@ -12,11 +12,6 @@ import Footer from "./components/Footer.vue";
 export default {
   name: "App",
   components: { CoinsBar, Navbar, Footer },
-  data() {
-    return {
-      isLog: false,
-    }
-  },
 };
 </script>
 
