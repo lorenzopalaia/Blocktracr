@@ -35,7 +35,7 @@
               <div class="modal" id="logout">
                 <div class="modal-dialog">
                   <div class="modal-content text-white">
-                    <div style="backgroundColor: #7067cf" class="modal-body justify-content-center text-center">
+                    <div style="backgroundColor: rgb(20, 15, 68)" class="modal-body justify-content-center text-center">
                       <p class="m-0">Ti sei disconnesso correttamente</p>
                     </div>
                   </div>
@@ -43,7 +43,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <router-link data-bs-toggle="modal" data-bs-target="#register" to="/register" v-if="!isLog">REGISTRATI</router-link>
+              <router-link to="/register" v-if="!isLog">REGISTRATI</router-link>
             </li>
           </ul>
         </div>

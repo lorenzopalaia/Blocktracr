@@ -68,13 +68,13 @@ export default {
     }
   },
   methods: {
-    signup() {
+    async signup() {
       let newUser = {
         name: this.name,
         email: this.email,
         password: this.password
       }
-      axios.post('http://localhost:5000/register', newUser)
+      await axios.post('http://localhost:5000/register', newUser)
         .then(res => {
           this.$router.push('/login'); //utente appena registrato viene reindirizzato nella pagina di login
         }, err => {

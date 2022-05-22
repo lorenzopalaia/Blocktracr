@@ -6,6 +6,7 @@ const User = require('./models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');//installato pure jsonwebtoken per associare un token agli utenti che si loggano
 const { db } = require('./models/User');
+const cookieParser = require('cookie-parser');
 
 const user='admin_LTW';
 const password = 'progettoLTW';
@@ -16,8 +17,7 @@ mongoose.connect(`mongodb+srv://${user}:${password}@progettoltw.xfdbm.mongodb.ne
     .catch(e=>console.log(e));
 const app = express();
 
-
-
+app.use(cookieParser())
 app.use(cors()); 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

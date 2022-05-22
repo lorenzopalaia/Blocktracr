@@ -3,7 +3,12 @@
     <ul style="margin: 0">
       <li class="coinItem" v-for="coin in coins" :key="coin.symbol">
         <img class="coinImage" :src="coin.image" />
-        <p class="coinName">{{ coin.symbol.toUpperCase() }}</p>
+        <router-link
+          class="router-link"
+          :to="{ name: 'coin', params: { id: coin.id } }"
+        >
+          <p class="coinName">{{ coin.symbol.toUpperCase() }}</p>
+        </router-link>
         <p class="coinPrice" :key="coin.current_price">
           {{ coin.current_price }}$
         </p>
@@ -38,6 +43,10 @@ export default {
 </script>
 
 <style scoped>
+.router-link {
+  text-decoration: none;
+}
+
 .coinsBar {
   background: transparent;
   overflow: hidden;

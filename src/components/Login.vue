@@ -66,12 +66,12 @@ export default {
     };
   },
   methods:{
-    login() {
+    async login() {
       let user = {
         email: this.email,
         password: this.password
       }
-      axios.post('http://localhost:5000/login', user)
+      await axios.post('http://localhost:5000/login', user)
         .then(res => {
           if (res.status === 200) {
             //inserimento token in memoria in base al checkbox
