@@ -614,7 +614,6 @@ export default {
           this.api_secret = res.data.user.api_secret;
         });
       this.getData();
-      
     },
     getToken() {
       // get user token and store it in a variable
@@ -636,7 +635,6 @@ export default {
     this.getExchanges();
     this.getToken();
     this.getDataFromServer();
-    this.getData();
   },
   created() {
     this.redirectOnMissingToken();
