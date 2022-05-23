@@ -5,7 +5,7 @@
         <div class="card rounded">
           <div class="card-body text-center" id="card">
             <div class="mb-md-5 mt-md-4 pb-5">
-              <form action="post" name="formLogin">
+              <form name="formLogin">
                 <p class="h2">Registrati</p>
                 <p>Inserisci Username, Email e Password</p>
                 <div class="form-outline form-white">
@@ -35,6 +35,9 @@
                     v-model="password"
                     required
                   />
+                  <div class="alert alert-danger" role="alert" v-if="this.errore===true">
+                    Email già in uso
+                  </div>
                 </div>
                 <br />
                 <a href="#" class="btn btn-primary brn-block"  @click="signup">
@@ -63,8 +66,9 @@ export default {
   data(){
     return{
       name: '',
-      email:'',
+      email: '',
       password: '',
+      errore:false,
     }
   },
   methods: {
@@ -74,13 +78,16 @@ export default {
         email: this.email,
         password: this.password
       }
-      await axios.post('http://localhost:5000/register', newUser)
-        .then(res => {
-          this.$router.push('/login'); //utente appena registrato viene reindirizzato nella pagina di login
-        }, err => {
-          console.log(err.response)
-          err.response.data.error
-        })
+      if(this.name!='' && this.email!='' && this.password!=''){
+        await axios.post('http://localhost:5000/register', newUser)
+          .then(res => {
+            this.$router.push('/login'); //utente appena registrato viene reindirizzato nella pagina di login
+          }, err => {
+            this.errore=true;
+            console.log(err.response)
+            err.response.data.error
+          })
+      }
     }
   },
 };
