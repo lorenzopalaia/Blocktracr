@@ -5,7 +5,6 @@ const cors = require("cors");
 const User = require("./models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken"); // in order to bind a unique token to logged user
-const { db } = require("./models/User");
 
 const user = "admin_LTW";
 const password = "progettoLTW";
@@ -29,6 +28,9 @@ app.post("/register", (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 10), // encrypts pw with 10 algorithms recursions
+    api_key:"",
+    api_secret:"",
+    name_exchange:"",
   });
   console.log("New user tried to register:");
   console.log(newUser);
@@ -115,12 +117,10 @@ app.delete("/delete", (req, res) => {
       return res.status(410).json({
         title: "user not found",
       });
-
-    console.log("ID: account da elimianre" + decoded.userId);
-
+    console.log("User ID to delete: " + decoded.userId);
     User.deleteOne({ _id: decoded.userId })
       .then(() => {
-        console.log("account eliminato con successo");
+        console.log("User deleted successfully");
         return res.status(200).json({
           title: "account eliminato",
         });
@@ -134,18 +134,15 @@ app.delete("/delete", (req, res) => {
   });
 });
 
-//aggiunta wallet
+// add wallet
 app.put("/user", (req, res) => {
   let token = req.body.token;
-
   jwt.verify(token, "secretkey", (err, decoded) => {
     if (err)
       return res.status(410).json({
         title: "utente non trovato",
       });
-
-    console.log("utente da modificare trovato: " + decoded.userId);
-
+    console.log("User ID to be edit: " + decoded.userId);
     User.updateOne(
       { _id: decoded.userId },
       {
@@ -153,20 +150,20 @@ app.put("/user", (req, res) => {
         api_key: req.body.api_key,
         api_secret: req.body.api_secret,
       },
-      (err, user) => {
+      (err) => {
         if (err) {
-          console.log("errore utente non modificato: " + err);
+          console.log("Error, user not edited: " + err);
           return res.status(405).json({
             title: "account non modificato",
             err: err,
           });
         } else {
           console.log(
-            "informazioni dashboard aggiunte: \n name exchange: " +
+            "Add dashboard infos: \n Exchange name: " +
               req.body.name_exchange +
-              "\n api key: " +
+              "\n Api Key: " +
               req.body.api_key +
-              "\n api secret " +
+              "\n Api Secret " +
               req.body.api_secret
           );
         }
@@ -175,7 +172,7 @@ app.put("/user", (req, res) => {
   });
 });
 
-//modifica profilo
+// edit user
 app.post("/user", (req, res) => {
   let token = req.body.token;
   jwt.verify(token, "secretkey", (err, decoded) => {
@@ -183,20 +180,19 @@ app.post("/user", (req, res) => {
       return res.status(410).json({
         title: "utente non trovato",
       });
-
     if (req.body.email != "") {
       User.updateOne(
         { _id: decoded.userId },
         { email: req.body.email },
         (err, user) => {
           if (err) {
-            console.log("errore utente non modificato: " + err);
+            console.log("Error, user not edited: " + err);
             return res.status(405).json({
               title: "account non modificato",
               err: err,
             });
           } else {
-            console.log("nuova email: " + req.body.email);
+            console.log("New email: " + req.body.email);
           }
         }
       );
@@ -207,13 +203,13 @@ app.post("/user", (req, res) => {
         { password: bcrypt.hashSync(req.body.password, 10) },
         (err, user) => {
           if (err) {
-            console.log("errore utente non modificato " + err);
+            console.log("Error, user not edited: " + err);
             return res.status(405).json({
               title: "account non modificato",
               err: err,
             });
           } else {
-            console.log("password modificata con successo");
+            console.log("Password edited successfully");
           }
         }
       );
@@ -225,5 +221,5 @@ const port = process.env.PORT || 5000;
 
 app.listen(port, (err) => {
   if (err) return console.log(err);
-  console.log("server running on port " + port);
+  console.log("Server running on port " + port);
 });

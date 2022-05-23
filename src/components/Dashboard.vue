@@ -4,17 +4,44 @@
       <div class="col">
         <div class="card">
           <div class="card-header">
-            <p class="h1 m-2 card-text">Bentornato, {{ this.name }} 👋🏻</p>
+            <p class="fs-1 m-2 card-text">Bentornato, {{ this.name }} 👋🏻</p>
           </div>
           <div class="card-body">
-            <!-- Bottone modifica profilo-->
+            <div v-if="apiStatus === 'waiting'" class="m-2">
+              <p class="card-text d-inline">In attesa di</p>
+              <p class="card-text d-inline text-primary"> stabilire una connessione</p>
+              <p class="card-text d-inline"> con l'exchange</p>
+            </div>
+            <div v-else-if="apiStatus === 'not set'" class="m-2">
+              <p class="card-text d-inline">Credenziali dell'exchange </p>
+              <p class="card-text d-inline text-warning">non ancora impostate</p>
+              <p class="card-text d-inline">. Aggiungi i tuoi dati</p>
+            </div>
+            <div v-else-if="apiStatus === 'uncorrect'" class="m-2">
+              <p class="card-text d-inline">Credenziali dell'exchange </p>
+              <p class="card-text d-inline text-danger">non valide</p>
+              <p class="card-text d-inline">. Modifica i tuoi dati</p>
+            </div>
+            <div v-else-if="apiStatus === 'correct'" class="m-2">
+              <p class="card-text d-inline">Stiamo </p>
+              <p class="card-text d-inline text-success">recuperando i tuoi dati</p>
+              <p class="card-text d-inline"> dall'exchange. Attendi...</p>
+            </div>
+            <div v-else-if="apiStatus === 'set'" class="m-2">
+              <p class="card-text d-inline">Ecco a te il resconoto del tuo wallet. Qui puoi </p>
+              <p class="card-text d-inline text-primary">modificare</p>
+              <p class="card-text d-inline"> i tuoi dati oppure </p>
+              <p class="card-text d-inline text-danger">eliminare</p>
+              <p class="card-text d-inline"> il tuo account</p>
+            </div>
+            <!-- Edit user button -->
             <button
               type="button"
               class="btn btn-primary m-2"
               data-bs-toggle="modal"
               data-bs-target="#profilo"
             >
-              <p class="card-text">Modifica profilo</p>
+              <p class="sequel-font-big m-0">Modifica profilo</p>
             </button>
             <div class="modal" id="profilo">
               <div class="modal-dialog">
@@ -66,29 +93,53 @@
                     </div>
                     <!-- Footer -->
                     <div class="modal-footer">
-                      <button class="btn btn-primary" @click="edit">
-                        <p class="card-text">Modifica</p>
+                      <button class="btn btn-primary" @click="edit" >
+                        <p class="sequel-font-big m-0">Modifica</p>
                       </button>
                       <button
                         type="button"
                         class="btn btn-danger"
                         data-bs-dismiss="modal"
                       >
-                        <p class="card-text">Annulla</p>
+                        <p class="sequel-font-big m-0">Annulla</p>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-danger m-2"
+                        data-bs-dismiss="modal"
+                        data-bs-toggle="modal"
+                        data-bs-target="#elimina"
+                      >
+                        <p class="sequel-font-big m-0">
+                          Elimina
+                        </p>
+                        <div class="modal" id="elimina">
+                          <div class="modal-dialog">
+                            <p>Sei sicuro di voler eliminare l'account?</p>
+                            <button @click="remove">Si</button>
+                            <button data-bs-dismiss="modal">No</button>
+                          </div>
+                        </div>
                       </button>
                     </div>
                   </form>
                 </div>
               </div>
             </div>
-            <!--aggiungi wallet-->
+            <!-- Add wallet button -->
             <button
               type="button"
               class="btn btn-primary m-2"
               data-bs-toggle="modal"
               data-bs-target="#wallet"
             >
-              <p class="card-text">Aggiungi wallet</p>
+              <p
+                v-if="apiStatus === 'not set'"
+                class="sequel-font-big m-0"
+              >
+                Aggiungi wallet
+              </p>
+              <p v-else class="sequel-font-big m-0">Modifica wallet</p>
             </button>
             <div class="modal" id="wallet">
               <div class="modal-dialog">
@@ -96,7 +147,15 @@
                   <form>
                     <!-- Header -->
                     <div class="modal-header">
-                      <p class="modal-title card-text h4">Aggiungi wallet</p>
+                      <p
+                        v-if="api_key === '' && api_secret === ''"
+                        class="modal-title card-text h4"
+                      >
+                        Aggiungi wallet
+                      </p>
+                      <p v-else class="modal-title card-text h4">
+                        Modifica wallet
+                      </p>
                     </div>
 
                     <!-- Body -->
@@ -110,10 +169,15 @@
                           >
                         </div>
                         <select
-                          class="custom-select card-text"
+                          class="custom-select card-text bg-transparent"
                           id="exchange"
                           v-model="name_exchange"
-                          style="backgroundColor: transparent; borderColor: transparent; color: #7067cf; borderBottomColor: #7067cf"
+                          style="
+                            borderColor: transparent;
+                            color: #7067cf;
+                            borderBottomColor: #7067cf;
+                          "
+                          required
                         >
                           <option
                             v-for="exchange in exchanges"
@@ -154,24 +218,52 @@
                     <!-- Footer -->
                     <div class="modal-footer">
                       <button
-                        href="#"
                         class="btn btn-primary brn-block"
-                        @click="add"
+                        @click="add" 
                       >
-                        <p class="card-text">Aggiungi</p>
+                        <p
+                          v-if="api_key === '' && api_secret === ''"
+                          class="sequel-font-big m-0"
+                        >
+                          Aggiungi
+                        </p>
+                        <p v-else class="sequel-font-big m-0">Modifica</p>
                       </button>
                       <button
                         type="button"
                         class="btn btn-danger"
                         data-bs-dismiss="modal"
                       >
-                        <p class="card-text">Annulla</p>
+                        <p class="sequel-font-big m-0">Annulla</p>
                       </button>
                     </div>
                   </form>
                 </div>
               </div>
             </div>
+            <!-- Refresh button -->
+            <button
+              type="button"
+              class="btn btn-primary m-2"
+              @click="this.$router.go()"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-clockwise"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"
+                />
+                <path
+                  d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -180,50 +272,34 @@
       <div class="col">
         <div class="card">
           <div class="card-header">
-            <p class="card-text h1 m-2">${{ user_total.toFixed(2) }}</p>
+            <p class="card-text fs-1 m-2">${{ user_total.toFixed(2) }}</p>
             <p
-              style="
-                display: inline;
-                font-family: 'Sequel100Black-45', Helvetica, Arial;
-              "
-              class="m-2 text-success h5"
+              class="m-2 text-success fs-5 d-inline sequel-font-small"
               v-if="user_24h_PL >= 0"
             >
               ${{ user_24h_PL.toFixed(2) }}
             </p>
             <p
-              style="
-                display: inline;
-                font-family: 'Sequel100Black-45', Helvetica, Arial;
-              "
-              class="m-2 h5 text-danger"
+              class="m-2 fs-5 d-inline sequel-font-small text-danger"
               v-else
             >
               -${{ Math.abs(user_24h_PL).toFixed(2) }}
             </p>
             <p
-              style="
-                display: inline;
-                font-family: 'Sequel100Black-45', Helvetica, Arial;
-              "
-              class="m-2 h5 text-success"
+              class="m-2 fs-5 d-inline sequel-font-small text-success"
               v-if="user_24h_PL_percent >= 0"
             >
               {{ user_24h_PL_percent.toFixed(2) }}%
             </p>
             <p
-              style="
-                display: inline;
-                font-family: 'Sequel100Black-45', Helvetica, Arial;
-              "
-              class="m-2 h5 text-danger"
+              class="m-2 fs-5 d-inline sequel-font-small text-danger"
               v-else
             >
               -${{ Math.abs(user_24h_PL_percent).toFixed(2) }}%
             </p>
           </div>
-          <div class="card-body">
-            <table class="table rounded text-uppercase text-white">
+          <div v-if="tableLoaded" class="card-body">
+            <table class="table rounded text-uppercase text-white bg-transparent">
               <thead>
                 <tr>
                   <th v-for="title in titles" :key="title">
@@ -245,7 +321,7 @@
                     ${{ (key.last * key.amount).toFixed(2) }}
                   </td>
                   <td class="text-white">${{ key.last }}</td>
-                  <td class=" d-none d-md-table-cell">
+                  <td class="d-none d-md-table-cell">
                     <p v-if="key.change < 0" class="text-danger">
                       -${{ Math.abs(key.change * key.amount).toFixed(2) }}
                     </p>
@@ -258,7 +334,7 @@
                       {{ key.changePercentage.toFixed(2) }}%
                     </p>
                     <p v-else class="text-success">
-                      {{ key.changePercentage /*.toFixed(2)*/ }}%
+                      {{ key.changePercentage.toFixed(2) }}%
                     </p>
                   </td>
                 </tr>
@@ -268,7 +344,7 @@
         </div>
       </div>
     </div>
-    <div class="row mb-4">
+    <div v-if="chartLoaded" class="row mb-4">
       <div class="col mt-4">
         <div class="card">
           <div class="card-header">
@@ -334,6 +410,7 @@ export default {
   components: { Doughnut, Bar },
   data() {
     return {
+      apiStatus: "waiting",
       titles: ["Coin", "Quantità", "Totale", "Prezzo"],
       token: "",
       name: "",
@@ -352,6 +429,8 @@ export default {
       user_24h_PL: 0,
       user_24h_PL_percent: 0,
       user_percentages: [],
+      tableLoaded: false,
+      chartLoaded: false,
       doughnutChartData: {
         labels: [],
         datasets: [
@@ -387,75 +466,83 @@ export default {
   },
   methods: {
     async getData() {
+      if (this.api_key === "" || this.api_secret === "") {
+        this.apiStatus = "not set";
+        return;
+      }
       const exchangeId = this.name_exchange,
         exchangeClass = ccxt[exchangeId],
         exchange = new exchangeClass({
-          apiKey: this.api_key, //"eTTdvdRluP7o3P3egzbaHH2inaRCX7ZV6EwokdracUitTtiAnXlRSxpgJCgxUgL5"
-          secret: this.api_secret, //"bpqwwR0pBrxwGVsuVTg6H1FNjybVBo8Bu96rtSvJEV70YhBqXuCC2zcoBRMvQXJT"
-          proxy: "https://dashboard-cors.herokuapp.com/",
+          apiKey: this.api_key,
+          secret: this.api_secret,
+          proxy: "https://dashboard-cors.herokuapp.com/", // our custom proxy to avoid CORS
         });
-      console.log(exchange);
-      let data = await exchange.fetchBalance();
-      data = data.total;
-      Object.keys(data).forEach((key) => {
-        if (data[key] <= 0) delete data[key];
-      });
-      this.user_data = data;
-      let symbols = Object.keys(this.user_data).map((key) => key + "/USDT");
-      symbols = await exchange.fetchTickers(symbols);
-      Object.keys(symbols).forEach((key) => {
-        symbols[key.replace("/USDT", "")] = symbols[key];
-        delete symbols[key];
-      });
-      Object.keys(this.user_data).forEach((key) => {
-        this.user_data[key] = {
-          amount: this.user_data[key],
-          last: symbols[key].last,
-          changePercentage: symbols[key].percentage, //last 24h percentage
-          change: symbols[key].change, //last 24h change in USD
-        };
-      });
-      //compute user total in USD
-      this.user_total = 0;
-      Object.keys(this.user_data).forEach((key) => {
-        this.user_total +=
-          this.user_data[key].amount * this.user_data[key].last;
-      });
-      //compute cumulative user 24h P/L
-      this.user_24h_PL = 0;
-      Object.keys(this.user_data).forEach((key) => {
-        this.user_24h_PL +=
-          this.user_data[key].amount * this.user_data[key].change;
-      });
-      //compute cumulative user 24h P/L percentage
-      this.user_24h_PL_percent =
-        (this.user_24h_PL / (this.user_total - this.user_24h_PL)) * 100;
-      //add data to charts
-      this.doughnutChartData.labels = Object.keys(this.user_data);
-      this.barChartData.labels = Object.keys(this.user_data);
-      let user_24h_PLs_percent = [];
-      Object.keys(this.user_data).forEach((key) => {
-        this.user_percentages.push(
-          ((this.user_data[key].amount * this.user_data[key].last) /
-            this.user_total) *
-            100
-        );
-        //console.log(this.user_data[key].changePercentage);
-        user_24h_PLs_percent.push(this.user_data[key].changePercentage);
-      });
-      this.doughnutChartData.datasets[0].data = this.user_percentages;
-      this.barChartData.datasets[0].data = user_24h_PLs_percent;
-      console.log(this.barChartData.datasets[0].data);
-      //generate color palette
-      const pal = palette("tol", this.user_percentages.length).map(function (
-        hex
-      ) {
-        return "#" + hex;
-      });
-      this.doughnutChartData.datasets[0].backgroundColor = pal;
-      this.barChartData.datasets[0].backgroundColor = pal;
-      //fetch orders
-      //console.log(await exchange.fetchOrders(["BTC/USDT", "ETH/USDT"]));
+      try {
+        let data = await exchange.fetchBalance();
+        this.apiStatus = "correct";
+        data = data.total;
+        Object.keys(data).forEach((key) => {
+          if (data[key] <= 0) delete data[key];
+        });
+        this.user_data = data;
+        let symbols = Object.keys(this.user_data).map((key) => key + "/USDT");
+        symbols = await exchange.fetchTickers(symbols);
+        Object.keys(symbols).forEach((key) => {
+          symbols[key.replace("/USDT", "")] = symbols[key];
+          delete symbols[key];
+        });
+        Object.keys(this.user_data).forEach((key) => {
+          this.user_data[key] = {
+            amount: this.user_data[key],
+            last: symbols[key].last,
+            changePercentage: symbols[key].percentage, //last 24h percentage
+            change: symbols[key].change, //last 24h change in USD
+          };
+        });
+        //compute user total in USD
+        this.user_total = 0;
+        Object.keys(this.user_data).forEach((key) => {
+          this.user_total +=
+            this.user_data[key].amount * this.user_data[key].last;
+        });
+        //compute cumulative user 24h P/L
+        this.user_24h_PL = 0;
+        Object.keys(this.user_data).forEach((key) => {
+          this.user_24h_PL +=
+            this.user_data[key].amount * this.user_data[key].change;
+        });
+        //compute cumulative user 24h P/L percentage
+        this.user_24h_PL_percent = (this.user_24h_PL / (this.user_total - this.user_24h_PL)) * 100;
+        this.tableLoaded = true;
+        //add data to charts
+        this.doughnutChartData.labels = Object.keys(this.user_data);
+        this.barChartData.labels = Object.keys(this.user_data);
+        let user_24h_PLs_percent = [];
+        Object.keys(this.user_data).forEach((key) => {
+          this.user_percentages.push(
+            ((this.user_data[key].amount * this.user_data[key].last) /
+              this.user_total) *
+              100
+          );
+          user_24h_PLs_percent.push(this.user_data[key].changePercentage);
+        });
+        this.doughnutChartData.datasets[0].data = this.user_percentages;
+        this.barChartData.datasets[0].data = user_24h_PLs_percent;
+        console.log(this.barChartData.datasets[0].data);
+        //generate color palette
+        const pal = palette("tol", this.user_percentages.length).map(function (
+          hex
+        ) {
+          return "#" + hex;
+        });
+        this.doughnutChartData.datasets[0].backgroundColor = pal;
+        this.barChartData.datasets[0].backgroundColor = pal;
+        this.chartLoaded = true;
+        this.apiStatus = "set";
+      } catch (err) {
+        if (err instanceof ccxt.AuthenticationError)
+          this.apiStatus = "uncorrect";
+      }
     },
     async getExchanges() {
       this.exchanges = await ccxt.exchanges;
@@ -483,15 +570,13 @@ export default {
         token: this.token,
         email: this.newEmail,
         password: this.password,
-      };
-      axios.post("http://localhost:5000/user", user).then((res) => {
-        if (res.status === 405) {
-          console.log("account non modificato");
-        } else controle.log("account modificato");
-      });
-      this.password = "";
-      if (this.newEmail != "") {
-        this.email = this.newEmail;
+      };      
+      if(document.getElementById("nuovaEmail").checkValidity()){
+        axios.post("http://localhost:5000/user", user).then((res) => {
+          if (res.status === 405) {
+            console.log("account non modificato");
+          } else controle.log("account modificato");
+        });
       }
     },
 
@@ -503,19 +588,11 @@ export default {
         api_key: this.newApiKey,
         api_secret: this.newApiSecret,
       };
-      //check validity
-      //const exchangeId = wallet.name_exchange,
-      //  exchangeClass = ccxt[exchangeId],
-      //  exchange = new exchangeClass({
-      //    apiKey: wallet.api_key,
-      //    secret: wallet.api_secret,
-      //    proxy: "https://dashboard-cors.herokuapp.com/",
-      //  });
-      if (api_key != "" && api_secret != "") {
+      if(this.newApiKey!="" && this.newApiSecret!="" && this.name_exchange!=""){
         axios.put("http://localhost:5000/user", wallet).then((res) => {
           if (res.status === 405) {
             console.log("account non modificato");
-          } else {
+            } else {
             console.log("account modificato");
             this.api_key = this.newApiKey;
             this.api_secret = this.newApiSecret;
@@ -526,6 +603,7 @@ export default {
       }
     },
     async getDataFromServer() {
+      // get user data from server
       await axios
         .get("http://localhost:5000/user", { headers: { token: this.token } })
         .then((res) => {
@@ -536,36 +614,37 @@ export default {
           this.api_secret = res.data.user.api_secret;
         });
       this.getData();
+      
     },
+    getToken() {
+      // get user token and store it in a variable
+      if (localStorage.getItem("token"))
+        this.token = localStorage.getItem("token");
+      else if (sessionStorage.getItem("token"))
+        this.token = sessionStorage.getItem("token");
+    },
+    redirectOnMissingToken() {
+      if (
+        localStorage.getItem("token") === null &&
+        sessionStorage.getItem("token") === null
+      ) {
+        this.$router.push("/login");
+      }
+    }
   },
   mounted() {
     this.getExchanges();
-    //estrapolo il token e me lo salvo in una variabile
-    if (localStorage.getItem("token"))
-      this.token = localStorage.getItem("token");
-    else if (sessionStorage.getItem("token"))
-      this.token = sessionStorage.getItem("token");
-    //mi prendo le informazioni dell'utente dal server
+    this.getToken();
     this.getDataFromServer();
     this.getData();
   },
-
   created() {
-    if (
-      localStorage.getItem("token") === null &&
-      sessionStorage.getItem("token") === null
-    ) {
-      this.$router.push("/login");
-    }
+    this.redirectOnMissingToken();
   },
 };
 </script>
 
 <style scoped>
-table {
-  background-color: transparent;
-}
-
 .card {
   background-color: rgba(112, 103, 207, 0.1);
   border-radius: 10px;
@@ -575,6 +654,13 @@ table {
 
 .modal-content {
   background-color: rgb(20, 15, 68);
+}
+
+.sequel-font-big {
+  font-family: "Sequel100Black-85", Helvetica, Arial;
+}
+.sequel-font-small {
+  font-family: 'Sequel100Black-45', Helvetica, Arial;
 }
 
 .card-text {

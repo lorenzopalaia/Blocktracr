@@ -1,29 +1,42 @@
 <template>
   <div class="container">
     <div>
-      <p class="fs-1 sequel-font-small text-white d-inline">I </p>
-      <p class="fs-1 sequel-font-small d-inline" style="color: #7067cf">prezzi di oggi</p>
+      <p class="fs-1 sequel-font-small text-white d-inline">I</p>
+      <p class="fs-1 sequel-font-small d-inline" style="color: #7067cf">
+        prezzi di oggi
+      </p>
       <p class="fs-1 sequel-font-small text-white d-inline">
         delle criptovalute in ordine di capitalizzazione di mercato
       </p>
       <div v-if="totalMCap && change24h && volume24h">
         <p class="sequel-font-small d-inline text-white">
-          La capitalizzazione totale del mercato crypto oggi è di 
+          La capitalizzazione totale del mercato crypto oggi è di
         </p>
         <p class="text-primary sequel-font-small d-inline">
           {{ totalMCap.toLocaleString() }}$
         </p>
         <p class="sequel-font-small d-inline text-white">, con un</p>
-        <p v-if="change24h >= 0" class="sequel-font-small d-inline text-white"> aumento</p>
-        <p v-else class="sequel-font-small d-inline text-white">a diminuzione</p>
-        <p class="sequel-font-small d-inline text-white"> percentuale nelle ultime 24 ore del </p>
-        <p v-if="change24h >= 0" class="text-success sequel-font-small d-inline">
+        <p v-if="change24h >= 0" class="sequel-font-small d-inline text-white">
+          aumento
+        </p>
+        <p v-else class="sequel-font-small d-inline text-white">
+          a diminuzione
+        </p>
+        <p class="sequel-font-small d-inline text-white">
+          percentuale nelle ultime 24 ore del
+        </p>
+        <p
+          v-if="change24h >= 0"
+          class="text-success sequel-font-small d-inline"
+        >
           {{ change24h.toFixed(2) }}%
         </p>
         <p v-else class="text-danger sequel-font-small d-inline">
           {{ change24h.toFixed(2) }}%
         </p>
-        <p class="sequel-font-small d-inline text-white">. Il volume scambiato oggi ammonta a </p>
+        <p class="sequel-font-small d-inline text-white">
+          . Il volume scambiato oggi ammonta a
+        </p>
         <p class="text-primary sequel-font-small d-inline">
           {{ volume24h.toLocaleString() }}$
         </p>
@@ -38,16 +51,26 @@
           <div class="card-body">
             <ul class="list-unstyled">
               <li>
-                <p class="sequel-font-small d-inline text-white">Crypto listate: </p>
-                <p class="sequel-font-small d-inline text-primary">{{ activeCryptos }}</p>
+                <p class="sequel-font-small d-inline text-white">
+                  Crypto listate:
+                </p>
+                <p class="sequel-font-small d-inline text-primary">
+                  {{ activeCryptos }}
+                </p>
               </li>
               <li>
-                <p class="sequel-font-small d-inline text-white">Mercati attivi: </p>
-                <p class="sequel-font-small d-inline text-primary">{{ activeMarkets }}</p>
+                <p class="sequel-font-small d-inline text-white">
+                  Mercati attivi:
+                </p>
+                <p class="sequel-font-small d-inline text-primary">
+                  {{ activeMarkets }}
+                </p>
               </li>
               <li>
-                <p class="sequel-font-small d-inline text-white">ICO attive: </p>
-                <p class="sequel-font-small d-inline text-primary">{{ activeICOs }}</p>
+                <p class="sequel-font-small d-inline text-white">ICO attive:</p>
+                <p class="sequel-font-small d-inline text-primary">
+                  {{ activeICOs }}
+                </p>
               </li>
             </ul>
           </div>
@@ -61,36 +84,48 @@
           <div class="card-body">
             <ul class="list-unstyled">
               <li>
-                <img src="https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579" alt="" class="me-2">
+                <img
+                  src="https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579"
+                  alt=""
+                  class="me-2"
+                />
                 <router-link
                   class="text-decoration-none"
                   :to="{ name: 'coin', params: { id: 'bitcoin' } }"
                 >
-                  <p class="sequel-font-small d-inline text-white">BTC: </p>
+                  <p class="sequel-font-small d-inline text-white">BTC:</p>
                 </router-link>
                 <p class="sequel-font-small d-inline text-primary">
                   {{ top3dominance.btc.toFixed(2) }}%
                 </p>
               </li>
               <li>
-                <img src="https://assets.coingecko.com/coins/images/279/thumb/ethereum.png?1595348880" alt="" class="me-2">
+                <img
+                  src="https://assets.coingecko.com/coins/images/279/thumb/ethereum.png?1595348880"
+                  alt=""
+                  class="me-2"
+                />
                 <router-link
                   class="text-decoration-none"
                   :to="{ name: 'coin', params: { id: 'ethereum' } }"
                 >
-                  <p class="sequel-font-small d-inline text-white">ETH: </p>
+                  <p class="sequel-font-small d-inline text-white">ETH:</p>
                 </router-link>
                 <p class="sequel-font-small d-inline text-primary">
                   {{ top3dominance.eth.toFixed(2) }}%
                 </p>
               </li>
               <li>
-                <img src="https://assets.coingecko.com/coins/images/325/thumb/Tether-logo.png?1598003707" alt="" class="me-2">
+                <img
+                  src="https://assets.coingecko.com/coins/images/325/thumb/Tether-logo.png?1598003707"
+                  alt=""
+                  class="me-2"
+                />
                 <router-link
                   class="text-decoration-none"
                   :to="{ name: 'coin', params: { id: 'tether' } }"
                 >
-                  <p class="sequel-font-small d-inline text-white">USDT: </p>
+                  <p class="sequel-font-small d-inline text-white">USDT:</p>
                 </router-link>
                 <p class="sequel-font-small d-inline text-primary">
                   {{ top3dominance.usdt.toFixed(2) }}%
@@ -106,14 +141,20 @@
             <p class="text-white sequel-font-big">Trending</p>
           </div>
           <div class="card-body">
-            <ul class="list-unstyled m-0" v-for="coin in top3trending" :key="coin.item.coin_id">
+            <ul
+              class="list-unstyled m-0"
+              v-for="coin in top3trending"
+              :key="coin.item.coin_id"
+            >
               <li>
                 <img :src="coin.item.thumb" alt="" class="me-2" />
                 <router-link
                   class="text-decoration-none"
                   :to="{ name: 'coin', params: { id: coin.item.id } }"
                 >
-                  <p class="sequel-font-small d-inline text-white">{{ coin.item.symbol }}</p>
+                  <p class="sequel-font-small d-inline text-white">
+                    {{ coin.item.symbol }}
+                  </p>
                 </router-link>
               </li>
             </ul>
@@ -179,6 +220,48 @@
         </tr>
       </tbody>
     </table>
+    <div class="btn-group d-flex justify-content-center my-4" role="group">
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        @click="onPageChange(1)"
+        :disabled="currentPage === 1"
+      >
+        Prima
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        @click="onPageChange(pageArray[0])"
+        :disabled="currentPage === pageArray[0]"
+      >
+        {{ pageArray[0] }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        @click="onPageChange(pageArray[1])"
+        :disabled="currentPage === pageArray[1]"
+      >
+        {{ pageArray[1] }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        @click="onPageChange(pageArray[2])"
+        :disabled="currentPage === pageArray[2]"
+      >
+        {{ pageArray[2] }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        @click="onPageChange(lastPage)"
+        :disabled="currentPage === lastPage"
+      >
+        Ultima
+      </button>
+    </div>
   </div>
 </template>
 
@@ -192,6 +275,9 @@ export default {
   },
   data() {
     return {
+      currentPage: 1,
+      pageArray: [1, 2, 3],
+      lastPage: 135, // default value updated asyncronously via getPages() function
       coins: [],
       tableTitles: ["#", "Nome", "Prezzo", "24h%"],
       change24h: null,
@@ -205,10 +291,28 @@ export default {
     };
   },
   methods: {
+    onPageChange(page) {
+      // everything is handled by an array, :disabled attribute in elements will do the rest...
+      this.currentPage = page;
+      this.getData();
+      window.scrollTo(0, 0);
+      if (page === 1) this.pageArray = [1, 2, 3];
+      else if (page === this.lastPage)
+        this.pageArray = [this.lastPage - 2, this.lastPage - 1, this.lastPage];
+      else this.pageArray = [page - 1, page, page + 1];
+    },
+    async getPages() {
+      let uri = "https://api.coingecko.com/api/v3/global";
+      let config = { headers: { Accept: "application/json" } };
+      const res = await axios.get(uri, config);
+      // ceil of total listed cryptos divided by 100 (number of cryptos per page)
+      this.lastPages = Math.ceil(res.data.data.active_cryptocurrencies / 100);
+    },
     async getData() {
       let uri =
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=" +
-        this.$props.page;
+        this.currentPage;
+      console.log(this.$props.page);
       let config = { headers: { Accept: "application/json" } };
       const res = await axios.get(uri, config);
       this.coins = res.data;
@@ -232,11 +336,11 @@ export default {
       let uri = "https://api.coingecko.com/api/v3/search/trending";
       let config = { headers: { Accept: "application/json" } };
       const res = await axios.get(uri, config);
-      console.log(res.data);
       this.top3trending = res.data.coins.slice(0, 3);
-    }
+    },
   },
   mounted() {
+    this.getPages();
     this.getData();
     this.getMarketData();
     this.getTrending();
