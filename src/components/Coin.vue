@@ -7,16 +7,15 @@
             <img
               v-if="coinData.image.large"
               :src="coinData.image.large"
-              style="width: 48px; display: inline"
-              class="m-2"
+              style="width: 48px;"
+              class="m-2 d-inline"
             />
-            <p v-if="coinData.name" class="fs-1 m-2" style="display: inline">
+            <p v-if="coinData.name" class="fs-1 m-2 d-inline">
               {{ coinData.name }}
             </p>
             <p
               v-if="coinData.symbol"
-              class="fs-5 text-wrap bg-primary badge m-2"
-              style="display: inline"
+              class="fs-5 text-wrap bg-primary badge m-2 d-inline"
             >
               {{ coinData.symbol.toUpperCase() }}
             </p>
@@ -24,8 +23,7 @@
           <div class="col d-flex align-items-center">
             <p
               v-if="coinData.market_data.current_price.usd"
-              style="display: inline"
-              class="fs-1 m-2"
+              class="fs-1 m-2 d-inline"
             >
               ${{ coinData.market_data.current_price.usd.toLocaleString() }}
             </p>
@@ -87,7 +85,6 @@
             <p
               v-if="coinData.description.en"
               v-html="coinData.description.en"
-              style="color: #e0e0e0"
             ></p>
             <p v-if="coinData.contract_address">
               Contratto: {{ coinData.contract_address }}
@@ -139,7 +136,7 @@
                     v-if="coinData.market_data.market_cap.usd"
                     class="fs-5 m-0"
                   >
-                    {{ Intl.NumberFormat('en-US', { notation: 'compact', currency: 'USD', style: 'currency' }).format(coinData.market_data.market_cap.usd) }}
+                    {{ Intl.NumberFormat('en-US', { notation: 'compact', currency: 'USD', style: 'currency' }).format(coinData.market_data.market_cap.usd) /* currency formatter */ }}
                   </p>
                   <p v-else class="fs-5 m-0">N/D</p>
                   <p class="fs-6 m-0" style="color: rgba(112, 103, 207, 0.8)">
@@ -337,34 +334,32 @@
         </div>
       </div>
     </div>
-    <div v-if="coinData.sentiment_votes_up_percentage" class="row">
-      <div class="col-12 my-4">
-        <div class="card">
-          <p class="card-header fw-bold">Sentiment Score</p>
-          <div class="card-body fw-bold">
-            <div class="progress" style="height: 24px">
-              <div
-                class="progress-bar bg-success"
-                role="progressbar"
-                :style="{ width: coinData.sentiment_votes_up_percentage + '%' }"
-                :aria-valuenow="coinData.sentiment_votes_up_percentage"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                {{ coinData.sentiment_votes_up_percentage }}%
-              </div>
-              <div
-                class="progress-bar bg-danger"
-                role="progressbar"
-                :style="{
-                  width: coinData.sentiment_votes_down_percentage + '%',
-                }"
-                :aria-valuenow="coinData.sentiment_votes_down_percentage"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                {{ coinData.sentiment_votes_down_percentage }}%
-              </div>
+    <div v-if="coinData.sentiment_votes_up_percentage" class="mb-4">
+      <div class="card">
+        <p class="card-header fw-bold">Sentiment Score</p>
+        <div class="card-body fw-bold">
+          <div class="progress" style="height: 24px">
+            <div
+              class="progress-bar bg-success"
+              role="progressbar"
+              :style="{ width: coinData.sentiment_votes_up_percentage + '%' }"
+              :aria-valuenow="coinData.sentiment_votes_up_percentage"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {{ coinData.sentiment_votes_up_percentage }}%
+            </div>
+            <div
+              class="progress-bar bg-danger"
+              role="progressbar"
+              :style="{
+                width: coinData.sentiment_votes_down_percentage + '%',
+              }"
+              :aria-valuenow="coinData.sentiment_votes_down_percentage"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {{ coinData.sentiment_votes_down_percentage }}%
             </div>
           </div>
         </div>
@@ -373,11 +368,11 @@
     <div v-if="chartLoaded">
       <div class="card">
         <p class="card-header fw-bold">Grafico</p>
-        <div class="btn-group mx-4" role="group">
+        <div class="btn-group m-4" role="group">
           <button
             type="button"
             class="btn btn-outline-primary"
-            v-on:click="getHistoricalData('1')"
+            @click="getHistoricalData('1')"
             :disabled="interval === '1'"
           >
             24h
@@ -385,7 +380,7 @@
           <button
             type="button"
             class="btn btn-outline-primary"
-            v-on:click="getHistoricalData('7')"
+            @click="getHistoricalData('7')"
             :disabled="interval === '7'"
           >
             7d
@@ -393,7 +388,7 @@
           <button
             type="button"
             class="btn btn-outline-primary"
-            v-on:click="getHistoricalData('30')"
+            @click="getHistoricalData('30')"
             :disabled="interval === '30'"
           >
             30d
@@ -401,7 +396,7 @@
           <button
             type="button"
             class="btn btn-outline-primary"
-            v-on:click="getHistoricalData('90')"
+            @click="getHistoricalData('90')"
             :disabled="interval === '90'"
           >
             90d
@@ -409,7 +404,7 @@
           <button
             type="button"
             class="btn btn-outline-primary"
-            v-on:click="getHistoricalData('365')"
+            @click="getHistoricalData('365')"
             :disabled="interval === '365'"
           >
             1y
@@ -417,7 +412,7 @@
           <button
             type="button"
             class="btn btn-outline-primary"
-            v-on:click="getHistoricalData('max')"
+            @click="getHistoricalData('max')"
             :disabled="interval === 'max'"
           >
             Max
@@ -472,7 +467,6 @@ export default {
   },
   data() {
     return {
-      gradient: null,
       interval: "1",
       coinData: [],
       chartLoaded: false,
@@ -508,19 +502,17 @@ export default {
     };
   },
   methods: {
-    isUpperCase(str) {
-      return str == str.toUpperCase() && str != str.toLowerCase();
-    },
     async getData() {
+      // HTTP GET CoinGecko API
       let uri = "https://api.coingecko.com/api/v3/coins/" + this.$props.coin;
       let config = { headers: { Accept: "application/json" } };
       let res = await axios.get(uri, config);
-      // little function to get a summarize description via deepai API
+      // summarize description via deepai API
       if (res.data.description.en) {
-        var resp = await deepai.callStandardApi("summarization", { text: res.data.description.en });
-        res.data.description.en = resp.output;
+        var sum = await deepai.callStandardApi("summarization", { text: res.data.description.en });
+        res.data.description.en = sum.output;
       }
-      this.coinData = res.data;
+      this.coinData = res.data; // bind API data to local data
     },
     async getHistoricalData(interval) {
       let uri =
@@ -530,9 +522,9 @@ export default {
         interval;
       let config = { headers: { Accept: "application/json" } };
       const res = await axios.get(uri, config);
-      //console.log(res.data.prices);
       this.chartData.labels = [];
       this.chartData.datasets[0].data = [];
+      // populate plot's x-axis with Date objects obtained by a conversion from API's timestamps
       for (let idx = 0; idx < res.data.prices.length; ++idx) {
         var date = new Date(res.data.prices[idx][0]).toLocaleDateString(
           "en-US"
@@ -541,28 +533,24 @@ export default {
         this.chartData.datasets[0].data.push(res.data.prices[idx][1]);
       }
       this.interval = interval;
+      // if there's more than one element in plot's datasets we can render the component
       if (this.chartData.datasets[0].data.length > 1) {
         this.chartLoaded = true;
       }
     },
-    async getAll() {
-      this.getData();
-      this.getHistoricalData("1");
-    },
   },
   mounted() {
-    //this.getAll();
-    //setInterval(this.getAll, 60000);
     this.getData();
     this.getHistoricalData("1");
-    setInterval(this.getData(), 60000);
   },
 };
 </script>
 
+<!--
+  this time style is not scoped, in order to bind that to elements rendered via v-html
+-->
 <style>
 .card {
-  box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
   background-color: rgba(112, 103, 207, 0.1);
   border-radius: 10px;
   height: 100%;

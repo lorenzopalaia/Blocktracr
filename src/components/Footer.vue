@@ -1,28 +1,28 @@
 <template>
-  <div class="footer">
+  <div class="footer mt-4">
     <div class="container">
-      <h1>BLOCKTRACR</h1>
+      <p class="fs-1 pt-2">BLOCKTRACR</p>
       <div class="row">
         <div class="col">
           <p class="footer-col-header">Navigazione</p>
-          <ul>
-            <li class="footer-link">
+          <ul class="p-0 list-unstyled">
+            <li class="footer-link pb-2">
               <router-link class="router-link" to="/">Home</router-link>
             </li>
-            <li class="footer-link">
+            <li class="footer-link pb-2">
               <router-link class="router-link" to="/livestats"
                 >Live Stats</router-link
               >
             </li>
-            <li class="footer-link">
+            <li class="footer-link pb-2">
               <router-link class="router-link" to="/dashboard"
                 >Dashboard</router-link
               >
             </li>
-            <li class="footer-link">
+            <li class="footer-link pb-2">
               <router-link class="router-link" to="/login">Login</router-link>
             </li>
-            <li class="footer-link">
+            <li class="footer-link pb-2">
               <router-link class="router-link" to="/register"
                 >Register</router-link
               >
@@ -31,31 +31,33 @@
         </div>
         <div class="col">
           <p class="footer-col-header">Links</p>
-          <ul>
+          <ul class="p-0 list-unstyled">
             <li>
-              <a target="_blank" href="https://github.com/lorenzopalaia"
-                ><p class="footer-link">GitHub Lorenzo</p></a
+              <a target="_blank" href="https://github.com/lorenzopalaia" class="text-decoration-none"
+                ><p class="footer-link pb-2 m-0">GitHub Lorenzo</p></a
               >
             </li>
             <li>
               <a
                 target="_blank"
                 href="https://www.linkedin.com/in/lorenzo-palaia-7177a5202/"
-                ><p class="footer-link">LinkedIn Lorenzo</p></a
+                class="text-decoration-none"
+                ><p class="footer-link pb-2 m-0">LinkedIn Lorenzo</p></a
               >
             </li>
             <li>
               <a
                 target="_blank"
                 href="https://github.com/giorgiokr"
-                ><p class="footer-link">GitHub Giorgio</p></a
+                class="text-decoration-none"
+                ><p class="footer-link pb-2 m-0">GitHub Giorgio</p></a
               >
             </li>
           </ul>
         </div>
         <div class="col">
           <p class="footer-col-header">Riguardo Blocktracr</p>
-          <p class="footer-text">
+          <p class="footer-text pb-2">
             A cura di Apa Giorgio e Palaia Lorenzo. Blocktracr è un progetto
             realizzato per il corso di Linguaggi e Tecnologie per il Web
             dell'Università La Sapienza di Roma, A.A. 2021/2022
@@ -73,10 +75,9 @@ export default {
 </script>
 
 <style scoped>
-h1 {
+.fs-1 {
   font-family: "Sequel100Black-85", Helvetica, Arial;
   color: #7067cf;
-  padding-top: 16px;
 }
 
 .footer-col-header {
@@ -86,28 +87,16 @@ h1 {
 
 .footer {
   background-color: rgba(112, 103, 207, 0.1);
-  margin-top: 30px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
 }
 
 .footer-text {
-  padding-bottom: 16px;
   font-family: "Sequel100Black-45", Helvetica, Arial;
   color: rgba(112, 103, 207, 0.8);
 }
 
 .footer-link {
-    padding-bottom: 16px;
     font-family: "Sequel100Black-45", Helvetica, Arial;
     color: #2ab2fc;
-}
-
-a {
-  text-decoration: none;
 }
 
 .router-link {

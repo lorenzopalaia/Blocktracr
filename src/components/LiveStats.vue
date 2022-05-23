@@ -1,98 +1,98 @@
 <template>
   <div class="container">
     <div>
-      <p class="h1 market-info-text">I </p>
-      <p class="h1 market-info-text" style="color: #7067cf">prezzi di oggi</p>
-      <p class="h1 market-info-text">
+      <p class="fs-1 sequel-font-small text-white d-inline">I </p>
+      <p class="fs-1 sequel-font-small d-inline" style="color: #7067cf">prezzi di oggi</p>
+      <p class="fs-1 sequel-font-small text-white d-inline">
         delle criptovalute in ordine di capitalizzazione di mercato
       </p>
       <div v-if="totalMCap && change24h && volume24h">
-        <p class="market-info-text">
+        <p class="sequel-font-small d-inline text-white">
           La capitalizzazione totale del mercato crypto oggi è di 
         </p>
-        <p class="text-primary market-info-text">
+        <p class="text-primary sequel-font-small d-inline">
           {{ totalMCap.toLocaleString() }}$
         </p>
-        <p class="market-info-text">, con un</p>
-        <p v-if="change24h >= 0" class="market-info-text"> aumento</p>
-        <p v-else class="market-info-text">a diminuzione</p>
-        <p class="market-info-text"> percentuale nelle ultime 24 ore del </p>
-        <p v-if="change24h >= 0" class="text-success market-info-text">
+        <p class="sequel-font-small d-inline text-white">, con un</p>
+        <p v-if="change24h >= 0" class="sequel-font-small d-inline text-white"> aumento</p>
+        <p v-else class="sequel-font-small d-inline text-white">a diminuzione</p>
+        <p class="sequel-font-small d-inline text-white"> percentuale nelle ultime 24 ore del </p>
+        <p v-if="change24h >= 0" class="text-success sequel-font-small d-inline">
           {{ change24h.toFixed(2) }}%
         </p>
-        <p v-else class="text-danger market-info-text">
+        <p v-else class="text-danger sequel-font-small d-inline">
           {{ change24h.toFixed(2) }}%
         </p>
-        <p class="market-info-text">. Il volume scambiato oggi ammonta a </p>
-        <p class="text-primary market-info-text">
+        <p class="sequel-font-small d-inline text-white">. Il volume scambiato oggi ammonta a </p>
+        <p class="text-primary sequel-font-small d-inline">
           {{ volume24h.toLocaleString() }}$
         </p>
       </div>
     </div>
     <div class="row">
       <div v-if="activeCryptos && activeMarkets && activeICOs" class="col mt-4">
-        <div class="card market-info-card">
+        <div class="card">
           <div class="card-header">
-            <p class="market-info-text market-info-title">Info di mercato</p>
+            <p class="text-white sequel-font-big">Info di mercato</p>
           </div>
           <div class="card-body">
-            <ul>
+            <ul class="list-unstyled">
               <li>
-                <p class="market-info-text">Crypto listate: </p>
-                <p class="market-info-text text-primary">{{ activeCryptos }}</p>
+                <p class="sequel-font-small d-inline text-white">Crypto listate: </p>
+                <p class="sequel-font-small d-inline text-primary">{{ activeCryptos }}</p>
               </li>
               <li>
-                <p class="market-info-text">Mercati attivi: </p>
-                <p class="market-info-text text-primary">{{ activeMarkets }}</p>
+                <p class="sequel-font-small d-inline text-white">Mercati attivi: </p>
+                <p class="sequel-font-small d-inline text-primary">{{ activeMarkets }}</p>
               </li>
               <li>
-                <p class="market-info-text">ICO attive: </p>
-                <p class="market-info-text text-primary">{{ activeICOs }}</p>
+                <p class="sequel-font-small d-inline text-white">ICO attive: </p>
+                <p class="sequel-font-small d-inline text-primary">{{ activeICOs }}</p>
               </li>
             </ul>
           </div>
         </div>
       </div>
       <div v-if="top3dominance" class="col mt-4">
-        <div class="card market-info-card">
+        <div class="card">
           <div class="card-header">
-            <p class="market-info-text market-info-title">Dominance</p>
+            <p class="text-white sequel-font-big">Dominance</p>
           </div>
           <div class="card-body">
-            <ul>
+            <ul class="list-unstyled">
               <li>
                 <img src="https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579" alt="" class="me-2">
                 <router-link
-                  class="router-link"
+                  class="text-decoration-none"
                   :to="{ name: 'coin', params: { id: 'bitcoin' } }"
                 >
-                  <p class="market-info-text">BTC: </p>
+                  <p class="sequel-font-small d-inline text-white">BTC: </p>
                 </router-link>
-                <p class="market-info-text text-primary">
+                <p class="sequel-font-small d-inline text-primary">
                   {{ top3dominance.btc.toFixed(2) }}%
                 </p>
               </li>
               <li>
                 <img src="https://assets.coingecko.com/coins/images/279/thumb/ethereum.png?1595348880" alt="" class="me-2">
                 <router-link
-                  class="router-link"
+                  class="text-decoration-none"
                   :to="{ name: 'coin', params: { id: 'ethereum' } }"
                 >
-                  <p class="market-info-text">ETH: </p>
+                  <p class="sequel-font-small d-inline text-white">ETH: </p>
                 </router-link>
-                <p class="market-info-text text-primary">
+                <p class="sequel-font-small d-inline text-primary">
                   {{ top3dominance.eth.toFixed(2) }}%
                 </p>
               </li>
               <li>
                 <img src="https://assets.coingecko.com/coins/images/325/thumb/Tether-logo.png?1598003707" alt="" class="me-2">
                 <router-link
-                  class="router-link"
+                  class="text-decoration-none"
                   :to="{ name: 'coin', params: { id: 'tether' } }"
                 >
-                  <p class="market-info-text">USDT: </p>
+                  <p class="sequel-font-small d-inline text-white">USDT: </p>
                 </router-link>
-                <p class="market-info-text text-primary">
+                <p class="sequel-font-small d-inline text-primary">
                   {{ top3dominance.usdt.toFixed(2) }}%
                 </p>
               </li>
@@ -101,19 +101,19 @@
         </div>
       </div>
       <div v-if="top3trending" class="col mt-4">
-        <div class="card market-info-card">
+        <div class="card">
           <div class="card-header">
-            <p class="market-info-text market-info-title">Trending</p>
+            <p class="text-white sequel-font-big">Trending</p>
           </div>
           <div class="card-body">
-            <ul v-for="coin in top3trending" :key="coin.item.coin_id">
+            <ul class="list-unstyled m-0" v-for="coin in top3trending" :key="coin.item.coin_id">
               <li>
                 <img :src="coin.item.thumb" alt="" class="me-2" />
                 <router-link
-                  class="router-link"
+                  class="text-decoration-none"
                   :to="{ name: 'coin', params: { id: coin.item.id } }"
                 >
-                  <p class="market-info-text">{{ coin.item.symbol }}</p>
+                  <p class="sequel-font-small d-inline text-white">{{ coin.item.symbol }}</p>
                 </router-link>
               </li>
             </ul>
@@ -124,7 +124,7 @@
     <table class="table rounded text-white mt-4">
       <thead>
         <tr>
-          <th v-for="title in titles" :key="title">
+          <th v-for="title in tableTitles" :key="title">
             {{ title }}
           </th>
           <th class="d-none d-md-table-cell">24h Vol.</th>
@@ -132,13 +132,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="coin in filterCoins" :key="coin.id">
+        <tr v-for="coin in coins" :key="coin.id">
           <td class="text-muted">
             {{ coin.market_cap_rank }}
           </td>
           <td>
             <router-link
-              class="text-white router-link"
+              class="text-white text-decoration-none"
               :to="{ name: 'coin', params: { id: coin.id } }"
             >
               <img :src="coin.image" style="width: 2rem" class="me-2" />
@@ -154,7 +154,7 @@
           </td>
           <td
             :class="[
-              coin.price_change_percentage_24h > 0
+              coin.price_change_percentage_24h >= 0
                 ? 'text-success'
                 : 'text-danger',
             ]"
@@ -193,10 +193,9 @@ export default {
   data() {
     return {
       coins: [],
-      filterCoins: [],
-      titles: ["#", "Nome", "Prezzo", "24h%"],
-      totalMCap: null,
+      tableTitles: ["#", "Nome", "Prezzo", "24h%"],
       change24h: null,
+      totalMCap: null,
       volume24h: null,
       activeCryptos: null,
       activeMarkets: null,
@@ -205,11 +204,6 @@ export default {
       top3trending: null,
     };
   },
-  watch: {
-    page: function () {
-      this.getData();
-    },
-  },
   methods: {
     async getData() {
       let uri =
@@ -217,15 +211,13 @@ export default {
         this.$props.page;
       let config = { headers: { Accept: "application/json" } };
       const res = await axios.get(uri, config);
-      //console.log(res.data);
       this.coins = res.data;
-      this.filterCoins = res.data;
     },
     async getMarketData() {
       let uri = "https://api.coingecko.com/api/v3/global";
       let config = { headers: { Accept: "application/json" } };
       const res = await axios.get(uri, config);
-      //console.log(res.data);
+      // get some market data
       this.change24h = res.data.data.market_cap_change_percentage_24h_usd;
       this.totalMCap = res.data.data.total_market_cap.usd;
       this.volume24h = res.data.data.total_volume.usd;
@@ -248,51 +240,32 @@ export default {
     this.getData();
     this.getMarketData();
     this.getTrending();
-    setInterval(this.getData, 60000);
   },
 };
 </script>
 
 <style scoped>
+.sequel-font-small {
+  font-family: "Sequel100Black-45", Helvetica, Arial;
+}
+
+.sequel-font-big {
+  font-family: "Sequel100Black-85", Helvetica, Arial;
+}
+
 .table {
   background-color: rgba(112, 103, 207, 0.1);
 }
 
-h1 {
-  color: #f5f5f5;
-  font-family: "Sequel100Black-45", Helvetica, Arial;
-}
-
-.market-info-text {
-  display: inline;
-  color: #e0e0e0;
-  font-family: "Sequel100Black-45", Helvetica, Arial;
-}
-
-.market-info-title {
-  font-family: "Sequel100Black-85", Helvetica, Arial;
-}
-
-ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.market-info-card {
+.card {
   transition: transform 0.2s ease;
-  box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
   background-color: rgba(112, 103, 207, 0.1);
   border-radius: 10px;
   border-width: 1px;
   border-color: rgba(42, 178, 252, 0.5);
   height: 100%;
 }
-
-.market-info-card:hover {
+.card:hover {
   transform: scale(1.1);
-}
-
-.router-link {
-  text-decoration: none;
 }
 </style>

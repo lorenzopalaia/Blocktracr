@@ -6,48 +6,45 @@
           <div class="card-body text-center" id="card">
             <div class="mb-md-5 mt-md-4 pb-5">
               <form name="formLogin">
-                <p class="h2">Registrati</p>
-                <p>Inserisci Username, Email e Password</p>
-                <div class="form-outline form-white">
+                <p class="sequel-font-small text-white fs-2">Registrati</p>
+                <p class="sequel-font-small text-white">Inserisci Username, Email e Password</p>
+                <div class="form-outline">
                   <input
                     type="text"
-                    class="form-control form-control-lg"
+                    class="form-control form-control-lg bg-transparent sequel-font-small"
                     placeholder="Username"
                     id="name"
                     v-model="name"
                     required
                   />
-                  <br />
                   <input
                     type="email"
-                    class="form-control form-control-lg"
+                    class="form-control form-control-lg mt-4 bg-transparent sequel-font-small"
                     placeholder="Email"
                     id="email"
                     v-model="email"
                     required
                   />
-                  <br />
                   <input
                     type="password"
-                    class="form-control form-control-lg"
+                    class="form-control form-control-lg mt-4 bg-transparent sequel-font-small"
                     placeholder="Password"
                     id="password"
                     v-model="password"
                     required
                   />
-                  <div class="alert alert-danger" role="alert" v-if="this.errore===true">
+                  <div class="alert alert-danger mt-4" role="alert" v-if="emailAlreadyInUse === true">
                     Email già in uso
                   </div>
                 </div>
-                <br />
-                <a href="#" class="btn btn-primary brn-block"  @click="signup">
+                <a href="#" class="btn btn-primary sequel-font-big mt-4"  @click="signup">
                   Invia
                 </a>
               </form>
               <div>
-                <p class="m-2">
+                <p class="mt-3 sequel-font-small text-white">
                   Hai già un account?
-                  <router-link to="/login">Login</router-link>
+                  <router-link class="sequel-font-big text-primary text-decoration-none" to="/login">Login</router-link>
                 </p>
               </div>
             </div>
@@ -62,13 +59,12 @@
 import axios from 'axios'
 export default {
   name: "Register",
-
   data(){
     return{
       name: '',
       email: '',
       password: '',
-      errore:false,
+      emailAlreadyInUse: false,
     }
   },
   methods: {
@@ -78,14 +74,13 @@ export default {
         email: this.email,
         password: this.password
       }
-      if(this.name!='' && this.email!='' && this.password!=''){
+      if(this.name !== '' && this.email !== '' && this.password !== '') {
         await axios.post('http://localhost:5000/register', newUser)
           .then(res => {
-            this.$router.push('/login'); //utente appena registrato viene reindirizzato nella pagina di login
+            this.$router.push('/login'); // redirect user to login page
           }, err => {
-            this.errore=true;
+            this.emailAlreadyInUse = true;
             console.log(err.response)
-            err.response.data.error
           })
       }
     }
@@ -95,30 +90,27 @@ export default {
 
 <style scoped>
 .card {
-  box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
   background-color: rgba(112, 103, 207, 0.1);
 }
 
-p {
-  color: #f5f5f5;
+.sequel-font-big {
+  font-family: "Sequel100Black-85", Helvetica, Arial;
+}
+.sequel-font-small {
   font-family: "Sequel100Black-45", Helvetica, Arial;
 }
 
 input {
-  background: transparent;
   color: #7067cf !important;
-  font-family: "Sequel100Black-45", Helvetica, Arial;
   border-color: transparent;
   border-bottom-color: #7067cf !important;
   border-radius: 0 !important;
 }
-
 input:focus {
   background: transparent;
   outline-width: 0;
   outline: none;
 }
-
 input::placeholder {
   color: #7067cf;
 }

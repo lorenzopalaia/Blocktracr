@@ -1,5 +1,5 @@
 <template>
-  <CoinsBar/>
+  <CoinsBar />
   <Navbar />
   <router-view />
   <Footer></Footer>

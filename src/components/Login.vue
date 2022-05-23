@@ -6,43 +6,41 @@
           <div class="card-body text-center" id="card">
             <div class="mb-md-5 mt-md-4 pb-5">
               <form action="post" name="formLogin">
-                <p class="h2">Login</p>
-                <p>Inserisci Email e Password</p>
+                <p class="sequel-font-small text-white fs-2">Login</p>
+                <p class="sequel-font-small text-white">Inserisci Email e Password</p>
                 <div class="form-outline">
                   <input
                     type="email"
-                    class="form-control form-control-lg"
+                    class="form-control form-control-lg sequel-font-small bg-transparent"
                     placeholder="Email"
                     id="email"
                     v-model="email"
                     required
                   />
-                  <br />
                   <input
                     type="password"
-                    class="form-control form-control-lg"
+                    class="form-control form-control-lg mt-4 sequel-font-small bg-transparent"
                     placeholder="Password"
                     id="password"
                     v-model="password"
                     required
                   />
                 </div>
-                <div class="alert alert-warning" role="alert" v-if="this.isLogin===false">
+                <div class="alert alert-warning mt-4" role="alert" v-if="isLog === false">
                   Email o password errata
                 </div>
-                <br />
-                <div>
+                <div class="mt-4">
                   <input class="me-2" type="checkbox" id="rememberMe" value="true" checked>
-                  <label for="rememberMe"><p>Ricordami</p></label>
+                  <label for="rememberMe"><p class="sequel-font-small text-white">Ricordami</p></label>
                 </div>
-                <a href="#" class="btn btn-primary brn-block" @click="login">
+                <a href="#" class="btn btn-primary sequel-font-big" @click="login">
                   Entra
                 </a>
               </form>
               <div>
-                <p class="m-2">
+                <p class="mt-3 sequel-font-small text-white">
                   Non hai un account?
-                  <router-link to="/register">Registrati</router-link>
+                  <router-link class="sequel-font-big text-primary text-decoration-none" to="/register">Registrati</router-link>
                 </p>
               </div>
             </div>
@@ -57,10 +55,9 @@
 import axios from 'axios'
 export default {
   name: "Login",
-
   data() {
     return {
-      isLogin: "",
+      isLog: null,
       email: '',
       password: '',
     };
@@ -74,52 +71,47 @@ export default {
       await axios.post('http://localhost:5000/login', user)
         .then(res => {
           if (res.status === 200) {
-            //inserimento token in memoria in base al checkbox
-            if(document.getElementById("rememberMe").checked){
-            localStorage.setItem('token', res.data.token);
+            // we choose to set token in localStorage or sessionStorage based on checkbox status
+            if(document.getElementById("rememberMe").checked) {
+              localStorage.setItem('token', res.data.token);
             } 
-            else{
+            else {
               sessionStorage.setItem('token', res.data.token);
             }
-            this.emitter.emit("loggedIn");
-            this.$router.push('/dashboard');
+            this.emitter.emit("loggedIn"); // emit event in order to notice other components
+            this.$router.push('/dashboard'); //mount dashboard component
           }
         }, err => {
           console.log(err.response);
-          this.isLogin = false;
-          this.error = err.response.data.error
+          this.isLog = false;
         })
     }
   },
 };
-
 </script>
 
 <style scoped>
 .card {
-  box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
   background-color: rgba(112, 103, 207, 0.1);
 }
 
-p {
-  color: #f5f5f5;
+.sequel-font-small {
   font-family: "Sequel100Black-45", Helvetica, Arial;
+}
+.sequel-font-big {
+  font-family: "Sequel100Black-85", Helvetica, Arial;
 }
 
 input {
-  background: transparent;
   color: #7067cf !important;
-  font-family: "Sequel100Black-45", Helvetica, Arial;
   border-color: transparent;
   border-bottom-color: #7067cf !important;
   border-radius: 0 !important;
 }
-
 input:focus {
   background: transparent;
   outline-width: 0;
 }
-
 input::placeholder {
   color: #7067cf;
 }

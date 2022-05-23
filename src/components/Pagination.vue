@@ -185,3 +185,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.btn {
+  font-family: "Sequel100Black-85", Helvetica, Arial;
+}
+</style>

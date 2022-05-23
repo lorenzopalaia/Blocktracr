@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       currentPage: 1,
-      totalPages: 135 //default value updated asyncronously via getPages()
+      totalPages: 135 // default value updated asyncronously via getPages() function
     };
   },
   methods: {
@@ -36,8 +36,8 @@ export default {
       let uri = "https://api.coingecko.com/api/v3/global";
       let config = { headers: { Accept: "application/json" } };
       const res = await axios.get(uri, config);
+      // ceil of total listed cryptos divided by 100 (number of cryptos per page)
       this.totalPages = Math.ceil(res.data.data.active_cryptocurrencies / 100);
-      //ceil of total listed cryptos divided by 100 (number of cryptos per page)
     },
   },
   mounted() {

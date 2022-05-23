@@ -3,27 +3,28 @@
     <div class="container">
       <div class="row">
         <div class="col text-center text-md-start">
-          <h1>BLOCKTRACR</h1>
-          <p>
+          <p class="fs-1 sequel-font-big">BLOCKTRACR</p>
+          <p class="sequel-font-small">
             Tieni traccia dell'andamento del tuo portafoglio crypto.<br />Analizza
             ogni crypto presente sul mercato tramite un'interfaccia semplice e
             interattiva
           </p>
-          <button v-if="!isLog" type="button" class="btn btn-primary btn-lg" style="margin-right: 10px;">
-            <router-link class="router-link" to="/register" style="color: white"
+          <button v-if="!isLog" type="button" class="btn btn-primary btn-lg sequel-font-big">
+            <router-link class="text-decoration-none text-white" to="/register"
               >Registrati</router-link
             >
           </button>
-          <button v-if="!isLog" type="button" class="btn btn-outline-primary btn-lg">
-            <router-link class="router-link" to="/login">Login</router-link>
+          <button v-if="!isLog" type="button" class="btn btn-outline-primary btn-lg m-2 sequel-font-big">
+            <router-link class="text-decoration-none" to="/login">Login</router-link>
           </button>
-          <button v-if="isLog" type="button" class="btn btn-primary btn-lg" style="margin-right: 10px;">
-            <router-link class="router-link" to="/dashboard" style="color: white"
+          <button v-if="isLog" type="button" class="btn btn-primary btn-lg sequel-font-big">
+            <router-link class="text-decoration-none text-white" to="/dashboard"
               >Dashboard</router-link
             >
           </button>
         </div>
         <div class="col d-none d-sm-block d-sm-none d-md-block">
+          <!-- img-fluid makes images responsive, float-end attaches images on the right side of column -->
           <img
             class="img-fluid float-end"
             src="../assets/images/eth.svg"
@@ -31,15 +32,14 @@
           />
         </div>
       </div>
-      <div class="container" style="padding-top: 20px">
-        <h3 class="cardsIntro">PERCHÉ BLOCKTRACR?</h3>
-        <p style="color: #e0e0e0; text-align: center">
-          I vantaggi di tracciare l'andamento del tuo portafoglio crypto sono
-          molteplici
+      <div class="container mt-4">
+        <p class="fs-3 text-center sequel-font-big">PERCHÉ BLOCKTRACR?</p>
+        <p class="text-center sequel-font-small">
+          I vantaggi di tracciare l'andamento del tuo portafoglio crypto sono molteplici
         </p>
         <div>
           <div class="row">
-            <div class="col-sm d-flex justify-content-center">
+            <div class="col-sm pt-4 d-flex justify-content-center">
               <div class="card">
                 <img
                   src="../assets/images/plot.svg"
@@ -47,13 +47,13 @@
                   alt="plot"
                 />
                 <div class="card-body">
-                  <p class="card-text">
-                    Grafico dell'andamento temporale e delle allocazioni
+                  <p class="card-text sequel-font-small">
+                    Grafico dell'andamento temporale
                   </p>
                 </div>
               </div>
             </div>
-            <div class="col-sm d-flex justify-content-center">
+            <div class="col-sm pt-4 d-flex justify-content-center">
               <div class="card">
                 <img
                   src="../assets/images/transaction.svg"
@@ -61,11 +61,11 @@
                   alt="transaction"
                 />
                 <div class="card-body">
-                  <p class="card-text">Raccolta delle transazioni eseguite</p>
+                  <p class="card-text sequel-font-small">Raccolta delle allocazioni del wallet</p>
                 </div>
               </div>
             </div>
-            <div class="col-sm d-flex justify-content-center">
+            <div class="col-sm pt-4 d-flex justify-content-center">
               <div class="card">
                 <img
                   src="../assets/images/profit.svg"
@@ -73,7 +73,7 @@
                   alt="profit"
                 />
                 <div class="card-body">
-                  <p class="card-text">
+                  <p class="card-text sequel-font-small">
                     Statistiche dettagliate su profitti e perdite
                   </p>
                 </div>
@@ -94,64 +94,52 @@ export default {
       isLog: false
     }
   },
+  methods: {
+    loginLogoutEventHandler() {
+      if (localStorage.getItem('token') || sessionStorage.getItem('token')) // check if token exists
+        this.isLog = true;
+      this.emitter.on("loggedIn", () => { // event handler
+        this.isLog = true;
+      })
+      this.emitter.on("loggedOut", () => { // event handler
+        this.isLog = false;
+      })
+    }
+  },
   mounted() {
-    if (localStorage.getItem('token') || sessionStorage.getItem('token')) //check if token exists
-      this.isLog = true;
-    this.emitter.on("loggedIn", () => { //event handler
-      this.isLog = true;
-    })
-    this.emitter.on("loggedOut", () => {
-      this.isLog = false;
-    })
+    this.loginLogoutEventHandler();
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1 {
+.sequel-font-big {
   font-family: "Sequel100Black-85", Helvetica, Arial;
+}
+
+.sequel-font-small {
+  font-family: "Sequel100Black-45", Helvetica, Arial;
+}
+
+.fs-1 {
   color: #7067cf;
 }
 
 p {
-  font-family: "Sequel100Black-45", Helvetica, Arial;
   color: #e0e0e0;
 }
 
-h3 {
-  color: #f5f5f5;
-  text-align: center;
-  font-family: "Sequel100Black-85", Helvetica, Arial;
-}
-
-.router-link {
-  text-decoration: none;
-}
-
-.btn-primary {
-  background-color: #2ab2fc;
-  font-family: "Sequel100Black-85", Helvetica, Arial;
-}
-.btn-outline-primary {
-  color: #2ab2fc;
-  font-family: "Sequel100Black-85", Helvetica, Arial;
-}
 .card:hover {
   transform: scale(1.1);
 }
 .card {
   transition: transform 0.2s ease;
-  box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
   width: 18rem;
   background-color: rgba(112, 103, 207, 0.1);
   border-radius: 10px;
   border-width: 1px;
   border-color: rgba(42, 178, 252, 0.5);
-}
-
-.col-sm {
-  padding-top: 20px;
 }
 
 .card-img-top {

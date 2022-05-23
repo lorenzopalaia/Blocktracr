@@ -1,15 +1,15 @@
 <template>
   <div v-if="coins" class="coinsBar">
-    <ul style="margin: 0">
-      <li class="coinItem" v-for="coin in coins" :key="coin.symbol">
-        <img class="coinImage" :src="coin.image" />
+    <ul class="m-0">
+      <li class="d-inline p-2" v-for="coin in coins" :key="coin.symbol">
+        <img style="width: 14px;" :src="coin.image" />
         <router-link
-          class="router-link"
+          class="text-decoration-none"
           :to="{ name: 'coin', params: { id: coin.id } }"
         >
-          <p class="coinName">{{ coin.symbol.toUpperCase() }}</p>
+          <p class="text-white d-inline p-2">{{ coin.symbol.toUpperCase() }}</p>
         </router-link>
-        <p class="coinPrice" :key="coin.current_price">
+        <p class="text-white d-inline p-1 coinPrice" :key="coin.current_price">
           {{ coin.current_price }}$
         </p>
       </li>
@@ -37,15 +37,12 @@ export default {
   },
   mounted() {
     this.getData();
-    setInterval(this.getData, 60000);
+    setInterval(this.getData, 60000); // update every minute
   },
 };
 </script>
 
 <style scoped>
-.router-link {
-  text-decoration: none;
-}
 
 .coinsBar {
   background: transparent;
@@ -64,25 +61,8 @@ export default {
   animation-play-state: paused;
 }
 
-.coinItem {
-  display: inline;
-  padding: 10px;
-}
-.coinImage {
-  height: 13px;
-}
-
-.coinName {
-  display: inline;
-  padding: 3px;
-  color: white;
-}
-
 .coinPrice {
-  color: white;
   border-radius: 5px;
-  display: inline;
-  padding: 3px;
   animation: updatedPrice 1.5s;
   transition-timing-function: ease-in;
 }

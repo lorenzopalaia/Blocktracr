@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark navbar-inverse">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fw-bold">
     <div class="container">
       <button
         class="navbar-toggler"
@@ -15,13 +15,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link to="/">HOME</router-link>
+            <router-link class="text-decoration-none" to="/">HOME</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/livestats">LIVE STATS</router-link>
+            <router-link class="text-decoration-none" to="/livestats">LIVE STATS</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/dashboard">DASHBOARD</router-link>
+            <router-link class="text-decoration-none" to="/dashboard">DASHBOARD</router-link>
           </li>
         </ul>
         <div
@@ -30,20 +30,20 @@
         >
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link to="/login" v-if="!isLog">LOGIN</router-link>
-              <router-link data-bs-toggle="modal" data-bs-target="#logout" to="/" v-else @click="logout()">LOGOUT</router-link>
+              <router-link class="text-decoration-none" to="/login" v-if="!isLog">LOGIN</router-link>
+              <router-link class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#logout" to="/" v-else @click="logout()">LOGOUT</router-link>
               <div class="modal" id="logout">
                 <div class="modal-dialog">
                   <div class="modal-content text-white">
                     <div style="backgroundColor: rgb(20, 15, 68)" class="modal-body justify-content-center text-center">
-                      <p class="m-0">Ti sei disconnesso correttamente</p>
+                      <p class="m-0 sequel-font-small">Ti sei disconnesso correttamente</p>
                     </div>
                   </div>
                 </div>
               </div>
             </li>
             <li class="nav-item">
-              <router-link to="/register" v-if="!isLog">REGISTRATI</router-link>
+              <router-link class="text-decoration-none" to="/register" v-if="!isLog">REGISTRATI</router-link>
             </li>
           </ul>
         </div>
@@ -65,36 +65,36 @@ export default {
       localStorage.clear();
       sessionStorage.clear();
       this.isLog = false;
-      this.emitter.emit("loggedOut");
-      this.$router.push("/")
+      this.emitter.emit("loggedOut"); // emit logout event
+      this.$router.push("/") // mount homepage component in order to redirect user after logout
     },
+    loginEventHandler() {
+      if (localStorage.getItem('token') || sessionStorage.getItem('token')) // check if token exists in localStorage or sessionStorage
+        this.isLog = true;
+      this.emitter.on("loggedIn", () => { // event handler
+        this.isLog = true;
+      })
+    }
   },
   mounted() {
-    if (localStorage.getItem('token') || sessionStorage.getItem('token')) //check if token exists
-      this.isLog = true;
-    this.emitter.on("loggedIn", () => { //event handler
-      this.isLog = true;
-    })
+    this.loginEventHandler();
   }
 };
 </script>
 
 <style scoped>
-nav {
-  background-color: transparent;
+.sequel-font-small {
+  font-family: "Sequel100Black-45", Helvetica, Arial;
 }
 
 nav a {
-  font-weight: bold;
   color: #f5f5f5;
   padding-right: 20px;
-  text-decoration: none;
 }
 
 nav a:hover {
   color: #7067cf;
 }
-
 nav a.router-link-exact-active {
   color: #2ab2fc;
 }

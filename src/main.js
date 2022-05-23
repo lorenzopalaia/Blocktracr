@@ -6,5 +6,5 @@ const emitter = mitt();
 
 const app = createApp(App);
 app.use(router);
-app.config.globalProperties.emitter = emitter; //emit bus per inviare eventi tra componenti
+app.config.globalProperties.emitter = emitter; // event bus to send events by components
 app.mount('#app');
