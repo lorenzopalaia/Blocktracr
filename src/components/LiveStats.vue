@@ -67,7 +67,7 @@
                 </p>
               </li>
               <li>
-                <p class="sequel-font-small d-inline text-white">ICO attive:</p>
+                <p class="sequel-font-small d-inline text-white">ICO attive: </p>
                 <p class="sequel-font-small d-inline text-primary">
                   {{ activeICOs }}
                 </p>
@@ -93,7 +93,7 @@
                   class="text-decoration-none"
                   :to="{ name: 'coin', params: { id: 'bitcoin' } }"
                 >
-                  <p class="sequel-font-small d-inline text-white">BTC:</p>
+                  <p class="sequel-font-small d-inline text-white">BTC: </p>
                 </router-link>
                 <p class="sequel-font-small d-inline text-primary">
                   {{ top3dominance.btc.toFixed(2) }}%
@@ -109,7 +109,7 @@
                   class="text-decoration-none"
                   :to="{ name: 'coin', params: { id: 'ethereum' } }"
                 >
-                  <p class="sequel-font-small d-inline text-white">ETH:</p>
+                  <p class="sequel-font-small d-inline text-white">ETH: </p>
                 </router-link>
                 <p class="sequel-font-small d-inline text-primary">
                   {{ top3dominance.eth.toFixed(2) }}%
@@ -125,7 +125,7 @@
                   class="text-decoration-none"
                   :to="{ name: 'coin', params: { id: 'tether' } }"
                 >
-                  <p class="sequel-font-small d-inline text-white">USDT:</p>
+                  <p class="sequel-font-small d-inline text-white">USDT: </p>
                 </router-link>
                 <p class="sequel-font-small d-inline text-primary">
                   {{ top3dominance.usdt.toFixed(2) }}%

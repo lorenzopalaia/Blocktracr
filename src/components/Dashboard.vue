@@ -68,7 +68,6 @@
                           class="m-2"
                         />
                       </div>
-                      <br />
                       <!--modifica password-->
                       <div id="collapsePassword">
                         <label for="nuovaPassword" class="form-label"
@@ -82,13 +81,6 @@
                           autocomplete="off"
                           class="m-2"
                         />
-                      </div>
-                      <div
-                        class="alert alert-primary"
-                        role="alert"
-                        v-if="modifica"
-                      >
-                        Account modificato
                       </div>
                     </div>
                     <!-- Footer -->
@@ -106,23 +98,30 @@
                       <button
                         type="button"
                         class="btn btn-outline-danger m-2"
-                        data-bs-dismiss="modal"
                         data-bs-toggle="modal"
                         data-bs-target="#elimina"
                       >
                         <p class="sequel-font-big m-0">
                           Elimina
                         </p>
-                        <div class="modal" id="elimina">
-                          <div class="modal-dialog">
-                            <p>Sei sicuro di voler eliminare l'account?</p>
-                            <button @click="remove">Si</button>
-                            <button data-bs-dismiss="modal">No</button>
-                          </div>
-                        </div>
                       </button>
                     </div>
                   </form>
+                </div>
+              </div>
+            </div>
+            <div class="modal" id="elimina">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <p class="card-text">Sei sicuro di voler eliminare l'account?</p>
+                    <button class="btn btn-danger" data-bs-dismiss="modal" @click="remove">
+                      <p class="sequel-font-big m-0">Si</p>
+                    </button>
+                    <button class="btn btn-primary m-2" data-bs-dismiss="modal">
+                      <p class="sequel-font-big m-0">No</p>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -201,7 +200,6 @@
                         required
                         class="m-2"
                       />
-                      <br />
                       <label for="api_secret" class="form-label"
                         ><p class="card-text">API Secret:</p></label
                       >
@@ -422,7 +420,6 @@ export default {
       name_exchange: "",
       api_key: "",
       api_secret: "",
-      modifica: false,
       exchanges: [],
       user_data: {},
       user_total: 0,
@@ -458,9 +455,29 @@ export default {
         scales: {
           display: false,
         },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: (tooltipItem) => { return tooltipItem.label + ": " + tooltipItem.raw.toFixed(2) + "%" }
+            }
+          }
+        }
       },
       barChartOptions: {
         responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: (tooltipItem) => { return tooltipItem.raw.toFixed(2) + "%" }
+            }
+          }
+        }
       },
     };
   },
@@ -528,7 +545,6 @@ export default {
         });
         this.doughnutChartData.datasets[0].data = this.user_percentages;
         this.barChartData.datasets[0].data = user_24h_PLs_percent;
-        console.log(this.barChartData.datasets[0].data);
         //generate color palette
         const pal = palette("tol", this.user_percentages.length).map(function (
           hex
@@ -548,8 +564,8 @@ export default {
       this.exchanges = await ccxt.exchanges;
     },
     //eliminazione account
-    remove() {
-      axios
+    async remove() {
+      await axios
         .delete("http://localhost:5000/delete", {
           headers: { token: this.token },
         })
@@ -559,29 +575,31 @@ export default {
           } else {
             localStorage.clear();
             sessionStorage.clear();
+            this.emitter.emit("loggedOut");
             this.$router.push("/");
           }
         });
     },
 
     //modifica profilo
-    edit() {
+    async edit() {
       let user = {
         token: this.token,
         email: this.newEmail,
         password: this.password,
       };      
-      if(document.getElementById("nuovaEmail").checkValidity()){
-        axios.post("http://localhost:5000/user", user).then((res) => {
+      if(document.getElementById("nuovaEmail").checkValidity() || this.password!="") {
+        await axios.post("http://localhost:5000/user", user).then((res) => {
           if (res.status === 405) {
             console.log("account non modificato");
-          } else controle.log("account modificato");
+          } else 
+            controle.log("account modificato");
         });
       }
     },
 
     //aggiungi wallet
-    add() {
+    async add() {
       let wallet = {
         token: this.token,
         name_exchange: this.name_exchange,
@@ -589,7 +607,7 @@ export default {
         api_secret: this.newApiSecret,
       };
       if(this.newApiKey!="" && this.newApiSecret!="" && this.name_exchange!=""){
-        axios.put("http://localhost:5000/user", wallet).then((res) => {
+        await axios.put("http://localhost:5000/user", wallet).then((res) => {
           if (res.status === 405) {
             console.log("account non modificato");
             } else {

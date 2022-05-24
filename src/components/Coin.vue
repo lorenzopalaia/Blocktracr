@@ -78,7 +78,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col mb-4">
+      <div class="col-12 col-lg-6 mb-4">
         <div class="card">
           <p class="card-header fw-bold">Informazioni su {{ coinData.name }}</p>
           <div class="card-body">
@@ -110,7 +110,7 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-12 col-lg-6">
         <div class="row">
           <div class="col mb-4">
             <div class="card">

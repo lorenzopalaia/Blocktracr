@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fw-bold">
+  <nav class="navbar navbar-expand-lg navbar-dark fw-bold sticky-top">
     <div class="container">
       <button
         class="navbar-toggler"
@@ -13,7 +13,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" id="menu">
           <li class="nav-item">
             <router-link class="text-decoration-none" to="/">HOME</router-link>
           </li>
@@ -24,10 +24,10 @@
             <router-link class="text-decoration-none" to="/dashboard">DASHBOARD</router-link>
           </li>
         </ul>
-        <div
+        <!--<div
           class="collapse navbar-collapse justify-content-end"
           id="navbarNav"
-        >
+        >-->
           <ul class="navbar-nav">
             <li class="nav-item">
               <router-link class="text-decoration-none" to="/login" v-if="!isLog">LOGIN</router-link>
@@ -46,7 +46,7 @@
               <router-link class="text-decoration-none" to="/register" v-if="!isLog">REGISTRATI</router-link>
             </li>
           </ul>
-        </div>
+        <!--</div>-->
       </div>
     </div>
   </nav>
@@ -64,25 +64,32 @@ export default {
     logout(){
       localStorage.clear();
       sessionStorage.clear();
-      this.isLog = false;
+      this.isLog= false;
       this.emitter.emit("loggedOut"); // emit logout event
       this.$router.push("/") // mount homepage component in order to redirect user after logout
     },
-    loginEventHandler() {
+    loginLogoutEventHandler() {
       if (localStorage.getItem('token') || sessionStorage.getItem('token')) // check if token exists in localStorage or sessionStorage
         this.isLog = true;
       this.emitter.on("loggedIn", () => { // event handler
         this.isLog = true;
       })
+      this.emitter.on("loggedOut", () => { // event handler
+        this.isLog = false;
+      })
     }
   },
   mounted() {
-    this.loginEventHandler();
+    this.loginLogoutEventHandler();
   }
 };
 </script>
 
 <style scoped>
+.navbar {
+  background-color: rgb(5, 10, 48);
+}
+
 .sequel-font-small {
   font-family: "Sequel100Black-45", Helvetica, Arial;
 }
