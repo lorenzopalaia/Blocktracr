@@ -180,7 +180,7 @@ app.post("/user", (req, res) => {
       return res.status(410).json({
         title: "utente non trovato",
       });
-    if (req.body.email != "") {
+    if (req.body.email !== "") {
       User.updateOne(
         { _id: decoded.userId },
         { email: req.body.email },
@@ -197,7 +197,7 @@ app.post("/user", (req, res) => {
         }
       );
     }
-    if (req.body.password != "") {
+    if (req.body.password !== "") {
       User.updateOne(
         { _id: decoded.userId },
         { password: bcrypt.hashSync(req.body.password, 10) },

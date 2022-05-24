@@ -77,7 +77,8 @@ export default {
       if(this.name !== '' && this.email !== '' && this.password !== '') {
         await axios.post('http://localhost:5000/register', newUser)
           .then(res => {
-            this.$router.push('/login'); // redirect user to login page
+            if (res.status === 200)
+              this.$router.push('/login'); // redirect user to login page
           }, err => {
             this.emailAlreadyInUse = true;
             console.log(err.response)

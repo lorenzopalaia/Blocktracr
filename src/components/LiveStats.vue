@@ -277,7 +277,7 @@ export default {
     return {
       currentPage: 1,
       pageArray: [1, 2, 3],
-      lastPage: 135, // default value updated asyncronously via getPages() function
+      lastPage: 135, // default value updated asyncronously via getMarketData() function
       coins: [],
       tableTitles: ["#", "Nome", "Prezzo", "24h%"],
       change24h: null,
@@ -296,17 +296,10 @@ export default {
       this.currentPage = page;
       this.getData();
       window.scrollTo(0, 0);
+      // update pagination numbers
       if (page === 1) this.pageArray = [1, 2, 3];
-      else if (page === this.lastPage)
-        this.pageArray = [this.lastPage - 2, this.lastPage - 1, this.lastPage];
+      else if (page === this.lastPage) this.pageArray = [this.lastPage - 2, this.lastPage - 1, this.lastPage];
       else this.pageArray = [page - 1, page, page + 1];
-    },
-    async getPages() {
-      let uri = "https://api.coingecko.com/api/v3/global";
-      let config = { headers: { Accept: "application/json" } };
-      const res = await axios.get(uri, config);
-      // ceil of total listed cryptos divided by 100 (number of cryptos per page)
-      this.lastPages = Math.ceil(res.data.data.active_cryptocurrencies / 100);
     },
     async getData() {
       let uri =
@@ -321,6 +314,8 @@ export default {
       let uri = "https://api.coingecko.com/api/v3/global";
       let config = { headers: { Accept: "application/json" } };
       const res = await axios.get(uri, config);
+      // get number of pages: ceil of total listed cryptos divided by 100 (number of cryptos per page)
+      this.lastPage = Math.ceil(res.data.data.active_cryptocurrencies / 100);
       // get some market data
       this.change24h = res.data.data.market_cap_change_percentage_24h_usd;
       this.totalMCap = res.data.data.total_market_cap.usd;
@@ -328,9 +323,7 @@ export default {
       this.activeCryptos = res.data.data.active_cryptocurrencies;
       this.activeMarkets = res.data.data.markets;
       this.activeICOs = res.data.data.ongoing_icos;
-      this.top3dominance = (({ btc, eth, usdt }) => ({ btc, eth, usdt }))(
-        res.data.data.market_cap_percentage
-      );
+      this.top3dominance = (({ btc, eth, usdt }) => ({ btc, eth, usdt })) (res.data.data.market_cap_percentage);
     },
     async getTrending() {
       let uri = "https://api.coingecko.com/api/v3/search/trending";
@@ -340,9 +333,8 @@ export default {
     },
   },
   mounted() {
-    this.getPages();
-    this.getData();
     this.getMarketData();
+    this.getData();
     this.getTrending();
   },
 };

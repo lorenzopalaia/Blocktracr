@@ -125,7 +125,7 @@
                 </div>
               </div>
             </div>
-            <!-- Add wallet button -->
+            <!-- Add/modify wallet button -->
             <button
               type="button"
               class="btn btn-primary m-2"
@@ -147,7 +147,7 @@
                     <!-- Header -->
                     <div class="modal-header">
                       <p
-                        v-if="api_key === '' && api_secret === ''"
+                        v-if="apiStatus === 'not set'"
                         class="modal-title card-text h4"
                       >
                         Aggiungi wallet
@@ -220,7 +220,7 @@
                         @click="add" 
                       >
                         <p
-                          v-if="api_key === '' && api_secret === ''"
+                          v-if="apiStatus === 'not set'"
                           class="sequel-font-big m-0"
                         >
                           Aggiungi
@@ -343,31 +343,29 @@
       </div>
     </div>
     <div v-if="chartLoaded" class="row mb-4">
-      <div class="col mt-4">
+      <div class="col-12 col-lg-6 mt-4">
         <div class="card">
           <div class="card-header">
-            <h1 class="card-text">Allocazione</h1>
+            <p class="fs-1 card-text">Allocazione</p>
           </div>
           <div class="card-body">
             <Doughnut
               :chart-data="doughnutChartData"
               :chart-options="doughnutChartOptions"
-              :height="100"
               class="m-4"
             />
           </div>
         </div>
       </div>
-      <div class="col mt-4">
+      <div class="col-12 col-lg-6 mt-4">
         <div class="card">
           <div class="card-header">
-            <h1 class="card-text">24h% P/L</h1>
+            <p class="fs-1 card-text">24h% P/L</p>
           </div>
           <div class="card-body">
             <Bar
               :chart-data="barChartData"
               :chart-options="barChartOptions"
-              :height="400"
               class="m-4"
             />
           </div>
@@ -482,6 +480,39 @@ export default {
     };
   },
   methods: {
+    setUserTotal() {
+      this.user_total = 0;
+      Object.keys(this.user_data).forEach((key) => {
+        this.user_total +=
+          this.user_data[key].amount * this.user_data[key].last;
+      });
+    },
+    setUser24hPL() {
+      this.user_24h_PL = 0;
+      Object.keys(this.user_data).forEach((key) => {
+        this.user_24h_PL +=
+          this.user_data[key].amount * this.user_data[key].change;
+      });
+    },
+    setUser24hPLPercent() {
+      this.user_24h_PL_percent = (this.user_24h_PL / (this.user_total - this.user_24h_PL)) * 100;
+    },
+    setChartData() {
+      this.doughnutChartData.labels = Object.keys(this.user_data);
+      this.barChartData.labels = Object.keys(this.user_data);
+      let user_24h_PLs_percent = [];
+      Object.keys(this.user_data).forEach((key) => {
+        this.user_percentages.push(((this.user_data[key].amount * this.user_data[key].last) / this.user_total) * 100);
+        user_24h_PLs_percent.push(this.user_data[key].changePercentage);
+      });
+      this.doughnutChartData.datasets[0].data = this.user_percentages;
+      this.barChartData.datasets[0].data = user_24h_PLs_percent;
+    },
+    setChartPalette() {
+      const pal = palette("tol", this.user_percentages.length).map(function (hex) { return "#" + hex; });
+      this.doughnutChartData.datasets[0].backgroundColor = pal;
+      this.barChartData.datasets[0].backgroundColor = pal;
+    },
     async getData() {
       if (this.api_key === "" || this.api_secret === "") {
         this.apiStatus = "not set";
@@ -497,6 +528,7 @@ export default {
       try {
         let data = await exchange.fetchBalance();
         this.apiStatus = "correct";
+        // data cleaning
         data = data.total;
         Object.keys(data).forEach((key) => {
           if (data[key] <= 0) delete data[key];
@@ -517,42 +549,17 @@ export default {
           };
         });
         //compute user total in USD
-        this.user_total = 0;
-        Object.keys(this.user_data).forEach((key) => {
-          this.user_total +=
-            this.user_data[key].amount * this.user_data[key].last;
-        });
+        this.setUserTotal();
         //compute cumulative user 24h P/L
-        this.user_24h_PL = 0;
-        Object.keys(this.user_data).forEach((key) => {
-          this.user_24h_PL +=
-            this.user_data[key].amount * this.user_data[key].change;
-        });
+        this.setUser24hPL();
         //compute cumulative user 24h P/L percentage
-        this.user_24h_PL_percent = (this.user_24h_PL / (this.user_total - this.user_24h_PL)) * 100;
+        this.setUser24hPLPercent();
         this.tableLoaded = true;
         //add data to charts
-        this.doughnutChartData.labels = Object.keys(this.user_data);
-        this.barChartData.labels = Object.keys(this.user_data);
-        let user_24h_PLs_percent = [];
-        Object.keys(this.user_data).forEach((key) => {
-          this.user_percentages.push(
-            ((this.user_data[key].amount * this.user_data[key].last) /
-              this.user_total) *
-              100
-          );
-          user_24h_PLs_percent.push(this.user_data[key].changePercentage);
-        });
-        this.doughnutChartData.datasets[0].data = this.user_percentages;
-        this.barChartData.datasets[0].data = user_24h_PLs_percent;
-        //generate color palette
-        const pal = palette("tol", this.user_percentages.length).map(function (
-          hex
-        ) {
-          return "#" + hex;
-        });
-        this.doughnutChartData.datasets[0].backgroundColor = pal;
-        this.barChartData.datasets[0].backgroundColor = pal;
+        this.setChartData();
+        //set chart's color palette
+        this.setChartPalette();
+        // set chart rendering flag to true
         this.chartLoaded = true;
         this.apiStatus = "set";
       } catch (err) {
@@ -580,7 +587,6 @@ export default {
           }
         });
     },
-
     //modifica profilo
     async edit() {
       let user = {
@@ -588,7 +594,7 @@ export default {
         email: this.newEmail,
         password: this.password,
       };      
-      if(document.getElementById("nuovaEmail").checkValidity() || this.password!="") {
+      if(document.getElementById("nuovaEmail").checkValidity() || this.password !== "") {
         await axios.post("http://localhost:5000/user", user).then((res) => {
           if (res.status === 405) {
             console.log("account non modificato");
@@ -597,7 +603,6 @@ export default {
         });
       }
     },
-
     //aggiungi wallet
     async add() {
       let wallet = {
@@ -606,16 +611,14 @@ export default {
         api_key: this.newApiKey,
         api_secret: this.newApiSecret,
       };
-      if(this.newApiKey!="" && this.newApiSecret!="" && this.name_exchange!=""){
+      if(this.newApiKey !== "" && this.newApiSecret !== "" && this.name_exchange !== ""){
         await axios.put("http://localhost:5000/user", wallet).then((res) => {
           if (res.status === 405) {
             console.log("account non modificato");
-            } else {
+          } else {
             console.log("account modificato");
             this.api_key = this.newApiKey;
             this.api_secret = this.newApiSecret;
-            this.newApiKey = "";
-            this.newApiSecret = "";
           }
         });
       }

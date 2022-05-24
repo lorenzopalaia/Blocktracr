@@ -532,7 +532,7 @@ export default {
         this.chartData.labels.push(date);
         this.chartData.datasets[0].data.push(res.data.prices[idx][1]);
       }
-      this.interval = interval;
+      this.interval = interval; // in order to disable buttons
       // if there's more than one element in plot's datasets we can render the component
       if (this.chartData.datasets[0].data.length > 1) {
         this.chartLoaded = true;

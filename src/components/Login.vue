@@ -5,7 +5,7 @@
         <div class="card rounded">
           <div class="card-body text-center" id="card">
             <div class="mb-md-5 mt-md-4 pb-5">
-              <form action="post" name="formLogin">
+              <form name="formLogin">
                 <p class="sequel-font-small text-white fs-2">Login</p>
                 <p class="sequel-font-small text-white">Inserisci Email e Password</p>
                 <div class="form-outline">
