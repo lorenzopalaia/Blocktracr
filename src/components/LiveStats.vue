@@ -167,7 +167,7 @@
         <tr>
           <th>#</th>
           <th>Nome</th>
-          <th class="d-none d-md-table-cell">Prezzo</th>
+          <th class="d-none d-sm-table-cell">Prezzo</th>
           <th class="d-none d-md-table-cell">24h%</th>
           <th class="d-none d-md-table-cell">24h Vol.</th>
           <th class="d-none d-md-table-cell">Market Cap.</th>
@@ -190,7 +190,7 @@
               </span>
             </router-link>
           </td>
-          <td class="d-none d-md-table-cell">
+          <td class="d-none d-sm-table-cell">
             <p v-if="coin.current_price">{{ coin.current_price }} $</p>
             <p v-else>N/D</p>
           </td>
