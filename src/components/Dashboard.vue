@@ -43,7 +43,7 @@
             >
               <p class="sequel-font-big m-0">Modifica profilo</p>
             </button>
-            <div class="modal" id="profilo">
+            <div class="modal" id="profilo" >
               <div class="modal-dialog">
                 <div class="modal-content">
                   <!--Header-->
@@ -69,7 +69,7 @@
                         />
                       </div>
                       <!--modifica password-->
-                      <div id="collapsePassword">
+                      <div>
                         <label for="nuovaPassword" class="form-label"
                           ><p class="card-text">Nuova password:</p></label
                         >
@@ -159,14 +159,12 @@
 
                     <!-- Body -->
                     <div class="modal-body justify-content-center">
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
+                        <div>
                           <label
                             for="exchange"
                             style="backgroundcolor: transparent"
                             ><p class="card-text">Exchange:</p></label
                           >
-                        </div>
                         <select
                           class="custom-select card-text bg-transparent"
                           id="exchange"
@@ -189,28 +187,32 @@
                           </option>
                         </select>
                       </div>
-                      <label for="api_key" class="form-label"
-                        ><p class="card-text">API Key:</p></label
-                      >
-                      <input
-                        type="text"
-                        id="api_key"
-                        v-model="newApiKey"
-                        placeholder="API Key"
-                        required
-                        class="m-2"
-                      />
-                      <label for="api_secret" class="form-label"
-                        ><p class="card-text">API Secret:</p></label
-                      >
-                      <input
-                        type="text"
-                        id="api_secret"
-                        v-model="newApiSecret"
-                        placeholder="API Secret"
-                        required
-                        class="m-2"
-                      />
+                      <div>
+                        <label for="api_key" class="form-label"
+                          ><p class="card-text">API Key:</p></label
+                        >
+                        <input
+                          type="text"
+                          id="api_key"
+                          v-model="newApiKey"
+                          placeholder="API Key"
+                          required
+                          class="m-2"
+                        />
+                      </div>
+                      <div>
+                        <label for="api_secret" class="form-label"
+                          ><p class="card-text">API Secret:</p></label
+                        >
+                        <input
+                          type="text"
+                          id="api_secret"
+                          v-model="newApiSecret"
+                          placeholder="API Secret"
+                          required
+                          class="m-2"
+                        />
+                      </div>
                     </div>
 
                     <!-- Footer -->
