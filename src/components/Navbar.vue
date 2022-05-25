@@ -28,15 +28,6 @@
           <li class="nav-item">
             <router-link class="text-decoration-none" to="/login" v-if="!isLog">LOGIN</router-link>
             <router-link class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#logout" to="/" v-else @click="logout()">LOGOUT</router-link>
-            <div class="modal" id="logout">
-              <div class="modal-dialog">
-                <div class="modal-content text-white">
-                  <div style="backgroundColor: rgb(20, 15, 68)" class="modal-body justify-content-center text-center">
-                    <p class="m-0 sequel-font-small">Ti sei disconnesso correttamente</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </li>
           <li class="nav-item">
             <router-link class="text-decoration-none" to="/register" v-if="!isLog">REGISTRATI</router-link>
@@ -45,6 +36,15 @@
       </div>
     </div>
   </nav>
+  <div class="modal" id="logout">
+    <div class="modal-dialog">
+      <div class="modal-content text-white">
+        <div style="backgroundColor: rgb(20, 15, 68)" class="modal-body justify-content-center text-center">
+          <p class="m-0 sequel-font-small">Ti sei disconnesso correttamente</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
