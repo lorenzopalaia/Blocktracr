@@ -165,9 +165,10 @@
     <table class="table rounded text-white mt-4">
       <thead>
         <tr>
-          <th v-for="title in tableTitles" :key="title">
-            {{ title }}
-          </th>
+          <th>#</th>
+          <th>Nome</th>
+          <th class="d-none d-md-table-cell">Prezzo</th>
+          <th class="d-none d-md-table-cell">24h%</th>
           <th class="d-none d-md-table-cell">24h Vol.</th>
           <th class="d-none d-md-table-cell">Market Cap.</th>
         </tr>
@@ -189,15 +190,15 @@
               </span>
             </router-link>
           </td>
-          <td>
+          <td class="d-none d-md-table-cell">
             <p v-if="coin.current_price">{{ coin.current_price }} $</p>
             <p v-else>N/D</p>
           </td>
           <td
             :class="[
               coin.price_change_percentage_24h >= 0
-                ? 'text-success'
-                : 'text-danger',
+                ? 'text-success d-none d-md-table-cell'
+                : 'text-danger d-none d-md-table-cell',
             ]"
           >
             <p v-if="coin.price_change_percentage_24h">
@@ -279,7 +280,6 @@ export default {
       pageArray: [1, 2, 3],
       lastPage: 135, // default value updated asyncronously via getMarketData() function
       coins: [],
-      tableTitles: ["#", "Nome", "Prezzo", "24h%"],
       change24h: null,
       totalMCap: null,
       volume24h: null,

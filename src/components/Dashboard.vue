@@ -56,7 +56,7 @@
                       <!--modifica email-->
                       <p class="card-text">La tua email è {{ email }}</p>
                       <div>
-                        <label for="nuovaEmail" class="form-label"
+                        <label for="nuovaEmail" class="form-label m-0"
                           ><p class="card-text">Nuova email:</p></label
                         >
                         <input
@@ -65,12 +65,12 @@
                           placeholder="Email"
                           v-model="newEmail"
                           autocomplete="off"
-                          class="m-2"
+                          class="ml-2"
                         />
                       </div>
                       <!--modifica password-->
                       <div>
-                        <label for="nuovaPassword" class="form-label"
+                        <label for="nuovaPassword" class="form-label mb-0 mt-2"
                           ><p class="card-text">Nuova password:</p></label
                         >
                         <input
@@ -79,7 +79,7 @@
                           placeholder="Password"
                           v-model="password"
                           autocomplete="off"
-                          class="m-2"
+                          class="ml-2"
                         />
                       </div>
                     </div>
@@ -187,8 +187,8 @@
                           </option>
                         </select>
                       </div>
-                      <div>
-                        <label for="api_key" class="form-label"
+                      <div class="mt-2">
+                        <label for="api_key" class="form-label mb-0"
                           ><p class="card-text">API Key:</p></label
                         >
                         <input
@@ -197,11 +197,11 @@
                           v-model="newApiKey"
                           placeholder="API Key"
                           required
-                          class="m-2"
+                          class="ml-2"
                         />
                       </div>
-                      <div>
-                        <label for="api_secret" class="form-label"
+                      <div class="mt-2">
+                        <label for="api_secret" class="form-label mb-0"
                           ><p class="card-text">API Secret:</p></label
                         >
                         <input
@@ -210,7 +210,7 @@
                           v-model="newApiSecret"
                           placeholder="API Secret"
                           required
-                          class="m-2"
+                          class="ml-2"
                         />
                       </div>
                     </div>
@@ -305,6 +305,7 @@
                   <th v-for="title in titles" :key="title">
                     {{ title }}
                   </th>
+                  <th class="d-none d-md-table-cell">Prezzo</th>
                   <th class="d-none d-md-table-cell">24h P/L</th>
                   <th class="d-none d-md-table-cell">24h% P/L</th>
                 </tr>
@@ -320,7 +321,7 @@
                   <td class="text-white">
                     ${{ (key.last * key.amount).toFixed(2) }}
                   </td>
-                  <td class="text-white">${{ key.last }}</td>
+                  <td class="text-white d-none d-md-table-cell">${{ key.last }}</td>
                   <td class="d-none d-md-table-cell">
                     <p v-if="key.change < 0" class="text-danger">
                       -${{ Math.abs(key.change * key.amount).toFixed(2) }}
@@ -409,7 +410,7 @@ export default {
   data() {
     return {
       apiStatus: "waiting",
-      titles: ["Coin", "Quantità", "Totale", "Prezzo"],
+      titles: ["Coin", "Quantità", "Totale"],
       token: "",
       name: "",
       email: "",
