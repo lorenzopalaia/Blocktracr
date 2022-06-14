@@ -1,5 +1,7 @@
 # Blocktracr
 Progetto per il corso Linguaggi e Tecnologie per il Web, Ingegneria Informatica e Automatica, Università La Sapienza 
+## Live Demo
+Una live demo del progetto è presente a questo [link](https://lorenzopalaia.github.io/Blocktracr/)
 ## Descrizione
 Il progetto è strutturato in cartelle.
 Nella root directory troviamo il file `server.js` contenente le funzioni per interfacciarsi con il database.
