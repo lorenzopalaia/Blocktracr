@@ -47,7 +47,7 @@ npm run build
 npm run lint
 ```
 
-## To run built files
+## Run built project
 ```
 sudo npm install -g serve
 serve -s dist
