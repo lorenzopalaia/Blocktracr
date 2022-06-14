@@ -16,6 +16,7 @@ Poi nella cartella components troviamo i singoli componenti delle pagine:
 - Login.vue e Register.vue sono i componenti che implementano le omonime funzioni attraverso funzioni che interagiscono con il database. La pagina di login emette inoltre un evento che verrà catturato dai componenti Home e Navbar
 - Home.vue è la homepage del sito che implementa un gestore di eventi con cui stabiliamo se mostrare i bottoni Login/Register oppure il bottone Dashboard
 - Navbar.vue contiene la navbar del sito, anche questa con un gestore di eventi per mostrare i redirect corretti oltre ad una funzione di logout che si interfaccia con il database
+
 Nella cartella router troviamo un file index.js che descrive le regole di indirizzamento nel sito, ovvero stabilisce quali componenti montare al verificarsi di un dato evento.
 In views troviamo altri componenti Vue che fanno da "wrapper" ai componenti presenti nella cartella components.
 Il file App.vue contiene la definizione dei componenti da montare. Quelli sempre montati sono CoinsBar, Navbar e Footer, con in mezzo un router-view in cui vengono montate le view presenti nella apposita cartella.
