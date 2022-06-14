@@ -53,6 +53,3 @@ sudo npm install -g serve
 serve -s dist
 npm run server
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
