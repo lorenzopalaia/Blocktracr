@@ -1,3 +1,4 @@
+![alt blocktracr](https://github.com/lorenzopalaia/Blocktracr/blob/main/blocktracr.png)
 # Blocktracr
 Progetto per il corso Linguaggi e Tecnologie per il Web, Ingegneria Informatica e Automatica, Università La Sapienza 
 ## Live Demo
