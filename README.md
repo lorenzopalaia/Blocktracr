@@ -1,6 +1,8 @@
 ![alt blocktracr](https://github.com/lorenzopalaia/Blocktracr/blob/main/blocktracr.png)
 # Blocktracr
-Progetto per il corso Linguaggi e Tecnologie per il Web, Ingegneria Informatica e Automatica, Università La Sapienza 
+Progetto per il corso Linguaggi e Tecnologie per il Web, Ingegneria Informatica e Automatica, Università La Sapienza
+
+Il progetto sviluppato è un sito che permette di visualizzare i dati di mercato di ogni criptovaluta e di avere un resoconto dettagliato del proprio wallet collegato ad un exchange centralizzato
 ## Live Demo
 Una live demo del progetto è presente a questo [link](https://lorenzopalaia.github.io/Blocktracr/)
 ## Descrizione
