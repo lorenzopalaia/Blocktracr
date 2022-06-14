@@ -1,5 +1,5 @@
 # Brocktracr
-
+Progetto per il corso Linguaggi e Tecnologie per il Web, Ingegneria Informatica e Automatica, Università La Sapienza 
 ## Project setup
 ```
 npm install
