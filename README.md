@@ -83,7 +83,6 @@ Project Link: [https://github.com/lorenzopalaia/Blocktracr](https://github.com/l
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/lorenzopalaia/Blocktracr.svg?style=for-the-badge
 [contributors-url]: https://github.com/lorenzopalaia/Blocktracr/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/lorenzopalaia/Blocktracr.svg?style=for-the-badge
@@ -92,8 +91,6 @@ Project Link: [https://github.com/lorenzopalaia/Blocktracr](https://github.com/l
 [stars-url]: https://github.com/lorenzopalaia/Blocktracr/stargazers
 [issues-shield]: https://img.shields.io/github/issues/lorenzopalaia/Blocktracr.svg?style=for-the-badge
 [issues-url]: https://github.com/lorenzopalaia/Blocktracr/issues
-[license-shield]: https://img.shields.io/github/license/lorenzopalaia/Blocktracr.svg?style=for-the-badge
-[license-url]: https://github.com/lorenzopalaia/Blocktracr/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/lorenzo-palaia-7177a5202
 [product-screenshot]: blocktracr.png
