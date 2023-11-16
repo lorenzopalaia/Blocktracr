@@ -9,7 +9,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/lorenzopalaia/Blocktracr">
-    <img src="logo.png" alt="Logo" width="80" height="80">
+    <img src="repo_assets/logo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Blocktracr</h3>
@@ -93,4 +93,4 @@ Project Link: [https://github.com/lorenzopalaia/Blocktracr](https://github.com/l
 [issues-url]: https://github.com/lorenzopalaia/Blocktracr/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/lorenzo-palaia-7177a5202
-[product-screenshot]: blocktracr.png
+[product-screenshot]: repo_assets/preview.png
