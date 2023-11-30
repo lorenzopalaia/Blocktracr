@@ -64,7 +64,7 @@ Project was developed for "Linguaggi e Tecnologie per il Web" class, Ingegneria 
 
 ## Usage  
 
-3. Run
+1. Run
    ```sh
    npm run serve
    npm run server
