@@ -114,6 +114,8 @@
 <script>
 import { formatPrice, firstSentence } from "@/utils/textUtils";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default {
   data() {
     return {
@@ -122,7 +124,7 @@ export default {
   },
   methods: {
     onMountedGetCoin() {
-      fetch(`http://localhost:3000/crypto/${this.$route.params.id}`)
+      fetch(`${apiUrl}/crypto/${this.$route.params.id}`)
         .then((res) => res.json())
         .then((data) => {
           this.coin = data;

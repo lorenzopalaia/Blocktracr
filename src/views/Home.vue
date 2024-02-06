@@ -9,6 +9,8 @@ import Hero from "../components/Home/Hero.vue";
 import Table from "../components/Table.vue";
 import Feature from "../components/Home/Feature.vue";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default {
   components: {
     Hero,
@@ -22,7 +24,7 @@ export default {
   },
   methods: {
     onMountedGetCoins() {
-      fetch("http://localhost:3000/crypto")
+      fetch(`${apiUrl}/crypto`)
         .then((res) => res.json())
         .then((data) => {
           this.coins = data

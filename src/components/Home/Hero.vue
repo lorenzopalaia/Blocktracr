@@ -62,7 +62,6 @@ export default {
   },
   computed: {
     slicedCoins() {
-      console.log(this.coins);
       return this.coins.slice(0, 4);
     },
   },
