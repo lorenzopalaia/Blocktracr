@@ -1,12 +1,11 @@
+import './style.css'
+
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import mitt from "mitt" //event bus
 
+const app = createApp(App)
 
-const emitter = mitt();
+app.use(router)
 
-const app = createApp(App);
-app.use(router);
-app.config.globalProperties.emitter = emitter; // event bus to send events by components
-app.mount('#app');
+app.mount('#app')

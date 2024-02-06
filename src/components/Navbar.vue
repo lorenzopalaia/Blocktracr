@@ -1,47 +1,59 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark fw-bold sticky-top">
-    <div class="container">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav" id="menu">
-          <li class="nav-item">
-            <router-link class="text-decoration-none" to="/">HOME</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="text-decoration-none" to="/livestats">LIVE STATS</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="text-decoration-none" to="/dashboard">DASHBOARD</router-link>
-          </li>
-        </ul>
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <router-link class="text-decoration-none" to="/login" v-if="!isLog">LOGIN</router-link>
-            <router-link class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#logout" to="/" v-else @click="logout()">LOGOUT</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="text-decoration-none" to="/register" v-if="!isLog">REGISTRATI</router-link>
-          </li>
-        </ul>
-      </div>
+  <div class="navbar">
+    <div class="navbar-start">
+      <router-link to="/" class="text-4xl text-white uppercase">Blocktracr</router-link>
     </div>
-  </nav>
-  <div class="modal" id="logout">
-    <div class="modal-dialog">
-      <div class="modal-content text-white">
-        <div style="backgroundColor: rgb(20, 15, 68)" class="modal-body justify-content-center text-center">
-          <p class="m-0 sequel-font-small">Ti sei disconnesso correttamente</p>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1">
+        <router-link
+          :to="route.path"
+          class="text-2xl"
+          v-for="route in routes"
+          :key="route.path"
+        >
+          <li
+            class="mx-4 text-white hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r from-primary to-secondary"
+          >
+            {{ route.name }}
+          </li>
+        </router-link>
+      </ul>
+    </div>
+    <div class="navbar-end">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="lg:hidden">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h8m-8 6h16"
+            />
+          </svg>
         </div>
+        <ul
+          tabindex="0"
+          class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52"
+        >
+          <router-link
+            :to="route.path"
+            class="text-2xl"
+            v-for="route in routes"
+            :key="route.path"
+          >
+            <li
+              class="mx-4 text-white hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r from-primary to-secondary"
+            >
+              {{ route.name }}
+            </li>
+          </router-link>
+        </ul>
       </div>
     </div>
   </div>
@@ -49,59 +61,21 @@
 
 <script>
 export default {
-  name: "Navbar",
   data() {
     return {
-      isLog: false
-    }
+      routes: [
+        {
+          name: "Home",
+          path: "/",
+        },
+        {
+          name: "Market",
+          path: "/market",
+        },
+      ],
+    };
   },
-  methods: {
-    logout(){
-      localStorage.clear();
-      sessionStorage.clear();
-      this.isLog = false;
-      this.emitter.emit("loggedOut"); // emit logout event
-      this.$router.push("/") // mount homepage component in order to redirect user after logout
-    },
-    loginLogoutEventHandler() {
-      if (localStorage.getItem('token') || sessionStorage.getItem('token')) // check if token exists in localStorage or sessionStorage
-        this.isLog = true;
-      this.emitter.on("loggedIn", () => { // event handler
-        this.isLog = true;
-      })
-      this.emitter.on("loggedOut", () => { // event handler
-        this.isLog = false;
-      })
-    }
-  },
-  mounted() {
-    this.loginLogoutEventHandler();
-  }
 };
 </script>
 
-<style scoped>
-.navbar {
-  background-color: rgb(5, 10, 48);
-}
-
-.sequel-font-small {
-  font-family: "Sequel100Black-45", Helvetica, Arial;
-}
-
-nav a {
-  color: #f5f5f5;
-  padding-right: 20px;
-}
-
-nav a:hover {
-  color: #7067cf;
-}
-nav a.router-link-exact-active {
-  color: #2ab2fc;
-}
-
-.nav-item {
-  font-family: "Sequel100Black-45", Helvetica, Arial;
-}
-</style>
+<style></style>
