@@ -9,20 +9,24 @@
           >
             {{ coin.name }}
           </h1>
-          <div class="text-4xl text-white">{{ coin.symbol.toUpperCase() }} </div>
+          <div class="text-4xl text-white">{{ coin.symbol.toUpperCase() }}</div>
         </div>
         <div class="flex flex-row">
-        <div
-          class="badge badge-primary mr-4"
-          v-for="category in coin.categories.reverse().slice(0, 5)"
-          :key="category"
-        >
-          {{ category }}
+          <div
+            class="badge badge-primary mr-4"
+            v-for="category in coin.categories.slice(0, 5)"
+            :key="category"
+          >
+            {{ category }}
+          </div>
         </div>
       </div>
-      </div>
     </div>
-    <h2 v-if="coin.description.en" class="text-xl text-white mt-8" v-html="firstSentence(coin.description.en)"></h2>
+    <h2
+      v-if="coin.description.en"
+      class="text-xl text-white mt-8"
+      v-html="firstSentence(coin.description.en)"
+    ></h2>
     <div class="flex flex-row gap-8 mt-8 stats bg-transparent">
       <div class="stat w-1/3">
         <div class="stat-title text-white">Price</div>
@@ -108,8 +112,7 @@
 </template>
 
 <script>
-import { formatPrice, firstSentence } from '@/utils/textUtils';
-
+import { formatPrice, firstSentence } from "@/utils/textUtils";
 
 export default {
   data() {
@@ -123,6 +126,7 @@ export default {
         .then((res) => res.json())
         .then((data) => {
           this.coin = data;
+          this.coin.categories.reverse();
         });
     },
     formatPrice,
