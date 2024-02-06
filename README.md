@@ -67,7 +67,7 @@ Project was developed for "Linguaggi e Tecnologie per il Web" class, Ingegneria 
 1. Run
    ```sh
    npm run serve
-   npm run server
+   npm run dev
    ```
    
 <p align="right">(<a href="#top">back to top</a>)</p>
