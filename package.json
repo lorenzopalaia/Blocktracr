@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "serve": "node server.cjs"
+    "serve": "node server/server.cjs"
   },
   "dependencies": {
     "axios": "^1.6.7",
