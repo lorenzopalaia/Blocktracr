@@ -40,7 +40,8 @@ Project was developed for "Linguaggi e Tecnologie per il Web" class, Ingegneria 
 * [Express](https://expressjs.com/)
 * [Vue.js](https://vuejs.org/)
 * [Node.js](https://nodejs.org/)
-* [Bootstrap](https://getbootstrap.com)
+* [Tailwind](https://tailwindscss.com)
+* [DaisyUI](https://daisyui.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -66,7 +67,7 @@ Project was developed for "Linguaggi e Tecnologie per il Web" class, Ingegneria 
 
 1. Run
    ```sh
-   npm run serve
+   npm run start
    npm run dev
    ```
    
