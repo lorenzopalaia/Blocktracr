@@ -11,7 +11,13 @@ export default function Hero() {
           text="Get started with Blocktracr"
           link="/dashboard"
         />
-        <h1 className="text-5xl font-bold">Track your favorite cryptos.</h1>
+        <h1 className="text-5xl font-bold">
+          Track your{" "}
+          <span className="bg-gradient-to-l from-primary to-indigo-500 bg-clip-text text-transparent">
+            favorite cryptos
+          </span>
+          .
+        </h1>
         <p className="text-lg text-muted-foreground">
           Blocktracr is a simple, easy-to-use cryptocurrency tracker that helps
           you keep track of your favorite cryptocurrencies.

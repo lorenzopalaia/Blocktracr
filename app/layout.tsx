@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 
+import ThemeProvider from "@/components/ThemeProvider";
+import Navbar from "@/components/Navbar";
 import CoinBar from "@/components/CoinBar";
+import Footer from "@/components/Footer";
 
 const poppins = Poppins({
   weight: "400",
@@ -21,10 +24,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html suppressHydrationWarning lang="en">
       <body className={`${poppins.variable} antialiased`}>
-        <CoinBar />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <CoinBar />
+          <Navbar />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
