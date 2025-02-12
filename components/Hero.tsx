@@ -1,33 +1,85 @@
-import Featured from "@/components/Featured";
+"use client";
 
-import { ShimmerButton } from "@/components/magicui/shimmer-button";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ArrowRightIcon } from "lucide-react";
+import { Section } from "@/components/ui/section";
+import { Mockup, MockupFrame } from "@/components/ui/mockup";
+import Glow from "@/components/ui/glow";
+import Image from "next/image";
+import { useTheme } from "next-themes";
+import Github from "@/components/logos/github";
+import Link from "next/link";
 
 export default function Hero() {
+  const { resolvedTheme } = useTheme();
+  let src;
+
+  switch (resolvedTheme) {
+    case "light":
+      src = "/app-light.png";
+      break;
+    case "dark":
+      src = "/app-dark.png";
+      break;
+    default:
+      src = "/app-dark.png";
+      break;
+  }
+
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="flex flex-col items-center justify-center gap-4 text-center">
-        <Featured
-          emoji="🚀"
-          text="Get started with Blocktracr"
-          link="/dashboard"
-        />
-        <h1 className="text-5xl font-bold">
-          Track your{" "}
-          <span className="bg-gradient-to-l from-primary to-indigo-500 bg-clip-text text-transparent">
-            favorite cryptos
-          </span>
-          .
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          Blocktracr is a simple, easy-to-use cryptocurrency tracker that helps
-          you keep track of your favorite cryptocurrencies.
-        </p>
-        <ShimmerButton className="shadow-2xl">
-          <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
-            Get started
-          </span>
-        </ShimmerButton>
+    <Section className="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0">
+      <div className="mx-auto flex max-w-container flex-col gap-12 pt-16 sm:gap-24">
+        <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
+          <Badge variant="outline" className="animate-appear">
+            <span className="text-muted-foreground">
+              Experience live crypto tracking!
+            </span>
+            <Link href="/" className="flex items-center gap-1">
+              Get started
+              <ArrowRightIcon className="h-3 w-3" />
+            </Link>
+          </Badge>
+          <h1 className="relative z-10 inline-block animate-appear bg-gradient-to-r from-foreground to-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight dark:to-muted-foreground">
+            Take Control of Your Crypto Journey
+          </h1>
+          <p className="text-md relative z-10 max-w-[550px] animate-appear font-medium text-muted-foreground opacity-0 delay-100 sm:text-xl">
+            Track your crypto portfolio with dynamic charts, live prices, and
+            real-time insights that empower your investment strategy.
+          </p>
+          <div className="relative z-10 flex animate-appear justify-center gap-4 opacity-0 delay-300">
+            <div className="relative z-10 flex animate-appear justify-center gap-4 opacity-0 delay-300">
+              <Button variant="default" size="lg" asChild>
+                <Link href="/">Get Started</Link>
+              </Button>
+              <Button variant="glow" size="lg" asChild>
+                <Link href="/">
+                  <Github className="mr-2 h-4 w-4" /> Github
+                </Link>
+              </Button>
+            </div>
+          </div>
+          <div className="relative pt-12">
+            <MockupFrame
+              className="animate-appear opacity-0 delay-700"
+              size="small"
+            >
+              <Mockup type="responsive">
+                <Image
+                  src={src}
+                  alt="Blocktracr app screenshot"
+                  width={1248}
+                  height={765}
+                />
+              </Mockup>
+            </MockupFrame>
+            <Glow
+              variant="top"
+              className="animate-appear-zoom opacity-0 delay-1000"
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </Section>
   );
 }

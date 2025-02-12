@@ -23,7 +23,7 @@ export default function Navbar() {
               className="flex items-center gap-2 text-xl font-bold"
             >
               <LaunchUI />
-              Launch UI
+              Blocktracr
             </Link>
             <Navigation />
           </NavbarLeft>
@@ -52,7 +52,7 @@ export default function Navbar() {
                     href="/"
                     className="flex items-center gap-2 text-xl font-bold"
                   >
-                    <span>Launch UI</span>
+                    <span>Blocktracr</span>
                   </Link>
                   <Link
                     href="/"

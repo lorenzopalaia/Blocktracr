@@ -7,54 +7,54 @@ export default function Stats() {
         <div className="grid grid-cols-2 gap-12 sm:grid-cols-4">
           <div className="flex flex-col items-start gap-3 text-left">
             <div className="text-sm font-semibold text-muted-foreground">
-              used by
+              Trusted by
             </div>
             <div className="flex items-baseline gap-2">
               <div className="bg-gradient-to-r from-foreground to-foreground bg-clip-text text-4xl font-medium text-transparent drop-shadow-[2px_1px_24px_hsla(var(--brand-foreground))] transition-all duration-300 sm:text-5xl md:text-6xl dark:to-brand">
-                x
+                50
               </div>
               <div className="text-2xl font-semibold text-brand">k</div>
             </div>
             <div className="text-pretty text-sm font-semibold text-muted-foreground">
-              designers on Figma Community
+              crypto investors worldwide
             </div>
           </div>
           <div className="flex flex-col items-start gap-3 text-left">
             <div className="text-sm font-semibold text-muted-foreground">
-              over
+              Tracking over
             </div>
             <div className="flex items-baseline gap-2">
               <div className="bg-gradient-to-r from-foreground to-foreground bg-clip-text text-4xl font-medium text-transparent drop-shadow-[2px_1px_24px_hsla(var(--brand-foreground))] transition-all duration-300 sm:text-5xl md:text-6xl dark:to-brand">
-                x
+                1,250
               </div>
             </div>
             <div className="text-pretty text-sm font-semibold text-muted-foreground">
-              clones and forks of the template on Github
+              digital assets live in the market
             </div>
           </div>
           <div className="flex flex-col items-start gap-3 text-left">
             <div className="text-sm font-semibold text-muted-foreground">
-              already
+              Updating
             </div>
             <div className="flex items-baseline gap-2">
               <div className="bg-gradient-to-r from-foreground to-foreground bg-clip-text text-4xl font-medium text-transparent drop-shadow-[2px_1px_24px_hsla(var(--brand-foreground))] transition-all duration-300 sm:text-5xl md:text-6xl dark:to-brand">
-                x
+                75
               </div>
               <div className="text-2xl font-semibold text-brand">k</div>
             </div>
             <div className="text-pretty text-sm font-semibold text-muted-foreground">
-              installations with shadcn/ui CLI
+              portfolio snapshots daily
             </div>
           </div>
           <div className="flex flex-col items-start gap-3 text-left">
             <div className="text-sm font-semibold text-muted-foreground">
-              includes
+              Powered by
             </div>
             <div className="bg-gradient-to-r from-foreground to-foreground bg-clip-text text-4xl font-medium text-transparent drop-shadow-[2px_1px_24px_hsla(var(--brand-foreground))] transition-all duration-300 sm:text-5xl md:text-6xl dark:to-brand">
-              x
+              99.9%
             </div>
             <div className="text-pretty text-sm font-semibold text-muted-foreground">
-              React components and sections
+              uptime & cutting-edge analytics
             </div>
           </div>
         </div>

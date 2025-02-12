@@ -8,6 +8,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "../../ui/sheet";
 import { Menu } from "lucide-react";
 import LaunchUI from "../../logos/launch-ui";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
@@ -16,21 +17,21 @@ export default function Navbar() {
       <div className="relative mx-auto max-w-container">
         <NavbarComponent>
           <NavbarLeft>
-            <a
+            <Link
               href="/"
               className="flex items-center gap-2 text-xl font-bold"
             >
               <LaunchUI />
               Launch UI
-            </a>
+            </Link>
             <Navigation />
           </NavbarLeft>
           <NavbarRight>
-            <a href="/" className="hidden text-sm md:block">
+            <Link href="/" className="hidden text-sm md:block">
               Sign in
-            </a>
+            </Link>
             <Button variant="default" asChild>
-              <a href="/">Get Started</a>
+              <Link href="/">Get Started</Link>
             </Button>
             <Sheet>
               <SheetTrigger asChild>
@@ -45,30 +46,30 @@ export default function Navbar() {
               </SheetTrigger>
               <SheetContent side="right">
                 <nav className="grid gap-6 text-lg font-medium">
-                  <a
+                  <Link
                     href="/"
                     className="flex items-center gap-2 text-xl font-bold"
                   >
                     <span>Launch UI</span>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Getting Started
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Components
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Documentation
-                  </a>
+                  </Link>
                 </nav>
               </SheetContent>
             </Sheet>

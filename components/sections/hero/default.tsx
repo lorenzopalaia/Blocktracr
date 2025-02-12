@@ -9,6 +9,7 @@ import Glow from "../../ui/glow";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import Github from "../../logos/github";
+import Link from "next/link";
 
 export default function Hero() {
   const { resolvedTheme } = useTheme();
@@ -34,13 +35,10 @@ export default function Hero() {
             <span className="text-muted-foreground">
               New version of Launch UI is out!
             </span>
-            <a
-              href="/"
-              className="flex items-center gap-1"
-            >
+            <Link href="/" className="flex items-center gap-1">
               Get started
               <ArrowRightIcon className="h-3 w-3" />
-            </a>
+            </Link>
           </Badge>
           <h1 className="relative z-10 inline-block animate-appear bg-gradient-to-r from-foreground to-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight dark:to-muted-foreground">
             Give your big idea the website it deserves
@@ -52,12 +50,12 @@ export default function Hero() {
           <div className="relative z-10 flex animate-appear justify-center gap-4 opacity-0 delay-300">
             <div className="relative z-10 flex animate-appear justify-center gap-4 opacity-0 delay-300">
               <Button variant="default" size="lg" asChild>
-                <a href="/">Get Started</a>
+                <Link href="/">Get Started</Link>
               </Button>
               <Button variant="glow" size="lg" asChild>
-                <a href="/">
+                <Link href="/">
                   <Github className="mr-2 h-4 w-4" /> Github
-                </a>
+                </Link>
               </Button>
             </div>
           </div>

@@ -4,7 +4,6 @@ import "./globals.css";
 
 import ThemeProvider from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
-import CoinBar from "@/components/CoinBar";
 import Footer from "@/components/Footer";
 
 const poppins = Poppins({
@@ -32,7 +31,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <CoinBar />
           <Navbar />
           {children}
           <Footer />

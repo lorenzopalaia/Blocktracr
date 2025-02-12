@@ -5,6 +5,8 @@ import React, { forwardRef, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/magicui/animated-beam";
 
+import { Section } from "@/components/ui/section";
+
 import { useCryptoListData } from "../hooks/useCryptoListData";
 
 import Image from "next/image";
@@ -48,110 +50,125 @@ export default function Features() {
     return <div>Error: {error}</div>;
   }
 
+  if (!coins || coins.length < 6) {
+    return <div>Not enough coins to display</div>;
+  }
+
   const top6 = coins.slice(0, 6);
 
   return (
-    <div className="flex flex-col items-center">
-      <h2 className="text-3xl font-bold">
-        All your favorite cryptocurrencies in one place!
-      </h2>
-      <p className="text-muted-foreground mb-4">
-        Track your portfolio in real-time with Blocktracr.
-      </p>
-      <div
-        className="relative flex h-[300px] w-full items-center justify-center overflow-hidden"
-        ref={containerRef}
-      >
-        <div className="flex size-full max-h-[200px] max-w-lg flex-col items-stretch justify-between gap-10">
-          <div className="flex flex-row items-center justify-between">
-            {top6.slice(0, 2).map((coin, index) => (
-              <Circle ref={index === 0 ? div1Ref : div5Ref} key={coin.id}>
-                <Image
-                  src={coin.image}
-                  alt={coin.name}
-                  width={32}
-                  height={32}
-                />
-              </Circle>
-            ))}
+    <Section>
+      <div className="mx-auto flex max-w-container flex-col items-center gap-8 text-center">
+        <div className="flex flex-col items-center gap-6">
+          <div>
+            <p className="text-md font-semibold sm:text-2xl">
+              All your favorite cryptocurrencies in one place!
+            </p>
+            <p className="text-muted-foreground">
+              We support over 1000 cryptocurrencies
+            </p>
           </div>
-          <div className="flex flex-row items-center justify-between">
-            <Circle ref={div2Ref}>
-              <Image
-                src={top6[2].image}
-                alt={top6[2].name}
-                width={32}
-                height={32}
-              />
-            </Circle>
-            <Circle ref={div4Ref} className="size-16">
-              <Image src="/images/logo.png" alt="Logo" width={32} height={32} />
-            </Circle>
-            <Circle ref={div6Ref}>
-              <Image
-                src={top6[3].image}
-                alt={top6[3].name}
-                width={32}
-                height={32}
-              />
-            </Circle>
-          </div>
-          <div className="flex flex-row items-center justify-between">
-            {top6.slice(4, 6).map((coin, index) => (
-              <Circle ref={index === 0 ? div3Ref : div7Ref} key={coin.id}>
-                <Image
-                  src={coin.image}
-                  alt={coin.name}
-                  width={32}
-                  height={32}
-                />
-              </Circle>
-            ))}
+          <div
+            className="relative flex h-[300px] w-full items-center justify-center overflow-hidden"
+            ref={containerRef}
+          >
+            <div className="flex size-full max-h-[200px] max-w-lg flex-col items-stretch justify-between gap-10">
+              <div className="flex flex-row items-center justify-between">
+                {top6.slice(0, 2).map((coin, index) => (
+                  <Circle ref={index === 0 ? div1Ref : div5Ref} key={coin.id}>
+                    <Image
+                      src={coin.image}
+                      alt={coin.name}
+                      width={32}
+                      height={32}
+                    />
+                  </Circle>
+                ))}
+              </div>
+              <div className="flex flex-row items-center justify-between">
+                <Circle ref={div2Ref}>
+                  <Image
+                    src={top6[2].image}
+                    alt={top6[2].name}
+                    width={32}
+                    height={32}
+                  />
+                </Circle>
+                <Circle ref={div4Ref} className="size-16">
+                  <Image
+                    src="/images/logo.png"
+                    alt="Logo"
+                    width={32}
+                    height={32}
+                  />
+                </Circle>
+                <Circle ref={div6Ref}>
+                  <Image
+                    src={top6[3].image}
+                    alt={top6[3].name}
+                    width={32}
+                    height={32}
+                  />
+                </Circle>
+              </div>
+              <div className="flex flex-row items-center justify-between">
+                {top6.slice(4, 6).map((coin, index) => (
+                  <Circle ref={index === 0 ? div3Ref : div7Ref} key={coin.id}>
+                    <Image
+                      src={coin.image}
+                      alt={coin.name}
+                      width={32}
+                      height={32}
+                    />
+                  </Circle>
+                ))}
+              </div>
+            </div>
+
+            <AnimatedBeam
+              containerRef={containerRef}
+              fromRef={div1Ref}
+              toRef={div4Ref}
+              curvature={-75}
+              endYOffset={-10}
+            />
+            <AnimatedBeam
+              containerRef={containerRef}
+              fromRef={div2Ref}
+              toRef={div4Ref}
+            />
+            <AnimatedBeam
+              containerRef={containerRef}
+              fromRef={div3Ref}
+              toRef={div4Ref}
+              curvature={75}
+              endYOffset={10}
+            />
+            <AnimatedBeam
+              containerRef={containerRef}
+              fromRef={div5Ref}
+              toRef={div4Ref}
+              curvature={-75}
+              endYOffset={-10}
+              reverse
+            />
+            <AnimatedBeam
+              containerRef={containerRef}
+              fromRef={div6Ref}
+              toRef={div4Ref}
+              reverse
+            />
+            <AnimatedBeam
+              containerRef={containerRef}
+              fromRef={div7Ref}
+              toRef={div4Ref}
+              curvature={75}
+              endYOffset={10}
+              reverse
+            />
           </div>
         </div>
-
-        <AnimatedBeam
-          containerRef={containerRef}
-          fromRef={div1Ref}
-          toRef={div4Ref}
-          curvature={-75}
-          endYOffset={-10}
-        />
-        <AnimatedBeam
-          containerRef={containerRef}
-          fromRef={div2Ref}
-          toRef={div4Ref}
-        />
-        <AnimatedBeam
-          containerRef={containerRef}
-          fromRef={div3Ref}
-          toRef={div4Ref}
-          curvature={75}
-          endYOffset={10}
-        />
-        <AnimatedBeam
-          containerRef={containerRef}
-          fromRef={div5Ref}
-          toRef={div4Ref}
-          curvature={-75}
-          endYOffset={-10}
-          reverse
-        />
-        <AnimatedBeam
-          containerRef={containerRef}
-          fromRef={div6Ref}
-          toRef={div4Ref}
-          reverse
-        />
-        <AnimatedBeam
-          containerRef={containerRef}
-          fromRef={div7Ref}
-          toRef={div4Ref}
-          curvature={75}
-          endYOffset={10}
-          reverse
-        />
       </div>
-    </div>
+    </Section>
   );
 }
