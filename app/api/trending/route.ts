@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const apiKey = process.env.COINGECKO_API_KEY;
-  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=250&x_cg_demo_api_key=${apiKey}`;
+  const url = `https://api.coingecko.com/api/v3/search/trending`;
 
   const response = await fetch(url, {
     method: "GET",

@@ -65,7 +65,7 @@ export default function Features() {
               All your favorite cryptocurrencies in one place!
             </p>
             <p className="text-muted-foreground">
-              We support over 1000 cryptocurrencies
+              We support over 250 cryptocurrencies
             </p>
           </div>
           <div

@@ -64,12 +64,6 @@ export default function Navbar() {
                     href="/"
                     className="text-muted-foreground hover:text-foreground"
                   >
-                    Components
-                  </Link>
-                  <Link
-                    href="/"
-                    className="text-muted-foreground hover:text-foreground"
-                  >
                     Documentation
                   </Link>
                 </nav>
