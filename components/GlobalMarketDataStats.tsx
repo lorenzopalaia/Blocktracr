@@ -3,6 +3,8 @@
 import { useGlobalMarketDataData } from "../hooks/useGlobalMarketDataData";
 import Stats from "./Stats";
 
+import { formatNumber } from "../utils/price";
+
 export default function GlobalMarketDataStats() {
   const { data, loading, error } = useGlobalMarketDataData();
 
@@ -13,14 +15,6 @@ export default function GlobalMarketDataStats() {
   if (error || !data) {
     return <div>Error: {error || "No data available"}</div>;
   }
-
-  const formatNumber = (value: number) => {
-    if (value >= 1e12) return { value: (value / 1e12).toFixed(1), unit: "T" };
-    if (value >= 1e9) return { value: (value / 1e9).toFixed(1), unit: "B" };
-    if (value >= 1e6) return { value: (value / 1e6).toFixed(1), unit: "M" };
-    if (value >= 1e3) return { value: (value / 1e3).toFixed(1), unit: "K" };
-    return { value: value.toFixed(1), unit: "" };
-  };
 
   const stats = [
     {
