@@ -25,6 +25,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+import { Coin } from "./Columns";
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -120,7 +122,10 @@ export function DataTable<TData, TValue>({
                         className={columnStyles[columnKey]}
                       >
                         {columnKey === "name" ? (
-                          <Link href="/" className="cursor-pointer">
+                          <Link
+                            href={`/coin/${(row.original as Coin).id}`}
+                            className="cursor-pointer"
+                          >
                             {content}
                           </Link>
                         ) : (

@@ -15,15 +15,6 @@ export default function Trending() {
     return <div>Error: {error}</div>;
   }
 
-  /* const coins = [
-    {
-      id: "bitcoin",
-      name: "Bitcoin",
-      current_price: 1,
-      image: "/bitcoin.png",
-    },
-  ]; */
-
   return (
     <ThreeCoins
       coins={coins}
