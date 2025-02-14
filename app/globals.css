@@ -95,6 +95,10 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .gradient-brand {
+    @apply bg-gradient-to-r from-foreground to-foreground bg-clip-text text-transparent drop-shadow-[2px_1px_24px_hsla(var(--brand-foreground))] transition-all duration-300 dark:to-brand;
+  }
 }
 
 @layer components {
