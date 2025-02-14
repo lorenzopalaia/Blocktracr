@@ -1,14 +1,18 @@
 import { useEffect } from "react";
-import { useCoinStore } from "../stores/useCoinStore";
+import { useCoinStore, useCurrentCoin } from "../stores/useCoinStore";
 
 export const useCoinData = (id: string) => {
-  const { coin, loading, error, fetchCoin } = useCoinStore();
+  const { loading, error, fetchCoin, resetCurrentCoin } = useCoinStore();
+  const coin = useCurrentCoin();
 
   useEffect(() => {
-    if (!coin && !loading && !error) {
-      fetchCoin(id);
-    }
-  }, [coin, loading, error, fetchCoin, id]);
+    fetchCoin(id);
+
+    // Reset quando il componente viene smontato
+    return () => {
+      resetCurrentCoin();
+    };
+  }, [id, fetchCoin, resetCurrentCoin]);
 
   return { coin, loading, error };
 };

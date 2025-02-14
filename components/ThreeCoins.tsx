@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Section } from "@/components/ui/section";
 
@@ -30,9 +31,10 @@ export default function ThreeCoins({
           </div>
           <div className="flex justify-center gap-4 sm:gap-16">
             {coins.slice(0, 3).map((coin) => (
-              <div
+              <Link
                 key={coin.id}
-                className="flex flex-col items-center space-x-2"
+                href={`/coin/${coin.id}`}
+                className="flex flex-col items-center gap-2"
               >
                 <Image
                   src={coin.image}
@@ -46,7 +48,7 @@ export default function ThreeCoins({
                 <span className="text-md from-foreground to-foreground dark:to-brand bg-linear-to-r bg-clip-text font-bold text-transparent sm:text-lg">
                   ${coin.current_price.toLocaleString()}
                 </span>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

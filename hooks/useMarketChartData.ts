@@ -1,14 +1,22 @@
 import { useEffect } from "react";
-import { useMarketChartStore } from "../stores/useMarketChartStore";
+import {
+  useMarketChartStore,
+  useCurrentMarketChart,
+} from "../stores/useMarketChartStore";
 
 export const useMarketChartData = (id: string) => {
-  const { data, loading, error, fetchMarketChart } = useMarketChartStore();
+  const { loading, error, fetchMarketChart, resetCurrentChart } =
+    useMarketChartStore();
+  const data = useCurrentMarketChart();
 
   useEffect(() => {
-    if (!data && !loading && !error) {
-      fetchMarketChart(id);
-    }
-  }, [data, loading, error, fetchMarketChart, id]);
+    fetchMarketChart(id);
+
+    // Reset quando il componente viene smontato
+    return () => {
+      resetCurrentChart();
+    };
+  }, [id, fetchMarketChart, resetCurrentChart]);
 
   return { data, loading, error };
 };
