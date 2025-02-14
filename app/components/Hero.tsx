@@ -1,14 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ArrowRightIcon } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { Mockup, MockupFrame } from "@/components/ui/mockup";
 import Glow from "@/components/ui/glow";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import Github from "@/components/logos/github";
+import { AnimatedGradientText } from "@/components/magicui/animated-gradient-text";
+import { ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 export default function Hero() {
@@ -17,13 +18,13 @@ export default function Hero() {
 
   switch (resolvedTheme) {
     case "light":
-      src = "/app-light.png";
+      src = "/images/app-light.png";
       break;
     case "dark":
-      src = "/app-dark.png";
+      src = "/images/app-dark.png";
       break;
     default:
-      src = "/app-dark.png";
+      src = "/images/app-dark.png";
       break;
   }
 
@@ -31,16 +32,25 @@ export default function Hero() {
     <Section className="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0">
       <div className="mx-auto flex max-w-container flex-col gap-12 pt-16 sm:gap-24">
         <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
-          <Badge variant="outline" className="animate-appear">
-            <span className="text-muted-foreground">
-              Experience live crypto tracking!
-            </span>
-            <Link href="/" className="flex items-center gap-1">
-              Get started
-              <ArrowRightIcon className="h-3 w-3" />
-            </Link>
-          </Badge>
-          <h1 className="relative z-10 inline-block animate-appear bg-gradient-to-r from-foreground to-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight dark:to-muted-foreground">
+          <Link
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-pointer"
+          >
+            <AnimatedGradientText>
+              🚀 <hr className="mx-2 h-4 w-px shrink-0 bg-gray-300" />{" "}
+              <span
+                className={cn(
+                  `inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`,
+                )}
+              >
+                Experience live crypto tracking!
+              </span>
+              <ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+            </AnimatedGradientText>
+          </Link>
+          <h1 className="relative z-10 inline-block animate-appear bg-gradient-to-r from-foreground to-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl dark:to-muted-foreground sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight">
             Take Control of Your Crypto Journey
           </h1>
           <p className="text-md relative z-10 max-w-[550px] animate-appear font-medium text-muted-foreground opacity-0 delay-100 sm:text-xl">

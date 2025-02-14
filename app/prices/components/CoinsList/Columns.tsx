@@ -50,7 +50,7 @@ export const columns: ColumnDef<Coin>[] = [
           height={24}
         />
         <span className="font-bold">{row.getValue("name")}</span>{" "}
-        <span className="text-muted-foreground uppercase">
+        <span className="uppercase text-muted-foreground">
           {row.original.symbol}
         </span>
       </div>
@@ -107,16 +107,16 @@ export const columns: ColumnDef<Coin>[] = [
       return (
         <div className="tabular-nums">
           ${volume.value}
-          <span className="text-muted-foreground text-sm">{volume.unit}</span>
+          <span className="text-sm text-muted-foreground">{volume.unit}</span>
         </div>
       );
     },
     sortingFn: (rowA, rowB) => {
       const valueA = parseFloat(
-        rowA.original.total_volume.value.replace(/,/g, "")
+        rowA.original.total_volume.value.replace(/,/g, ""),
       );
       const valueB = parseFloat(
-        rowB.original.total_volume.value.replace(/,/g, "")
+        rowB.original.total_volume.value.replace(/,/g, ""),
       );
       return valueA - valueB;
     },
@@ -137,7 +137,7 @@ export const columns: ColumnDef<Coin>[] = [
       return (
         <div className="tabular-nums">
           ${marketCap.value}
-          <span className="text-muted-foreground text-sm">
+          <span className="text-sm text-muted-foreground">
             {marketCap.unit}
           </span>
         </div>
@@ -145,10 +145,10 @@ export const columns: ColumnDef<Coin>[] = [
     },
     sortingFn: (rowA, rowB) => {
       const valueA = parseFloat(
-        rowA.original.market_cap.value.replace(/,/g, "")
+        rowA.original.market_cap.value.replace(/,/g, ""),
       );
       const valueB = parseFloat(
-        rowB.original.market_cap.value.replace(/,/g, "")
+        rowB.original.market_cap.value.replace(/,/g, ""),
       );
       return valueA - valueB;
     },

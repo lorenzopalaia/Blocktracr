@@ -1,9 +1,9 @@
 "use client";
 
-import { useGlobalMarketDataData } from "../hooks/useGlobalMarketDataData";
-import Stats from "./Stats";
+import { useGlobalMarketDataData } from "@/hooks/useGlobalMarketDataData";
+import Stats from "@/components/Stats";
 
-import { formatNumber } from "../utils/price";
+import { formatNumber } from "@/utils/price";
 
 export default function GlobalMarketDataStats() {
   const { data, loading, error } = useGlobalMarketDataData();

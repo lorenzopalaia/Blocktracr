@@ -1,8 +1,8 @@
 "use client";
 
-import { useTrendingData } from "../hooks/useTrendingData";
+import { useTrendingData } from "@/hooks/useTrendingData";
 
-import ThreeCoins from "./ThreeCoins";
+import ThreeCoins from "@/components/ThreeCoins";
 
 export default function Trending() {
   const { coins, loading, error } = useTrendingData();

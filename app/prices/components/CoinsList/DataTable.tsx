@@ -92,7 +92,7 @@ export function DataTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
                   );
@@ -113,7 +113,7 @@ export function DataTable<TData, TValue>({
                       .id as keyof typeof columnStyles;
                     const content = flexRender(
                       cell.column.columnDef.cell,
-                      cell.getContext()
+                      cell.getContext(),
                     );
 
                     return (

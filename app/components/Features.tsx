@@ -7,7 +7,7 @@ import { AnimatedBeam } from "@/components/magicui/animated-beam";
 
 import { Section } from "@/components/ui/section";
 
-import { useCryptoListData } from "../hooks/useCryptoListData";
+import { useCryptoListData } from "@/hooks/useCryptoListData";
 
 import Image from "next/image";
 
@@ -20,7 +20,7 @@ const Circle = forwardRef<
       ref={ref}
       className={cn(
         "z-10 flex size-12 items-center justify-center rounded-full border-2 bg-white p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
-        className
+        className,
       )}
     >
       {children}
@@ -69,13 +69,17 @@ export default function Features() {
             </p>
           </div>
           <div
-            className="relative flex h-[300px] w-full items-center justify-center overflow-hidden"
+            className="relative flex h-[400px] w-full items-center justify-center overflow-hidden px-6"
             ref={containerRef}
           >
             <div className="flex size-full max-h-[200px] max-w-lg flex-col items-stretch justify-between gap-10">
               <div className="flex flex-row items-center justify-between">
                 {top6.slice(0, 2).map((coin, index) => (
-                  <Circle ref={index === 0 ? div1Ref : div5Ref} key={coin.id}>
+                  <Circle
+                    className="drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))] dark:bg-muted-foreground/50"
+                    ref={index === 0 ? div1Ref : div5Ref}
+                    key={coin.id}
+                  >
                     <Image
                       src={coin.image}
                       alt={coin.name}
@@ -86,7 +90,10 @@ export default function Features() {
                 ))}
               </div>
               <div className="flex flex-row items-center justify-between">
-                <Circle ref={div2Ref}>
+                <Circle
+                  className="drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))] dark:bg-muted-foreground/50"
+                  ref={div2Ref}
+                >
                   <Image
                     src={top6[2].image}
                     alt={top6[2].name}
@@ -94,7 +101,10 @@ export default function Features() {
                     height={32}
                   />
                 </Circle>
-                <Circle ref={div4Ref} className="size-16">
+                <Circle
+                  className="size-16 drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))] dark:bg-muted-foreground/50"
+                  ref={div4Ref}
+                >
                   <Image
                     src="/images/logo.png"
                     alt="Logo"
@@ -102,7 +112,10 @@ export default function Features() {
                     height={32}
                   />
                 </Circle>
-                <Circle ref={div6Ref}>
+                <Circle
+                  className="drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))] dark:bg-muted-foreground/50"
+                  ref={div6Ref}
+                >
                   <Image
                     src={top6[3].image}
                     alt={top6[3].name}
@@ -113,7 +126,11 @@ export default function Features() {
               </div>
               <div className="flex flex-row items-center justify-between">
                 {top6.slice(4, 6).map((coin, index) => (
-                  <Circle ref={index === 0 ? div3Ref : div7Ref} key={coin.id}>
+                  <Circle
+                    className="drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))] dark:bg-muted-foreground/50"
+                    ref={index === 0 ? div3Ref : div7Ref}
+                    key={coin.id}
+                  >
                     <Image
                       src={coin.image}
                       alt={coin.name}

@@ -15,7 +15,7 @@ export default function Stats({ items }: StatsProps) {
   return (
     <Section>
       <div className="container mx-auto">
-        <div className="flex flex-wrap justify-center gap-12 max-w-4xl mx-auto">
+        <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-12">
           {items.map((item, index) => (
             <div
               key={index}
@@ -25,7 +25,7 @@ export default function Stats({ items }: StatsProps) {
                 {item.title}
               </div>
               <div className="flex items-baseline gap-2">
-                <div className="bg-gradient-to-r from-foreground to-foreground bg-clip-text text-4xl font-medium text-transparent drop-shadow-[2px_1px_24px_hsla(var(--brand-foreground))] transition-all duration-300 sm:text-5xl md:text-6xl dark:to-brand">
+                <div className="bg-gradient-to-r from-foreground to-foreground bg-clip-text text-4xl font-medium text-transparent drop-shadow-[2px_1px_24px_hsla(var(--brand-foreground))] transition-all duration-300 dark:to-brand sm:text-5xl md:text-6xl">
                   {item.value}
                 </div>
                 {item.unit && (

@@ -1,7 +1,7 @@
 // import { Section } from "@/components/ui/section";
-import CoinsList from "@/components/Table/CoinsList";
-import GlobalMarketDataStats from "@/components/GlobalMarketDataStats";
-import Trending from "@/components/Trending";
+import CoinsList from "@/app/prices/components/CoinsList";
+import GlobalMarketDataStats from "@/app/prices/components/GlobalMarketDataStats";
+import Trending from "@/app/prices/components/Trending";
 
 export default function Prices() {
   return (
@@ -12,8 +12,8 @@ export default function Prices() {
         </div>
       </Section> */}
       <GlobalMarketDataStats />
-      <Trending />
       <CoinsList />
+      <Trending />
     </main>
   );
 }

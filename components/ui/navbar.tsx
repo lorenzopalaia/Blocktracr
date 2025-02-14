@@ -8,7 +8,7 @@ const Navbar = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
       {...props}
       ref={ref}
     />
-  )
+  ),
 );
 Navbar.displayName = "Navbar";
 
@@ -17,7 +17,7 @@ const NavbarLeft = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <nav
-    className={cn("flex items-center gap-4 justify-start", className)}
+    className={cn("flex items-center justify-start gap-4", className)}
     {...props}
     ref={ref}
   />
@@ -29,7 +29,7 @@ const NavbarRight = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <nav
-    className={cn("flex items-center gap-4 justify-end", className)}
+    className={cn("flex items-center justify-end gap-4", className)}
     {...props}
     ref={ref}
   />
@@ -41,7 +41,7 @@ const NavbarCenter = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <nav
-    className={cn("flex items-center gap-4 justify-center", className)}
+    className={cn("flex items-center justify-center gap-4", className)}
     {...props}
     ref={ref}
   />

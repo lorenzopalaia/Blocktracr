@@ -3,8 +3,8 @@
 import { useCryptoListData } from "@/hooks/useCryptoListData";
 import { formatNumber } from "@/utils/price";
 import { Section } from "@/components/ui/section";
-import { columns } from "./Columns";
-import { DataTable } from "./DataTable";
+import { columns } from "./CoinsList/Columns";
+import { DataTable } from "./CoinsList/DataTable";
 
 export default function CoinsList() {
   const { coins, loading, error } = useCryptoListData();

@@ -9,7 +9,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import LaunchUI from "@/components/logos/launch-ui";
 import Link from "next/link";
-import ThemeToggle from "@/components/ThemeToggle";
+import ThemeToggle from "@/app/components/Layout/ThemeToggle";
 
 export default function Navbar() {
   return (

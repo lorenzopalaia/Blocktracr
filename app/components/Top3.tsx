@@ -1,8 +1,8 @@
 "use client";
 
-import { useCryptoListData } from "../hooks/useCryptoListData";
+import { useCryptoListData } from "@/hooks/useCryptoListData";
 
-import ThreeCoins from "./ThreeCoins";
+import ThreeCoins from "@/components/ThreeCoins";
 
 export default function Top3() {
   const { coins, loading, error } = useCryptoListData();

@@ -18,11 +18,11 @@ export default function CoinBar() {
   return (
     <div className="sticky top-0 py-2">
       <div className="relative flex">
-        <div className="flex animate-marquee-infinite min-w-full">
+        <div className="animate-marquee-infinite flex min-w-full">
           {coins.map((coin, index) => (
             <div
               key={`${coin.id}-${index}`}
-              className="flex items-center gap-2 mx-4 shrink-0"
+              className="mx-4 flex shrink-0 items-center gap-2"
             >
               <Image
                 src={coin.image}

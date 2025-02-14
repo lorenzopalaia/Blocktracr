@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   if (!id) {
     return NextResponse.json(
       { error: "Missing id parameter" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 

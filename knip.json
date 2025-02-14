@@ -1,0 +1,24 @@
+{
+  "$schema": "https://unpkg.com/knip@5.44.1/schema.json",
+  "next": {
+    "entry": [
+      "next.config.{js,ts,cjs,mjs}",
+      "{instrumentation,middleware}.{js,ts}",
+      "app/global-error.{js,jsx,ts,tsx}",
+      "app/**/{error,layout,loading,not-found,page,template,default}.{js,jsx,ts,tsx}",
+      "app/**/route.{js,jsx,ts,tsx}",
+      "app/{manifest,sitemap,robots}.{js,ts}",
+      "app/**/{icon,apple-icon}.{js,jsx,ts,tsx}",
+      "app/**/{opengraph,twitter}-image.{js,jsx,ts,tsx}"
+    ]
+  },
+  "project": [
+    "app/**/*.{js,jsx,ts,tsx}",
+    "components/**/*.{js,jsx,ts,tsx}",
+    "hooks/**/*.{js,jsx,ts,tsx}",
+    "lib/**/*.{js,jsx,ts,tsx}",
+    "stores/**/*.{js,jsx,ts,tsx}",
+    "types/**/*.{js,jsx,ts,tsx}",
+    "utils/**/*.{js,jsx,ts,tsx}"
+  ]
+}

@@ -49,7 +49,7 @@ export const useTrendingStore = create<TrendingStoreState>((set) => ({
           name: cat.name,
           marketCap: cat.data.market_cap,
           marketCapChange24h: cat.data.market_cap_change_percentage_24h.usd,
-        })
+        }),
       );
 
       set({ coins, nfts, categories, loading: false });

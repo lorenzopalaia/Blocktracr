@@ -131,10 +131,7 @@ export default function FAQ() {
               </p>
               <p className="mb-4 max-w-[580px] text-muted-foreground">
                 If this interests you, don&apos;t hesitate to{" "}
-                <Link
-                  href="/"
-                  className="text-foreground underline"
-                >
+                <Link href="/" className="text-foreground underline">
                   reach out by email
                 </Link>
                 .

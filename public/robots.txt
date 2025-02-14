@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.blocktracr.lorenzopalaia.it
+
+# Sitemaps
+Sitemap: https://www.blocktracr.lorenzopalaia.it/sitemap.xml

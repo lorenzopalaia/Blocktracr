@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { Section } from "@/components/ui/section";
+
 interface Coin {
   id: string;
   name: string;
@@ -19,7 +21,7 @@ export default function ThreeCoins({
   subtitle,
 }: ThreeCoinsProps) {
   return (
-    <section>
+    <Section>
       <div className="mx-auto flex max-w-container flex-col items-center gap-8 text-center">
         <div className="flex flex-col items-center gap-6">
           <div>
@@ -38,10 +40,10 @@ export default function ThreeCoins({
                   width={32}
                   height={32}
                 />
-                <span className="font-bold text-xl sm:text-xl">
+                <span className="text-xl font-bold sm:text-xl">
                   {coin.name}
                 </span>
-                <span className="font-bold text-md sm:text-lg bg-gradient-to-r from-foreground to-foreground bg-clip-text text-transparent dark:to-brand">
+                <span className="text-md bg-gradient-to-r from-foreground to-foreground bg-clip-text font-bold text-transparent dark:to-brand sm:text-lg">
                   ${coin.current_price.toLocaleString()}
                 </span>
               </div>
@@ -49,6 +51,6 @@ export default function ThreeCoins({
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

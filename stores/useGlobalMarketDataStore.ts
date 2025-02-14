@@ -29,5 +29,5 @@ export const useGlobalMarketDataStore = create<GlobalMarketDataStoreState>(
         set({ error: message, loading: false });
       }
     },
-  })
+  }),
 );
