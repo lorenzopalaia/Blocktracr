@@ -4,19 +4,20 @@ import {
   useCurrentMarketChart,
 } from "../stores/useMarketChartStore";
 
-export const useMarketChartData = (id: string) => {
+type TimeRange = "1" | "7" | "30" | "90";
+
+export const useMarketChartData = (id: string, timeRange: TimeRange = "1") => {
   const { loading, error, fetchMarketChart, resetCurrentChart } =
     useMarketChartStore();
   const data = useCurrentMarketChart();
 
   useEffect(() => {
-    fetchMarketChart(id);
+    fetchMarketChart(id, timeRange);
 
-    // Reset quando il componente viene smontato
     return () => {
       resetCurrentChart();
     };
-  }, [id, fetchMarketChart, resetCurrentChart]);
+  }, [id, timeRange, fetchMarketChart, resetCurrentChart]);
 
   return { data, loading, error };
 };

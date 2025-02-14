@@ -1,12 +1,15 @@
 import { create } from "zustand";
 import { MarketChart } from "../types/market-chart";
 
+type TimeRange = "1" | "7" | "30" | "90";
+
 interface MarketChartStoreState {
-  charts: Record<string, MarketChart>; // Cache per ID
+  charts: Record<string, Record<TimeRange, MarketChart>>; // Cache per ID and timeRange
   currentId: string | null;
+  currentTimeRange: TimeRange | null;
   loading: boolean;
   error: string | null;
-  fetchMarketChart: (id: string) => Promise<void>;
+  fetchMarketChart: (id: string, timeRange: TimeRange) => Promise<void>;
   resetCurrentChart: () => void;
 }
 
@@ -14,22 +17,36 @@ export const useMarketChartStore = create<MarketChartStoreState>(
   (set, get) => ({
     charts: {},
     currentId: null,
+    currentTimeRange: null,
     loading: false,
     error: null,
-    fetchMarketChart: async (id: string) => {
-      // Se abbiamo già il chart in cache e non è in caricamento, usalo
-      if (get().charts[id] && !get().loading) {
-        set({ currentId: id, error: null });
+    fetchMarketChart: async (id: string, timeRange: TimeRange) => {
+      // Check if we have the chart in cache for this timeRange
+      if (get().charts[id]?.[timeRange] && !get().loading) {
+        set({ currentId: id, currentTimeRange: timeRange, error: null });
         return;
       }
 
-      set({ loading: true, error: null, currentId: id });
+      set({
+        loading: true,
+        error: null,
+        currentId: id,
+        currentTimeRange: timeRange,
+      });
       try {
-        const response = await fetch(`/api/market-chart?id=${id}`);
+        const response = await fetch(
+          `/api/market-chart?id=${id}&days=${timeRange}`,
+        );
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         set((state) => ({
-          charts: { ...state.charts, [id]: data },
+          charts: {
+            ...state.charts,
+            [id]: {
+              ...state.charts[id],
+              [timeRange]: data,
+            },
+          },
           loading: false,
         }));
       } catch (error) {
@@ -39,13 +56,15 @@ export const useMarketChartStore = create<MarketChartStoreState>(
       }
     },
     resetCurrentChart: () => {
-      set({ currentId: null });
+      set({ currentId: null, currentTimeRange: null });
     },
   }),
 );
 
-// Selector per ottenere il chart corrente
+// Selector to get the current chart
 export const useCurrentMarketChart = () => {
-  const { charts, currentId } = useMarketChartStore();
-  return currentId ? charts[currentId] : null;
+  const { charts, currentId, currentTimeRange } = useMarketChartStore();
+  return currentId && currentTimeRange
+    ? charts[currentId]?.[currentTimeRange]
+    : null;
 };

@@ -25,5 +25,10 @@
     "components/ui/**/*.{js,jsx,ts,tsx}",
     "components/magicui/**/*.{js,jsx,ts,tsx}"
   ],
-  "ignoreDependencies": ["eslint", "eslint-config-next", "postcss-load-config"]
+  "ignoreDependencies": [
+    "eslint",
+    "eslint-config-next",
+    "tailwindcss",
+    "tailwindcss-animate"
+  ]
 }
