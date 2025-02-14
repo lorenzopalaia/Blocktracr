@@ -19,8 +19,8 @@ import { Section } from "@/components/ui/section";
 export default function Items() {
   return (
     <Section>
-      <div className="mx-auto flex max-w-container flex-col items-center gap-6 sm:gap-20">
-        <h2 className="max-w-[560px] text-center text-3xl font-semibold leading-tight sm:text-5xl sm:leading-tight">
+      <div className="max-w-container mx-auto flex flex-col items-center gap-6 sm:gap-20">
+        <h2 className="max-w-[560px] text-center text-3xl leading-tight font-semibold sm:text-5xl sm:leading-tight">
           Empower Your Crypto Journey with Live, Actionable Insights
         </h2>
         <div className="grid auto-rows-fr grid-cols-2 gap-0 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">

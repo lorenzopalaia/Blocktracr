@@ -50,7 +50,7 @@ export const columns: ColumnDef<Coin>[] = [
           height={24}
         />
         <span className="font-bold">{row.getValue("name")}</span>{" "}
-        <span className="uppercase text-muted-foreground">
+        <span className="text-muted-foreground uppercase">
           {row.original.symbol}
         </span>
       </div>
@@ -107,7 +107,7 @@ export const columns: ColumnDef<Coin>[] = [
       return (
         <div className="tabular-nums">
           ${volume.value}
-          <span className="text-sm text-muted-foreground">{volume.unit}</span>
+          <span className="text-muted-foreground text-sm">{volume.unit}</span>
         </div>
       );
     },
@@ -137,7 +137,7 @@ export const columns: ColumnDef<Coin>[] = [
       return (
         <div className="tabular-nums">
           ${marketCap.value}
-          <span className="text-sm text-muted-foreground">
+          <span className="text-muted-foreground text-sm">
             {marketCap.unit}
           </span>
         </div>

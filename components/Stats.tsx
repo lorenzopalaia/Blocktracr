@@ -21,20 +21,20 @@ export default function Stats({ items }: StatsProps) {
               key={index}
               className="flex flex-col items-start gap-3 text-left"
             >
-              <div className="text-sm font-semibold text-muted-foreground">
+              <div className="text-muted-foreground text-sm font-semibold">
                 {item.title}
               </div>
               <div className="flex items-baseline gap-2">
-                <div className="bg-gradient-to-r from-foreground to-foreground bg-clip-text text-4xl font-medium text-transparent drop-shadow-[2px_1px_24px_hsla(var(--brand-foreground))] transition-all duration-300 dark:to-brand sm:text-5xl md:text-6xl">
+                <div className="from-foreground to-foreground dark:to-brand bg-linear-to-r bg-clip-text text-4xl font-medium text-transparent drop-shadow-[2px_1px_24px_hsla(var(--brand-foreground))] transition-all duration-300 sm:text-5xl md:text-6xl">
                   {item.value}
                 </div>
                 {item.unit && (
-                  <div className="text-2xl font-semibold text-brand">
+                  <div className="text-brand text-2xl font-semibold">
                     {item.unit}
                   </div>
                 )}
               </div>
-              <div className="text-pretty text-sm font-semibold text-muted-foreground">
+              <div className="text-muted-foreground text-sm font-semibold text-pretty">
                 {item.text}
               </div>
             </div>

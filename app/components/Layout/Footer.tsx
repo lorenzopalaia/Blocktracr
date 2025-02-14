@@ -10,8 +10,8 @@ import Github from "@/components/logos/github";
 
 export default function FooterSection() {
   return (
-    <footer className="w-full bg-background px-4">
-      <div className="mx-auto max-w-container">
+    <footer className="bg-background w-full px-4">
+      <div className="max-w-container mx-auto">
         <Footer className="border-t pt-8">
           <FooterContent className="sm:grid-cols-2 md:grid-cols-3">
             <FooterColumn className="col-span-2 flex-row items-center justify-between gap-8 border-b pb-8 md:col-span-1 md:flex-col md:items-start md:justify-start md:border-b-0">
@@ -28,28 +28,28 @@ export default function FooterSection() {
             </FooterColumn>
             <FooterColumn>
               <h3 className="text-md pt-1 font-semibold">Product</h3>
-              <Link href="#" className="text-sm text-muted-foreground">
+              <Link href="#" className="text-muted-foreground text-sm">
                 Documentation
               </Link>
             </FooterColumn>
             <FooterColumn>
               <h3 className="text-md pt-1 font-semibold">Contact</h3>
-              <Link href="#" className="text-sm text-muted-foreground">
+              <Link href="#" className="text-muted-foreground text-sm">
                 Email
               </Link>
-              <Link href="/" className="text-sm text-muted-foreground">
+              <Link href="/" className="text-muted-foreground text-sm">
                 Github
               </Link>
             </FooterColumn>
             <FooterColumn>
               <h3 className="text-md pt-1 font-semibold">Legal</h3>
-              <Link href="#" className="text-sm text-muted-foreground">
+              <Link href="#" className="text-muted-foreground text-sm">
                 Privacy Policy
               </Link>
-              <Link href="#" className="text-sm text-muted-foreground">
+              <Link href="#" className="text-muted-foreground text-sm">
                 Terms of Service
               </Link>
-              <Link href="#" className="text-sm text-muted-foreground">
+              <Link href="#" className="text-muted-foreground text-sm">
                 Cookie Policy
               </Link>
             </FooterColumn>

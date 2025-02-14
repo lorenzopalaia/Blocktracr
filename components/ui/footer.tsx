@@ -7,7 +7,7 @@ const Footer = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("bg-background pb-4 pt-12 text-foreground", className)}
+    className={cn("bg-background text-foreground pt-12 pb-4", className)}
     {...props}
   />
 ));
@@ -43,7 +43,7 @@ const FooterBottom = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "mt-8 flex flex-col items-center justify-between gap-4 border-t pt-4 text-xs text-muted-foreground sm:flex-row",
+      "text-muted-foreground mt-8 flex flex-col items-center justify-between gap-4 border-t pt-4 text-xs sm:flex-row",
       className,
     )}
     {...props}

@@ -37,7 +37,7 @@ export default function CoinChart({ id }: { id: string }) {
 
   return (
     <Section>
-      <div className="mx-auto flex max-w-container flex-col gap-12 pt-16 sm:gap-24">
+      <div className="max-w-container mx-auto flex flex-col gap-12 pt-16 sm:gap-24">
         <ChartContainer
           config={{
             price: {

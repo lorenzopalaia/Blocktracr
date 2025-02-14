@@ -22,7 +22,7 @@ export default function ThreeCoins({
 }: ThreeCoinsProps) {
   return (
     <Section>
-      <div className="mx-auto flex max-w-container flex-col items-center gap-8 text-center">
+      <div className="max-w-container mx-auto flex flex-col items-center gap-8 text-center">
         <div className="flex flex-col items-center gap-6">
           <div>
             <p className="text-md font-semibold sm:text-2xl">{title}</p>
@@ -43,7 +43,7 @@ export default function ThreeCoins({
                 <span className="text-xl font-bold sm:text-xl">
                   {coin.name}
                 </span>
-                <span className="text-md bg-gradient-to-r from-foreground to-foreground bg-clip-text font-bold text-transparent dark:to-brand sm:text-lg">
+                <span className="text-md from-foreground to-foreground dark:to-brand bg-linear-to-r bg-clip-text font-bold text-transparent sm:text-lg">
                   ${coin.current_price.toLocaleString()}
                 </span>
               </div>

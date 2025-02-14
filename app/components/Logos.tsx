@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 export default function Logos() {
   return (
     <Section>
-      <div className="mx-auto flex max-w-container flex-col items-center gap-8 text-center">
+      <div className="max-w-container mx-auto flex flex-col items-center gap-8 text-center">
         <div className="flex flex-col items-center gap-6">
           <Badge variant="outline" className="border-brand/30 text-brand">
             Last updated: Feb 12, 2025

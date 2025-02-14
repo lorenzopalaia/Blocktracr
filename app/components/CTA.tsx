@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function CTA() {
   return (
     <Section className="relative w-full overflow-hidden">
-      <div className="relative z-10 mx-auto flex max-w-container flex-col items-center gap-6 text-center sm:gap-10">
+      <div className="max-w-container relative z-10 mx-auto flex flex-col items-center gap-6 text-center sm:gap-10">
         <h2 className="text-3xl font-semibold sm:text-5xl">
           Unlock Your Crypto Potential
         </h2>
@@ -20,13 +20,13 @@ export default function CTA() {
             <Input
               type="email"
               placeholder="Enter your email"
-              className="grow border-brand/20 bg-foreground/10"
+              className="border-brand/20 bg-foreground/10 grow"
             />
             <Button variant="default" size="lg" asChild>
               <Link href="/">Get Started</Link>
             </Button>
           </div>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             Dive into real-time insights—no credit card required.
           </p>
         </div>

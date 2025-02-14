@@ -22,7 +22,7 @@ export default function CoinData({ id }: { id: string }) {
 
   return (
     <Section>
-      <div className="mx-auto flex max-w-container flex-col gap-12 pt-16 sm:gap-24">
+      <div className="max-w-container mx-auto flex flex-col gap-12 pt-16 sm:gap-24">
         <div className="flex flex-col gap-6 sm:gap-12">
           <div className="flex gap-8">
             <div className="w-1/2 space-y-2">
@@ -35,7 +35,7 @@ export default function CoinData({ id }: { id: string }) {
                 />
                 <div className="flex items-end gap-2">
                   <h1 className="text-4xl font-bold">{coin.name}</h1>
-                  <p className="text-xl text-muted-foreground">
+                  <p className="text-muted-foreground text-xl">
                     {coin.symbol.toUpperCase()}
                   </p>
                 </div>

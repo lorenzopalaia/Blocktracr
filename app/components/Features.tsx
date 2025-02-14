@@ -58,7 +58,7 @@ export default function Features() {
 
   return (
     <Section>
-      <div className="mx-auto flex max-w-container flex-col items-center gap-8 text-center">
+      <div className="max-w-container mx-auto flex flex-col items-center gap-8 text-center">
         <div className="flex flex-col items-center gap-6">
           <div>
             <p className="text-md font-semibold sm:text-2xl">
@@ -76,7 +76,7 @@ export default function Features() {
               <div className="flex flex-row items-center justify-between">
                 {top6.slice(0, 2).map((coin, index) => (
                   <Circle
-                    className="drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))] dark:bg-muted-foreground/50"
+                    className="dark:bg-muted-foreground/50 drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))]"
                     ref={index === 0 ? div1Ref : div5Ref}
                     key={coin.id}
                   >
@@ -91,7 +91,7 @@ export default function Features() {
               </div>
               <div className="flex flex-row items-center justify-between">
                 <Circle
-                  className="drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))] dark:bg-muted-foreground/50"
+                  className="dark:bg-muted-foreground/50 drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))]"
                   ref={div2Ref}
                 >
                   <Image
@@ -102,7 +102,7 @@ export default function Features() {
                   />
                 </Circle>
                 <Circle
-                  className="size-16 drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))] dark:bg-muted-foreground/50"
+                  className="dark:bg-muted-foreground/50 size-16 drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))]"
                   ref={div4Ref}
                 >
                   <Image
@@ -113,7 +113,7 @@ export default function Features() {
                   />
                 </Circle>
                 <Circle
-                  className="drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))] dark:bg-muted-foreground/50"
+                  className="dark:bg-muted-foreground/50 drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))]"
                   ref={div6Ref}
                 >
                   <Image
@@ -127,7 +127,7 @@ export default function Features() {
               <div className="flex flex-row items-center justify-between">
                 {top6.slice(4, 6).map((coin, index) => (
                   <Circle
-                    className="drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))] dark:bg-muted-foreground/50"
+                    className="dark:bg-muted-foreground/50 drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))]"
                     ref={index === 0 ? div3Ref : div7Ref}
                     key={coin.id}
                   >
