@@ -1,6 +1,6 @@
 import { Section } from "@/components/ui/section";
 
-export interface StatItem {
+interface StatItem {
   title: string;
   value: string | number;
   unit?: string;

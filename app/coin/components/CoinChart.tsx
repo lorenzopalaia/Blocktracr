@@ -1,6 +1,5 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import {
   ChartContainer,
   ChartTooltipContent,
@@ -8,7 +7,14 @@ import {
 } from "@/components/ui/chart";
 import { Section } from "@/components/ui/section";
 
-import { AreaChart, Area, CartesianGrid, XAxis, YAxis } from "recharts";
+import {
+  Area,
+  Bar,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+  ComposedChart,
+} from "recharts";
 
 import { useMarketChartData } from "@/hooks/useMarketChartData";
 
@@ -23,73 +29,121 @@ export default function CoinChart({ id }: { id: string }) {
     return <div>Error: {error}</div>;
   }
 
+  const combinedData = data.prices.map(([timestamp, price], index) => ({
+    date: new Date(timestamp).toLocaleDateString(),
+    price: price,
+    volume: data.total_volumes[index][1],
+  }));
+
   return (
     <Section>
       <div className="mx-auto flex max-w-container flex-col gap-12 pt-16 sm:gap-24">
-        <Card>
-          <CardContent>
-            <ChartContainer
-              config={{
-                price: {
-                  label: "Price",
-                  color: "hsl(var(--primary))",
-                },
+        <ChartContainer
+          config={{
+            price: {
+              label: "Price",
+              color: "hsl(var(--primary))",
+            },
+            volume: {
+              label: "Volume",
+              color: "hsl(var(--secondary))",
+            },
+          }}
+        >
+          <ResponsiveContainer width="100%" height={400}>
+            <ComposedChart
+              data={combinedData}
+              margin={{
+                top: 20,
+                right: 20,
+                bottom: 20,
+                left: 20,
               }}
             >
-              <AreaChart
-                data={data.prices.map(([timestamp, price]) => ({
-                  date: new Date(timestamp).toLocaleDateString(),
-                  price: price,
-                }))}
-                margin={{
-                  left: 12,
-                  right: 12,
-                }}
-              >
-                <CartesianGrid vertical={false} />
-                <XAxis
-                  dataKey="date"
-                  tickLine={false}
-                  axisLine={false}
-                  tickMargin={8}
-                />
-                <YAxis
-                  tickLine={false}
-                  axisLine={false}
-                  tickMargin={-8}
-                  tickFormatter={(value) => `$${value.toLocaleString()}`}
-                  domain={["dataMin", "dataMax"]}
-                />
-                <ChartTooltip
-                  cursor={false}
-                  content={<ChartTooltipContent />}
-                />
-                <defs>
-                  <linearGradient id="fillPrice" x1="0" y1="0" x2="0" y2="1">
-                    <stop
-                      offset="5%"
-                      stopColor="hsl(var(--primary))"
-                      stopOpacity={0.8}
-                    />
-                    <stop
-                      offset="95%"
-                      stopColor="hsl(var(--primary))"
-                      stopOpacity={0.1}
-                    />
-                  </linearGradient>
-                </defs>
-                <Area
-                  dataKey="price"
-                  type="natural"
-                  fill="url(#fillPrice)"
-                  fillOpacity={0.4}
-                  stroke="hsl(var(--primary))"
-                />
-              </AreaChart>
-            </ChartContainer>
-          </CardContent>
-        </Card>
+              <XAxis
+                dataKey="date"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+              />
+              <YAxis
+                yAxisId="left"
+                orientation="left"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                tickFormatter={(value) => `$${(value / 1e9).toFixed(2)}B`}
+                domain={[0, "dataMax"]}
+              />
+              <YAxis
+                yAxisId="right"
+                orientation="right"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                tickFormatter={(value) => `$${value.toLocaleString()}`}
+                domain={["dataMin", "dataMax"]}
+              />
+              <ChartTooltip
+                cursor={false}
+                content={
+                  <ChartTooltipContent
+                    valueFormatter={(value, name) =>
+                      name === "volume"
+                        ? `$${(value / 1e9).toFixed(2)}B`
+                        : `$${value.toLocaleString()}`
+                    }
+                  />
+                }
+              />
+              <defs>
+                <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="hsl(var(--primary))"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="hsl(var(--primary))"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+              </defs>
+              <Area
+                type="monotone"
+                dataKey="price"
+                stroke="hsl(var(--primary))"
+                fillOpacity={1}
+                fill="url(#colorPrice)"
+                yAxisId="right"
+              />
+              <Bar
+                dataKey="volume"
+                yAxisId="left"
+                fill="hsl(var(--foreground))"
+                opacity={1}
+                shape={<VolumeBar />}
+                className="opacity-25"
+              />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </ChartContainer>
       </div>
     </Section>
   );
 }
+
+// Custom shape for volume bar
+const VolumeBar = (props: any) => {
+  const { x, y, width, height, fill } = props;
+  return (
+    <rect
+      x={x}
+      y={y + height * 0.9}
+      width={width}
+      height={height * 0.1}
+      fill={fill}
+    />
+  );
+};
