@@ -17,6 +17,7 @@
     "components/**/*.{js,jsx,ts,tsx}",
     "hooks/**/*.{js,jsx,ts,tsx}",
     "lib/**/*.{js,jsx,ts,tsx}",
+    "scripts/**/*.{mjs}",
     "stores/**/*.{js,jsx,ts,tsx}",
     "types/**/*.{js,jsx,ts,tsx}",
     "utils/**/*.{js,jsx,ts,tsx}"

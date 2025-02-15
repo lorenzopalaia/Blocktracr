@@ -49,7 +49,7 @@ export default function Navigation() {
                 Dive into your portfolio with a dynamic dashboard featuring
                 interactive charts and real-time updates.
               </ListItem>
-              <ListItem href="/" title="Sign in">
+              <ListItem href="/login" title="Sign in">
                 Sign in now to unlock an unparalleled crypto tracking experience
                 with intuitive insights.
               </ListItem>
