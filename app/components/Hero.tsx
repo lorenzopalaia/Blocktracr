@@ -63,7 +63,11 @@ export default function Hero() {
                 <Link href="/dashboard">Get Started</Link>
               </Button>
               <Button variant="glow" size="lg" asChild>
-                <Link href="https://github.com/lorenzopalaia/Blocktracr">
+                <Link
+                  href="https://github.com/lorenzopalaia/Blocktracr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Github className="mr-2 h-4 w-4" /> Github
                 </Link>
               </Button>

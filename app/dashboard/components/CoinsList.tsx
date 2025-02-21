@@ -6,6 +6,16 @@ interface CoinsListProps {
   values: { crypto: string; amount: number; usdtValue: number }[];
 }
 
+function formatAmount(amount: number) {
+  if (amount >= 1)
+    return amount.toFixed(Math.max(0, 1 - Math.floor(Math.log10(amount))));
+  if (amount > 0)
+    return amount.toFixed(
+      Math.min(8, Math.abs(Math.floor(Math.log10(amount))) + 1),
+    );
+  return "0";
+}
+
 export default function CoinsList({ values }: CoinsListProps) {
   return (
     <ul>
@@ -23,7 +33,7 @@ export default function CoinsList({ values }: CoinsListProps) {
               <div>
                 <div className="font-bold">{item.crypto}</div>
                 <div className="text-muted-foreground text-sm">
-                  {item.amount} {item.crypto}
+                  {formatAmount(item.amount)} {item.crypto}
                 </div>
               </div>
             </div>

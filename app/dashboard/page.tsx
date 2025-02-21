@@ -24,6 +24,8 @@ import ccxt from "ccxt";
 import PieChart from "./components/PieChart";
 import CoinsList from "./components/CoinsList";
 
+import { fetchAllBalances, fetchAllTrades } from "@/utils/exchange";
+
 export const metadata: Metadata = {
   title: "Dashboard",
   description: "Example dashboard app built using the components.",
@@ -52,69 +54,17 @@ export default async function DashboardPage() {
     secret: decrypt(userExchange.api_secret),
   });
 
-  const balance = await exchange.fetchBalance();
+  const {
+    totalValues,
+    // freeValues,
+    // usedValues,
+    totalBalance,
+    freeBalance,
+    usedBalance,
+  } = await fetchAllBalances(exchange);
 
-  const total = balance.total;
-  const free = balance.free;
-  const used = balance.used;
-
-  interface BalanceType {
-    [key: string]: number;
-  }
-
-  const calculateBalanceValues = async (balanceType: BalanceType) => {
-    return Promise.all(
-      Object.entries(balanceType)
-        .filter(([, amount]) => Number(amount) > 0)
-        .map(async ([crypto, amount]) => {
-          const numAmount = Number(amount);
-          if (crypto === "USDT")
-            return { crypto, amount: numAmount, usdtValue: numAmount };
-          const ticker = await exchange.fetchTicker(`${crypto}/USDT`);
-          return {
-            crypto,
-            amount: numAmount,
-            usdtValue: ticker.last * numAmount,
-          };
-        }),
-    ).then((values) => values.sort((a, b) => b.usdtValue - a.usdtValue));
-  };
-
-  const totalValues = await calculateBalanceValues(total);
-  const freeValues = await calculateBalanceValues(free);
-  const usedValues = await calculateBalanceValues(used);
-
-  const totalBalance = totalValues.reduce(
-    (sum, { usdtValue }) => sum + Number(usdtValue),
-    0,
-  );
-  const freeBalance = freeValues.reduce(
-    (sum, { usdtValue }) => sum + Number(usdtValue),
-    0,
-  );
-  const usedBalance = usedValues.reduce(
-    (sum, { usdtValue }) => sum + Number(usdtValue),
-    0,
-  );
-
-  /* const tickers = totalValues.map(({ crypto }) => `${crypto}`);
-
-  const trades = (
-    await Promise.all(
-      tickers
-        .filter((ticker) => ticker !== "USDT")
-        .map(async (crypto) => {
-          try {
-            const symbol = `${crypto}/USDT`;
-            const trades = await exchange.fetchMyTrades(symbol);
-            return trades;
-          } catch (error) {
-            console.error(`Error fetching trades for ${crypto}: ${error}`);
-            return [];
-          }
-        }),
-    )
-  ).flat(); */
+  // const tickers = totalValues.map(({ crypto }) => crypto);
+  // const trades = await fetchAllTrades(exchange, tickers);
 
   return (
     <Section>

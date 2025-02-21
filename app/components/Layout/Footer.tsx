@@ -24,6 +24,8 @@ export default function FooterSection() {
               <div className="ml-2.5 flex gap-4 sm:ml-0">
                 <Link
                   href="https://github.com/lorenzopalaia/Blocktracr"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-muted-foreground"
                 >
                   <span className="sr-only">GitHub</span>
@@ -47,6 +49,8 @@ export default function FooterSection() {
               </Link>
               <Link
                 href="https://github.com/lorenzopalaia/Blocktracr"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-muted-foreground text-sm"
               >
                 Github
