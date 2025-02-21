@@ -29,6 +29,7 @@ export const columns: ColumnDef<Coin>[] = [
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="cursor-pointer"
       >
         #
         <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -62,6 +63,7 @@ export const columns: ColumnDef<Coin>[] = [
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="cursor-pointer"
       >
         Price
         <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -77,6 +79,7 @@ export const columns: ColumnDef<Coin>[] = [
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="cursor-pointer"
       >
         24h%
         <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -97,6 +100,7 @@ export const columns: ColumnDef<Coin>[] = [
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="cursor-pointer"
       >
         Volume
         <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -127,6 +131,7 @@ export const columns: ColumnDef<Coin>[] = [
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="cursor-pointer"
       >
         Market Cap
         <ArrowUpDown className="ml-2 h-4 w-4" />

@@ -19,18 +19,20 @@ export default function Trending() {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-bold">Trending Now</h2>
-      <div className="space-y-2">
-        {coins.slice(0, 3).map((coin) => (
+      <div className="grid grid-cols-2 gap-4">
+        {coins.slice(0, 4).map((coin) => (
           <Link
             key={coin.id}
             href={`/coins/${coin.id}`}
-            className="flex items-center gap-2"
+            className="flex flex-col items-center drop-shadow-[2px_1px_24px_hsla(var(--brand-foreground))]"
           >
-            <Image src={coin.image} alt={coin.name} width={32} height={32} />
-            <span className="text-xl font-bold sm:text-xl">{coin.name}</span>
-            <span className="text-md from-foreground to-foreground dark:to-brand bg-linear-to-r bg-clip-text font-bold text-transparent sm:text-lg">
+            <span className="from-foreground to-foreground dark:to-brand bg-linear-to-r bg-clip-text text-4xl font-bold text-transparent">
               ${coin.current_price.toLocaleString()}
             </span>
+            <div className="flex items-center gap-2">
+              <Image src={coin.image} alt={coin.name} width={24} height={24} />
+              <span className="font-bold">{coin.name}</span>
+            </div>
           </Link>
         ))}
       </div>

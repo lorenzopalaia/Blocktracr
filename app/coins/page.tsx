@@ -9,11 +9,11 @@ export default function Coins() {
       <Section>
         <div className="max-w-container mx-auto flex flex-col gap-8">
           <h1 className="text-4xl font-bold">Cryptocurrency Prices</h1>
-          <div className="flex gap-8">
-            <div className="w-1/2">
+          <div className="flex flex-col gap-8 sm:flex-row">
+            <div className="w-full sm:w-1/2">
               <GlobalMarketDataStats />
             </div>
-            <div className="w-1/2">
+            <div className="w-full sm:w-1/2">
               <Trending />
             </div>
           </div>

@@ -33,7 +33,7 @@ interface DataTableProps<TData, TValue> {
 }
 
 const columnStyles = {
-  market_cap_rank: "text-right",
+  market_cap_rank: "text-left",
   name: "",
   current_price: "text-right",
   price_change_percentage_24h: "text-right hidden md:table-cell",

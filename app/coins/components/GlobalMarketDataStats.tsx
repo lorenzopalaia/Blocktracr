@@ -43,14 +43,18 @@ export default function GlobalMarketDataStats() {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-bold">Global Market Data</h2>
-      <div className="space-y-2">
+      <div className="grid grid-cols-2 gap-4">
         {stats.map((coin) => (
-          <div key={coin.title} className="flex items-center gap-2">
-            <span className="text-xl font-bold sm:text-xl">{coin.title}</span>
-            <span className="text-md from-foreground to-foreground dark:to-brand bg-linear-to-r bg-clip-text font-bold text-transparent sm:text-lg">
-              ${coin.value.toLocaleString()}
-              {coin.unit}
+          <div
+            key={coin.title}
+            className="flex flex-col items-center drop-shadow-[2px_1px_24px_hsla(var(--brand-foreground))]"
+          >
+            <span className="from-foreground to-foreground dark:to-brand bg-linear-to-r bg-clip-text text-4xl font-bold text-transparent">
+              {coin.unit === "%" ? "" : "$"}
+              {coin.value.toLocaleString()}
+              <span className="text-xl">{coin.unit}</span>
             </span>
+            <span className="font-bold">{coin.title}</span>
           </div>
         ))}
       </div>

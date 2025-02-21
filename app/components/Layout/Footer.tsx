@@ -22,7 +22,10 @@ export default function FooterSection() {
                 <h3 className="text-xl font-bold">Blocktracr</h3>
               </div>
               <div className="ml-2.5 flex gap-4 sm:ml-0">
-                <Link href="/" className="text-muted-foreground">
+                <Link
+                  href="https://github.com/lorenzopalaia/Blocktracr"
+                  className="text-muted-foreground"
+                >
                   <span className="sr-only">GitHub</span>
                   <Github className="h-5 w-5" />
                 </Link>
@@ -30,28 +33,34 @@ export default function FooterSection() {
             </FooterColumn>
             <FooterColumn>
               <h3 className="text-md pt-1 font-semibold">Product</h3>
-              <Link href="#" className="text-muted-foreground text-sm">
+              <Link href="/docs" className="text-muted-foreground text-sm">
                 Documentation
               </Link>
             </FooterColumn>
             <FooterColumn>
               <h3 className="text-md pt-1 font-semibold">Contact</h3>
-              <Link href="#" className="text-muted-foreground text-sm">
+              <Link
+                href="mailto:lorenzopalaia53@gmail.com"
+                className="text-muted-foreground text-sm"
+              >
                 Email
               </Link>
-              <Link href="/" className="text-muted-foreground text-sm">
+              <Link
+                href="https://github.com/lorenzopalaia/Blocktracr"
+                className="text-muted-foreground text-sm"
+              >
                 Github
               </Link>
             </FooterColumn>
             <FooterColumn>
               <h3 className="text-md pt-1 font-semibold">Legal</h3>
-              <Link href="#" className="text-muted-foreground text-sm">
+              <Link href="/privacy" className="text-muted-foreground text-sm">
                 Privacy Policy
               </Link>
-              <Link href="#" className="text-muted-foreground text-sm">
+              <Link href="/tos" className="text-muted-foreground text-sm">
                 Terms of Service
               </Link>
-              <Link href="#" className="text-muted-foreground text-sm">
+              <Link href="/cookie" className="text-muted-foreground text-sm">
                 Cookie Policy
               </Link>
             </FooterColumn>

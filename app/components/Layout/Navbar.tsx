@@ -53,8 +53,7 @@ export default function Navbar() {
         setProfile(data);
       }
     } catch (error) {
-      console.error("Error loading user data:", error);
-      alert("Error loading user data!");
+      console.error("An error occurred while fetching user profile", error);
     } finally {
       setLoading(false);
     }
@@ -98,7 +97,7 @@ export default function Navbar() {
                   Sign in
                 </Link>
                 <Button variant="default" asChild>
-                  <Link href="/">Get Started</Link>
+                  <Link href="/dashboard">Get Started</Link>
                 </Button>
               </>
             )}

@@ -33,7 +33,7 @@ export default function Hero() {
       <div className="max-w-container mx-auto flex flex-col gap-12 pt-16 sm:gap-24">
         <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
           <Link
-            href="/"
+            href="/dashboard"
             target="_blank"
             rel="noopener noreferrer"
             className="cursor-pointer"
@@ -60,10 +60,10 @@ export default function Hero() {
           <div className="animate-appear relative z-10 flex justify-center gap-4 opacity-0 delay-300">
             <div className="animate-appear relative z-10 flex justify-center gap-4 opacity-0 delay-300">
               <Button variant="default" size="lg" asChild>
-                <Link href="/">Get Started</Link>
+                <Link href="/dashboard">Get Started</Link>
               </Button>
               <Button variant="glow" size="lg" asChild>
-                <Link href="/">
+                <Link href="https://github.com/lorenzopalaia/Blocktracr">
                   <Github className="mr-2 h-4 w-4" /> Github
                 </Link>
               </Button>

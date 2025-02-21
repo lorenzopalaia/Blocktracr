@@ -23,7 +23,7 @@ export default function CTA() {
               className="border-brand/20 bg-foreground/10 grow"
             />
             <Button variant="default" size="lg" asChild>
-              <Link href="/">Get Started</Link>
+              <Link href="/dashboard">Get Started</Link>
             </Button>
           </div>
           <p className="text-muted-foreground text-xs">
