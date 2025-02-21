@@ -123,7 +123,7 @@ export function DataTable<TData, TValue>({
                       >
                         {columnKey === "name" ? (
                           <Link
-                            href={`/coin/${(row.original as Coin).id}`}
+                            href={`/coins/${(row.original as Coin).id}`}
                             className="cursor-pointer"
                           >
                             {content}

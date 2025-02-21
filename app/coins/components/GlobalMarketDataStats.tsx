@@ -1,7 +1,6 @@
 "use client";
 
 import { useGlobalMarketDataData } from "@/hooks/useGlobalMarketDataData";
-import Stats from "@/components/Stats";
 
 import { formatNumber } from "@/utils/price";
 
@@ -33,7 +32,28 @@ export default function GlobalMarketDataStats() {
       unit: "%",
       text: "Percentage of total market cap",
     },
+    {
+      title: "ETH Dominance",
+      value: data.market_cap_percentage.eth.toFixed(1),
+      unit: "%",
+      text: "Percentage of total market cap",
+    },
   ];
 
-  return <Stats items={stats} />;
+  return (
+    <div className="flex flex-col gap-4">
+      <h2 className="text-2xl font-bold">Global Market Data</h2>
+      <div className="space-y-2">
+        {stats.map((coin) => (
+          <div key={coin.title} className="flex items-center gap-2">
+            <span className="text-xl font-bold sm:text-xl">{coin.title}</span>
+            <span className="text-md from-foreground to-foreground dark:to-brand bg-linear-to-r bg-clip-text font-bold text-transparent sm:text-lg">
+              ${coin.value.toLocaleString()}
+              {coin.unit}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }

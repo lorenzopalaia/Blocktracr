@@ -49,6 +49,10 @@
   --radius-xl: calc(var(--radius) + 2px);
 
   --animate-gradient: gradient 8s linear infinite;
+  --animate-marquee: marquee 20s linear infinite;
+  --animate-hover: hover 4s forwards ease-out infinite;
+  --animate-hover-reverse: hover-reverse 8s forwards ease-out infinite;
+  --animate-spin-slow: spin 10s linear infinite;
   --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite
     alternate;
   --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;

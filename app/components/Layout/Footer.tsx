@@ -8,6 +8,8 @@ import LaunchUI from "@/components/logos/launch-ui";
 import Link from "next/link";
 import Github from "@/components/logos/github";
 
+import config from "@/config";
+
 export default function FooterSection() {
   return (
     <footer className="bg-background w-full px-4">
@@ -55,7 +57,9 @@ export default function FooterSection() {
             </FooterColumn>
           </FooterContent>
           <FooterBottom className="border-0">
-            <div>© 2025 Lorenzo Palaia. All rights reserved</div>
+            <div>
+              © {config.footer.year} Lorenzo Palaia. All rights reserved
+            </div>
           </FooterBottom>
         </Footer>
       </div>

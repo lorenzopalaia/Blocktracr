@@ -2,7 +2,6 @@
 
 import { useCryptoListData } from "@/hooks/useCryptoListData";
 import { formatNumber } from "@/utils/price";
-import { Section } from "@/components/ui/section";
 import { columns } from "./CoinsList/Columns";
 import { DataTable } from "./CoinsList/DataTable";
 
@@ -25,9 +24,5 @@ export default function CoinsList() {
     };
   });
 
-  return (
-    <Section>
-      <DataTable columns={columns} data={formattedCoins} />
-    </Section>
-  );
+  return <DataTable columns={columns} data={formattedCoins} />;
 }

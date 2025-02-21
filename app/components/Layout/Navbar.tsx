@@ -20,8 +20,15 @@ import { createClient } from "@/utils/supabase/client";
 export default function Navbar() {
   const supabase = createClient();
 
+  interface Profile {
+    full_name: string;
+    username: string;
+    website: string;
+    avatar_url: string;
+  }
+
   const [loading, setLoading] = useState(true);
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
 
   const getProfile = useCallback(async () => {
     try {
@@ -46,6 +53,7 @@ export default function Navbar() {
         setProfile(data);
       }
     } catch (error) {
+      console.error("Error loading user data:", error);
       alert("Error loading user data!");
     } finally {
       setLoading(false);

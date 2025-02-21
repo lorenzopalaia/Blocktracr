@@ -41,7 +41,7 @@ export default function Navigation() {
                   </Link>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/prices" title="Prices">
+              <ListItem href="/coins" title="Coins">
                 Stay ahead with live crypto prices and trending market insights
                 that give you the edge.
               </ListItem>
