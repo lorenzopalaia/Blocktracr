@@ -9,9 +9,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
-import { login, signup } from "../actions";
-
 import Link from "next/link";
 
 export function LoginForm({
@@ -28,8 +25,8 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
-            <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6">
+            <form action="/api/auth/login" method="post" className="space-y-6">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -52,17 +49,21 @@ export function LoginForm({
                 </div>
                 <Input id="password" type="password" name="password" required />
               </div>
-              <Button type="submit" className="w-full" formAction={login}>
+              <Button type="submit" className="w-full cursor-pointer">
                 Login
               </Button>
-              <Button variant="outline" className="w-full" formAction={signup}>
+            </form>
+
+            <form action="/api/auth/signup" method="post">
+              <Button
+                type="submit"
+                variant="outline"
+                className="w-full cursor-pointer"
+              >
                 Sign up
               </Button>
-              {/* <Button variant="outline" className="w-full">
-                Login with Google
-              </Button> */}
-            </div>
-          </form>
+            </form>
+          </div>
         </CardContent>
       </Card>
     </div>

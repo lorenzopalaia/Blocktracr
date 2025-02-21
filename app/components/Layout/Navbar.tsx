@@ -17,15 +17,15 @@ import { useEffect, useState, useCallback } from "react";
 
 import { createClient } from "@/utils/supabase/client";
 
+interface Profile {
+  full_name: string;
+  username: string;
+  website: string;
+  avatar_url: string;
+}
+
 export default function Navbar() {
   const supabase = createClient();
-
-  interface Profile {
-    full_name: string;
-    username: string;
-    website: string;
-    avatar_url: string;
-  }
 
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -38,14 +38,19 @@ export default function Navbar() {
         data: { user },
       } = await supabase.auth.getUser();
 
+      if (!user) {
+        setProfile(null);
+        setLoading(false);
+        return;
+      }
+
       const { data, error, status } = await supabase
         .from("profiles")
         .select(`full_name, username, website, avatar_url`)
-        .eq("id", user?.id)
+        .eq("id", user.id)
         .single();
 
       if (error && status !== 406) {
-        console.log(error);
         throw error;
       }
 
@@ -54,6 +59,7 @@ export default function Navbar() {
       }
     } catch (error) {
       console.error("An error occurred while fetching user profile", error);
+      setProfile(null);
     } finally {
       setLoading(false);
     }
@@ -81,14 +87,17 @@ export default function Navbar() {
           <NavbarRight>
             <ThemeToggle />
             {loading ? (
-              <div className="bg-muted h-9 w-[200px] animate-pulse rounded-md" />
+              <>
+                <div className="bg-muted h-9 w-24 animate-pulse rounded-md" />
+                <div className="bg-muted h-9 w-24 animate-pulse rounded-md" />
+              </>
             ) : profile ? (
               <>
-                <Button>
-                  <Link href="/dashboard">Dashboard</Link>
-                </Button>
                 <Button variant="outline">
                   <Link href="/account">Account</Link>
+                </Button>
+                <Button>
+                  <Link href="/dashboard">Dashboard</Link>
                 </Button>
               </>
             ) : (

@@ -16,7 +16,7 @@
     "update": "npx npm-check-updates -u && npm install",
     "update-data": "node scripts/updateData.mjs",
     "update-license": "node scripts/updateLicense.mjs",
-    "dir-tree": "npx tree-cli -a -l 3 --ignore 'node_modules, .git, .next'"
+    "tree": "npx tree-cli -a -l 3 --ignore 'node_modules, .git, .next'"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.3",

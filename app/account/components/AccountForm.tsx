@@ -133,19 +133,23 @@ export default function AccountForm({ user }: { user: User | null }) {
             </div>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-4">
             <Button
               onClick={() =>
                 updateProfile({ fullname, username, website, avatar_url })
               }
               disabled={loading}
-              className="w-full"
+              className="w-full cursor-pointer"
             >
               {loading ? "Loading ..." : "Update"}
             </Button>
 
-            <form action="/auth/signout" method="post">
-              <Button type="submit" variant="outline" className="w-full">
+            <form action="/api/auth/signout" method="post">
+              <Button
+                type="submit"
+                variant="outline"
+                className="w-full cursor-pointer"
+              >
                 Sign out
               </Button>
             </form>
