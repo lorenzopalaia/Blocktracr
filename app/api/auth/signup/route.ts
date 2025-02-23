@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
   }
 
   revalidatePath("/", "layout");
-  return NextResponse.redirect(new URL("/account", req.url), {
+  return NextResponse.redirect(new URL("/", req.url), {
     status: 302,
   });
 }

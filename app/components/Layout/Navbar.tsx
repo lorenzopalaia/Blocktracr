@@ -102,11 +102,11 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link href="/login" className="hidden text-sm md:block">
+                <Link href="/signin" className="hidden text-sm md:block">
                   Sign in
                 </Link>
                 <Button variant="default" asChild>
-                  <Link href="/dashboard">Get Started</Link>
+                  <Link href="/signup">Get Started</Link>
                 </Button>
               </>
             )}

@@ -36,7 +36,7 @@ export async function updateSession(request: NextRequest) {
 
   // protect routes
   if (user.error && protectedPaths.includes(request.nextUrl.pathname)) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/signin", request.url));
   }
 
   return supabaseResponse;

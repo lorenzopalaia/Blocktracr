@@ -19,7 +19,8 @@ module.exports = {
     "/_document",
     "/_error",
     // ! Custom
-    "/login",
+    "/signin",
+    "/signup",
     "/dashboard",
     "/account",
   ],

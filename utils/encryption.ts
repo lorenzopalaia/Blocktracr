@@ -1,6 +1,6 @@
 import CryptoJS from "crypto-js";
 
-const ENCRYPTION_KEY = process.env.NEXT_PUBLIC_ENCRYPTION_KEY || ""; // Deve essere definito in .env
+const ENCRYPTION_KEY = process.env.NEXT_PUBLIC_ENCRYPTION_KEY || "";
 
 export function encrypt(text: string): string {
   if (!ENCRYPTION_KEY) throw new Error("ENCRYPTION_KEY is not set");
