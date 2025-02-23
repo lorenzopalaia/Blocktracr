@@ -22,10 +22,8 @@
     "types/**/*.{js,jsx,ts,tsx}",
     "utils/**/*.{js,jsx,ts,tsx}"
   ],
-  "ignore": [
-    "components/ui/**/*.{js,jsx,ts,tsx}",
-    "components/magicui/**/*.{js,jsx,ts,tsx}"
-  ],
+  "ignore": [],
+  "ignoreExportsUsedInFile": true,
   "ignoreDependencies": [
     "eslint",
     "eslint-config-next",

@@ -1,4 +1,4 @@
-import { type Exchange, type Balance } from "ccxt";
+import { type Exchange, type Balance, type Trade } from "ccxt";
 
 interface BalanceType extends Partial<Balance> {
   [key: string]: number | undefined;
@@ -10,7 +10,16 @@ interface BalanceValue {
   usdtValue: number;
 }
 
-export async function calculateBalanceValues(
+interface ExchangeBalance {
+  totalValues: BalanceValue[];
+  freeValues: BalanceValue[];
+  usedValues: BalanceValue[];
+  totalBalance: number;
+  freeBalance: number;
+  usedBalance: number;
+}
+
+async function calculateBalanceValues(
   balanceType: BalanceType,
   exchange: Exchange,
 ): Promise<BalanceValue[]> {
@@ -32,16 +41,27 @@ export async function calculateBalanceValues(
   ).then((values) => values.sort((a, b) => b.usdtValue - a.usdtValue));
 }
 
-export function calculateTotalBalance(values: BalanceValue[]): number {
+function calculateTotalBalance(values: BalanceValue[]): number {
   return values.reduce((sum, { usdtValue }) => sum + Number(usdtValue), 0);
 }
 
-export async function fetchAllBalances(exchange: Exchange) {
+export async function fetchAllBalances(
+  exchange: Exchange,
+): Promise<ExchangeBalance> {
   const balance = await exchange.fetchBalance();
 
-  const totalValues = await calculateBalanceValues(balance.total, exchange);
-  const freeValues = await calculateBalanceValues(balance.free, exchange);
-  const usedValues = await calculateBalanceValues(balance.used, exchange);
+  const totalValues = await calculateBalanceValues(
+    balance.total as BalanceType,
+    exchange,
+  );
+  const freeValues = await calculateBalanceValues(
+    balance.free as BalanceType,
+    exchange,
+  );
+  const usedValues = await calculateBalanceValues(
+    balance.used as BalanceType,
+    exchange,
+  );
 
   return {
     totalValues,
@@ -53,7 +73,10 @@ export async function fetchAllBalances(exchange: Exchange) {
   };
 }
 
-export async function fetchAllTrades(exchange: Exchange, tickers: string[]) {
+export async function fetchAllTrades(
+  exchange: Exchange,
+  tickers: string[],
+): Promise<Trade[]> {
   return (
     await Promise.all(
       tickers

@@ -1,83 +1,89 @@
-"use client";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Coins, DollarSign, Lock, Unlock } from "lucide-react";
 
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+interface OverviewProps {
+  values: {
+    totalBalance: number;
+    totalValues: Array<{
+      crypto: string;
+      amount: number;
+      usdtValue: number;
+    }>;
+    freeBalance: number;
+    usedBalance: number;
+    freeValues: Array<{
+      crypto: string;
+      amount: number;
+      usdtValue: number;
+    }>;
+    usedValues: Array<{
+      crypto: string;
+      amount: number;
+      usdtValue: number;
+    }>;
+  };
+}
 
-const data = [
-  {
-    name: "Jan",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Feb",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Mar",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Apr",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "May",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Jun",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Jul",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Aug",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Sep",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Oct",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Nov",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: "Dec",
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-];
+export default function Overview({ values }: OverviewProps) {
+  const getPercentage = (value: number): string => {
+    if (!values.totalBalance || values.totalBalance === 0) return "0.00";
+    return ((value / values.totalBalance) * 100).toFixed(2);
+  };
 
-export function Overview() {
   return (
-    <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={data}>
-        <XAxis
-          dataKey="name"
-          stroke="#888888"
-          fontSize={12}
-          tickLine={false}
-          axisLine={false}
-        />
-        <YAxis
-          stroke="#888888"
-          fontSize={12}
-          tickLine={false}
-          axisLine={false}
-          tickFormatter={(value) => `$${value}`}
-        />
-        <Bar
-          dataKey="total"
-          fill="currentColor"
-          radius={[4, 4, 0, 0]}
-          className="fill-primary"
-        />
-      </BarChart>
-    </ResponsiveContainer>
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">
+            Total Cryptocurrencies
+          </CardTitle>
+          <Coins className="text-muted-foreground h-4 w-4" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">
+            {values.totalValues?.length ?? 0}
+          </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">Total Balance</CardTitle>
+          <DollarSign className="text-muted-foreground h-4 w-4" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">
+            ${values.totalBalance?.toFixed(2) ?? "0.00"}
+          </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">Used Balance</CardTitle>
+          <Lock className="text-muted-foreground h-4 w-4" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">
+            ${values.usedBalance?.toFixed(2) ?? "0.00"}
+          </div>
+          <p className="text-muted-foreground text-xs">
+            {getPercentage(values.usedBalance)}% of total balance
+          </p>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">Free Balance</CardTitle>
+          <Unlock className="text-muted-foreground h-4 w-4" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">
+            ${values.freeBalance?.toFixed(2) ?? "0.00"}
+          </div>
+          <p className="text-muted-foreground text-xs">
+            {getPercentage(values.freeBalance)}% of total balance
+          </p>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
