@@ -1,13 +1,7 @@
 import { Metadata } from "next";
 
 import { Section } from "@/components/ui/section";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import AddDialog from "./components/AddDialog";
 
@@ -17,12 +11,13 @@ import { decrypt } from "@/utils/encryption";
 
 import ccxt from "ccxt";
 
-import Overview from "./components/Overview";
-import PieChart from "./components/PieChart";
-import CoinsList from "./components/CoinsList";
-import Trades from "./components/Trades";
+import Overview from "../../components/Overview";
+import PieChart from "../../components/PieChart";
+import CoinsList from "../../components/CoinsList";
+import Trades from "../../components/Trades";
 
 import { fetchAllBalances, fetchAllTrades } from "@/utils/exchange";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -35,16 +30,32 @@ export default async function DashboardPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: userExchange, error } = await supabase
+  const { data: userExchange, error: exchangeError } = await supabase
     .from("exchanges")
     .select()
     .eq("user_id", user?.id)
     .single();
 
+  const {
+    data: profile,
+    error: profileError,
+    status,
+  } = await supabase
+    .from("profiles")
+    .select(`full_name, username, website, avatar_url`)
+    .eq("id", user?.id)
+    .single();
+
+  if (profileError && status !== 406) {
+    console.log(profileError);
+    throw profileError;
+  }
+
   let exchangeData = null;
   let trades = null;
+  let apiError = null;
 
-  if (!error && userExchange) {
+  if (!exchangeError && userExchange) {
     try {
       // @ts-expect-error ccxt does not have types for all exchanges
       const exchange = new ccxt[userExchange.exchange_id]({
@@ -56,6 +67,7 @@ export default async function DashboardPage() {
       trades = await fetchAllTrades(exchange, tickers);
     } catch (e) {
       console.error("Error fetching exchange data:", e);
+      apiError = true;
     }
   }
 
@@ -65,11 +77,11 @@ export default async function DashboardPage() {
         <div className="flex flex-col">
           <div className="flex-1 space-y-4 p-8 pt-6">
             <div className="flex items-center justify-between space-y-2">
-              <div>
-                <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-              </div>
+              <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+              <AddDialog user={user} action={userExchange ? "edit" : "add"} />
             </div>
-            {!exchangeData || !trades ? (
+            {/* Exchange non configurato */}
+            {exchangeError && (
               <Card>
                 <CardHeader>
                   <CardTitle>
@@ -83,12 +95,44 @@ export default async function DashboardPage() {
                     your exchange and start tracking your portfolio.
                   </p>
                 </CardContent>
-                <CardFooter>
-                  <AddDialog user={user} />
-                </CardFooter>
               </Card>
-            ) : (
+            )}
+
+            {/* Credenziali non valide */}
+            {apiError && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-destructive">
+                    Invalid API Credentials
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p>
+                    The API credentials for {userExchange?.exchange_id} seem to
+                    be invalid. Please check your API key and secret and try
+                    again.
+                  </p>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Dati validi - mostra dashboard */}
+            {!exchangeError && !apiError && exchangeData && trades && (
               <>
+                <p className="text-muted-foreground">
+                  Welcome back,{" "}
+                  <Link href="/account" className="text-foreground font-bold">
+                    {profile?.full_name || profile?.username || user?.email}
+                  </Link>
+                  ! Here you can see an overview of your portfolio, a breakdown
+                  of your assets, and your recent trades.
+                </p>
+                <p className="text-muted-foreground">
+                  Connected to{" "}
+                  <span className="text-foreground font-bold capitalize">
+                    {userExchange.exchange_id}
+                  </span>
+                </p>
                 <Card>
                   <CardHeader>
                     <CardTitle>Overview</CardTitle>

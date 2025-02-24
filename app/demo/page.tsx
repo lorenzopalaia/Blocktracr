@@ -2,10 +2,10 @@ import { Metadata } from "next";
 import { Section } from "@/components/ui/section";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import Overview from "../dashboard/components/Overview";
-import PieChart from "../dashboard/components/PieChart";
-import CoinsList from "../dashboard/components/CoinsList";
-import Trades from "../dashboard/components/Trades";
+import Overview from "../../components/Overview";
+import PieChart from "../../components/PieChart";
+import CoinsList from "../../components/CoinsList";
+import Trades from "../../components/Trades";
 
 import { demoBalanceData, demoTrades } from "@/utils/demoData";
 
