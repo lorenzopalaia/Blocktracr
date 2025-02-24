@@ -1,4 +1,5 @@
 "use client";
+
 import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { type User } from "@supabase/supabase-js";
@@ -7,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
+
+import { toast } from "sonner";
 
 import Avatar from "./Avatar";
 
@@ -41,7 +44,7 @@ export default function AccountForm({ user }: { user: User | null }) {
       }
     } catch (error) {
       console.error("Error loading user data:", error);
-      alert("Error loading user data!");
+      toast.error("Error loading user data!");
     } finally {
       setLoading(false);
     }
@@ -73,10 +76,10 @@ export default function AccountForm({ user }: { user: User | null }) {
         updated_at: new Date().toISOString(),
       });
       if (error) throw error;
-      alert("Profile updated!");
+      toast.success("Profile updated!");
     } catch (error) {
       console.error("Error updating the data:", error);
-      alert("Error updating the data!");
+      toast.error("Error updating the data!");
     } finally {
       setLoading(false);
     }

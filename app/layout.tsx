@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 
 import ThemeProvider from "@/app/components/Layout/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
+
 import Navbar from "@/app/components/Layout/Navbar";
 import Footer from "@/app/components/Layout/Footer";
 
@@ -34,6 +36,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

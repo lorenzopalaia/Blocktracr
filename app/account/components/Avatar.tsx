@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
@@ -6,6 +7,8 @@ import Image from "next/image";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+
+import { toast } from "sonner";
 
 export default function Avatar({
   uid,
@@ -67,7 +70,7 @@ export default function Avatar({
       onUpload(filePath);
     } catch (error) {
       console.error("Error uploading avatar:", error);
-      alert("Error uploading avatar!");
+      toast.error("Error uploading avatar!");
     } finally {
       setUploading(false);
     }

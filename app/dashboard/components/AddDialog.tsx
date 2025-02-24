@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/client";
 
+import { toast } from "sonner";
+
 import {
   Dialog,
   DialogContent,
@@ -102,14 +104,14 @@ export default function AddDialog({
 
       if (error) throw error;
       router.refresh();
-      alert(
+      toast.success(
         action === "add"
           ? "Exchange added successfully!"
           : "Exchange updated successfully!",
       );
     } catch (error) {
       console.error("Error saving exchange details:", error);
-      alert("Error saving exchange details!");
+      toast.error("Error saving exchange details!");
     } finally {
       setLoading(false);
     }

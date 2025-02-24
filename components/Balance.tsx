@@ -18,7 +18,7 @@ function formatAmount(amount: number) {
   return "0";
 }
 
-export default function CoinsList({ values }: CoinsListProps) {
+export default function Balance({ values }: CoinsListProps) {
   const formattedValues = values.map((item) => ({
     ...item,
     usdtValue: formatPrice(item.usdtValue),
@@ -45,7 +45,7 @@ export default function CoinsList({ values }: CoinsListProps) {
               </div>
             </div>
           </div>
-          <div className="gradient-brand text-right font-bold">
+          <div className="text-right font-bold">
             <span>
               ${item.usdtValue.value}
               {item.usdtValue.unit}

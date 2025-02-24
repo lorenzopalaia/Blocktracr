@@ -11,10 +11,10 @@ import { decrypt } from "@/utils/encryption";
 
 import ccxt from "ccxt";
 
-import Overview from "../../components/Overview";
-import PieChart from "../../components/PieChart";
-import CoinsList from "../../components/CoinsList";
-import Trades from "../../components/Trades";
+import Overview from "@/components/Overview";
+import PieChart from "@/components/PieChart";
+import Balance from "@/components/Balance";
+import Trades from "@/components/Trades";
 
 import { fetchAllBalances, fetchAllTrades } from "@/utils/exchange";
 import Link from "next/link";
@@ -158,7 +158,7 @@ export default async function DashboardPage() {
                       <CardTitle>Balance</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <CoinsList values={exchangeData.totalValues} />
+                      <Balance values={exchangeData.totalValues} />
                     </CardContent>
                   </Card>
                 </div>

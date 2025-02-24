@@ -2,10 +2,10 @@ import { Metadata } from "next";
 import { Section } from "@/components/ui/section";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import Overview from "../../components/Overview";
-import PieChart from "../../components/PieChart";
-import CoinsList from "../../components/CoinsList";
-import Trades from "../../components/Trades";
+import Overview from "@/components/Overview";
+import PieChart from "@/components/PieChart";
+import Balance from "@/components/Balance";
+import Trades from "@/components/Trades";
 
 import { demoBalanceData, demoTrades } from "@/utils/demoData";
 
@@ -52,7 +52,7 @@ export default function DemoPage() {
                   <CardTitle>Balance</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CoinsList values={demoBalanceData.totalValues} />
+                  <Balance values={demoBalanceData.totalValues} />
                 </CardContent>
               </Card>
             </div>
