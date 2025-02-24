@@ -6,7 +6,7 @@
     "predev": "npm run update",
     "dev": "next dev --turbopack",
     "postdev": "npm run format",
-    "prebuild": "npm run update && npm run update-data && npx knip",
+    "prebuild": "npm run update-data && npx prettier --write . --log-level warn && npx knip",
     "build": "next build",
     "postbuild": "npm run sitemap && npm run update-license",
     "start": "next start",
