@@ -24,7 +24,7 @@ export default function Trades({ values }: TradesProps) {
                   </Badge>
                   <span className="font-bold">{trade.symbol}</span>
                 </div>
-                <div className="text-muted-foreground text-sm">
+                <div className="text-muted-foreground text-sm capitalize">
                   {trade.type || "N/A"} • {trade.takerOrMaker || "N/A"}
                 </div>
               </div>
@@ -33,16 +33,16 @@ export default function Trades({ values }: TradesProps) {
                 <div>
                   {trade.amount} {trade.symbol?.split("/")[0]}
                   <span className="text-muted-foreground text-sm"> @ </span>$
-                  {trade.price}
+                  {trade.price.toLocaleString()}
                 </div>
                 <div className="text-sm font-medium">
-                  Total: ${trade.cost?.toFixed(2)}
+                  Total: ${trade.cost?.toLocaleString()}
                 </div>
               </div>
               <div className="space-y-2">
                 <div className="text-sm font-medium">Fees</div>
                 <div className="text-sm">
-                  {trade.fee?.cost?.toFixed(6)} {trade.fee?.currency}
+                  {trade.fee?.cost?.toLocaleString()} {trade.fee?.currency}
                   {trade.fee?.rate &&
                     ` (${(trade.fee.rate * 100).toFixed(2)}%)`}
                 </div>
@@ -50,7 +50,13 @@ export default function Trades({ values }: TradesProps) {
               <div className="space-y-2">
                 <div>
                   {trade.datetime
-                    ? new Date(trade.datetime).toLocaleString()
+                    ? new Date(trade.datetime).toLocaleString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "numeric",
+                      })
                     : "N/A"}
                 </div>
                 <div className="text-muted-foreground truncate text-xs">

@@ -26,7 +26,7 @@ export const demoBalanceData = {
 
 export const demoTrades: Trade[] = [
   {
-    id: "1",
+    id: "134580475",
     timestamp: Date.now() - 3600000,
     datetime: new Date(Date.now() - 3600000).toISOString(),
     symbol: "BTC/USDT",
@@ -42,10 +42,10 @@ export const demoTrades: Trade[] = [
     },
     takerOrMaker: "taker",
     info: {},
-    order: "order1",
+    order: "13940215216383945272",
   },
   {
-    id: "2",
+    id: "134580476",
     timestamp: Date.now() - 7200000,
     datetime: new Date(Date.now() - 7200000).toISOString(),
     symbol: "ETH/USDT",
@@ -61,10 +61,10 @@ export const demoTrades: Trade[] = [
     },
     takerOrMaker: "maker",
     info: {},
-    order: "order2",
+    order: "13940215216383945273",
   },
   {
-    id: "3",
+    id: "134580477",
     timestamp: Date.now() - 10800000,
     datetime: new Date(Date.now() - 10800000).toISOString(),
     symbol: "SOL/USDT",
@@ -80,10 +80,10 @@ export const demoTrades: Trade[] = [
     },
     takerOrMaker: "taker",
     info: {},
-    order: "order3",
+    order: "13940215216383945274",
   },
   {
-    id: "4",
+    id: "134580478",
     timestamp: Date.now() - 14400000,
     datetime: new Date(Date.now() - 14400000).toISOString(),
     symbol: "BTC/USDT",
@@ -99,10 +99,10 @@ export const demoTrades: Trade[] = [
     },
     takerOrMaker: "maker",
     info: {},
-    order: "order4",
+    order: "13940215216383945275",
   },
   {
-    id: "5",
+    id: "134580479",
     timestamp: Date.now() - 18000000,
     datetime: new Date(Date.now() - 18000000).toISOString(),
     symbol: "ETH/USDT",
@@ -118,10 +118,10 @@ export const demoTrades: Trade[] = [
     },
     takerOrMaker: "taker",
     info: {},
-    order: "order5",
+    order: "13940215216383945276",
   },
   {
-    id: "6",
+    id: "134580480",
     timestamp: Date.now() - 21600000,
     datetime: new Date(Date.now() - 21600000).toISOString(),
     symbol: "SOL/USDT",
@@ -137,6 +137,6 @@ export const demoTrades: Trade[] = [
     },
     takerOrMaker: "maker",
     info: {},
-    order: "order6",
+    order: "13940215216383945277",
   },
 ];

@@ -49,6 +49,9 @@ export default function Navigation() {
                 Dive into your portfolio with a dynamic dashboard featuring
                 interactive charts and real-time updates.
               </ListItem>
+              <ListItem href="/demo" title="Demo">
+                Explore the Blocktracr experience with our interactive demo.
+              </ListItem>
               <ListItem href="/signin" title="Sign in">
                 Sign in now to unlock an unparalleled crypto tracking experience
                 with intuitive insights.

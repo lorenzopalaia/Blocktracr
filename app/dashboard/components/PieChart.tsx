@@ -8,13 +8,14 @@ import {
 } from "@/components/ui/chart";
 import { Label, Pie, PieChart as _PieChart } from "recharts";
 
+import { formatPrice } from "@/utils/price";
+
 interface PieChartProps {
   values: { crypto: string; usdtValue: number }[];
   balance: number;
 }
 
 export default function PieChart({ values, balance }: PieChartProps) {
-  // Define colors for different cryptocurrencies
   const getColor = (index: number) => {
     const colors = [
       "hsl(var(--chart-1))",
@@ -42,6 +43,8 @@ export default function PieChart({ values, balance }: PieChartProps) {
     return acc;
   }, {} as ChartConfig);
 
+  const formattedBalance = formatPrice(balance);
+
   return (
     <ChartContainer
       config={chartConfig}
@@ -51,6 +54,10 @@ export default function PieChart({ values, balance }: PieChartProps) {
         <ChartTooltip
           cursor={false}
           content={<ChartTooltipContent hideLabel />}
+          formatter={(value: number) => {
+            const formattedValue = formatPrice(value);
+            return `\$${formattedValue.value}${formattedValue.unit}`;
+          }}
         />
         <Pie
           data={chartData}
@@ -74,7 +81,8 @@ export default function PieChart({ values, balance }: PieChartProps) {
                       y={viewBox.cy}
                       className="fill-foreground text-2xl font-bold"
                     >
-                      ${balance.toFixed(2)}
+                      ${formattedBalance.value}
+                      {formattedBalance.unit}
                     </tspan>
                     <tspan
                       x={viewBox.cx}

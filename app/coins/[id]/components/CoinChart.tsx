@@ -17,7 +17,7 @@ import { Area, Bar, XAxis, YAxis, ComposedChart } from "recharts";
 
 import { useMarketChartData } from "@/hooks/useMarketChartData";
 
-import { formatNumber } from "@/utils/price";
+import { formatPrice } from "@/utils/price";
 
 type TimeRange = "1" | "7" | "30" | "90";
 
@@ -109,7 +109,7 @@ export default function CoinChart({ id }: { id: string }) {
             axisLine={false}
             tickMargin={8}
             tickFormatter={(value) => {
-              const { value: formatted, unit } = formatNumber(value);
+              const { value: formatted, unit } = formatPrice(value);
               return `$${formatted}${unit}`;
             }}
             domain={[0, "dataMax"]}
@@ -137,7 +137,7 @@ export default function CoinChart({ id }: { id: string }) {
                     : Number(value);
                   if (name === "volume") {
                     const { value: formatted, unit } =
-                      formatNumber(numericValue);
+                      formatPrice(numericValue);
                     return `$${formatted}${unit}`;
                   }
                   return `$${numericValue.toLocaleString()}`;

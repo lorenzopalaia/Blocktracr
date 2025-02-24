@@ -1,7 +1,7 @@
 "use client";
 
 import { useCryptoListData } from "@/hooks/useCryptoListData";
-import { formatNumber } from "@/utils/price";
+import { formatPrice } from "@/utils/price";
 import { columns } from "./CoinsList/Columns";
 import { DataTable } from "./CoinsList/DataTable";
 
@@ -19,8 +19,8 @@ export default function CoinsList() {
   const formattedCoins = coins.map((coin) => {
     return {
       ...coin,
-      total_volume: formatNumber(coin.total_volume),
-      market_cap: formatNumber(coin.market_cap),
+      total_volume: formatPrice(coin.total_volume),
+      market_cap: formatPrice(coin.market_cap),
     };
   });
 

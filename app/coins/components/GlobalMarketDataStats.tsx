@@ -2,7 +2,7 @@
 
 import { useGlobalMarketDataData } from "@/hooks/useGlobalMarketDataData";
 
-import { formatNumber } from "@/utils/price";
+import { formatPrice } from "@/utils/price";
 
 export default function GlobalMarketDataStats() {
   const { data, loading, error } = useGlobalMarketDataData();
@@ -18,12 +18,12 @@ export default function GlobalMarketDataStats() {
   const stats = [
     {
       title: "Market Cap",
-      ...formatNumber(data.total_market_cap.usd),
+      ...formatPrice(data.total_market_cap.usd),
       text: "Total market capitalization",
     },
     {
       title: "Volume",
-      ...formatNumber(data.total_volume.usd),
+      ...formatPrice(data.total_volume.usd),
       text: "Total trading volume",
     },
     {

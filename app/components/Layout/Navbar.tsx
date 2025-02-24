@@ -103,7 +103,7 @@ export default function Navbar() {
             ) : (
               <>
                 <Link href="/signin" className="hidden text-sm md:block">
-                  Sign in
+                  Sign In
                 </Link>
                 <Button variant="default" asChild>
                   <Link href="/signup">Get Started</Link>
@@ -130,10 +130,28 @@ export default function Navbar() {
                     <span>Blocktracr</span>
                   </Link>
                   <Link
-                    href="/"
+                    href="/coins"
                     className="text-muted-foreground hover:text-foreground"
                   >
-                    Getting Started
+                    Coins
+                  </Link>
+                  <Link
+                    href="/dashboard"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/demo"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    Demo
+                  </Link>
+                  <Link
+                    href="/signin"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    Sign In
                   </Link>
                   <Link
                     href="/"

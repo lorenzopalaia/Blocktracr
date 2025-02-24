@@ -2,6 +2,8 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+import { formatPrice } from "@/utils/price";
+
 interface CoinsListProps {
   values: { crypto: string; amount: number; usdtValue: number }[];
 }
@@ -17,9 +19,14 @@ function formatAmount(amount: number) {
 }
 
 export default function CoinsList({ values }: CoinsListProps) {
+  const formattedValues = values.map((item) => ({
+    ...item,
+    usdtValue: formatPrice(item.usdtValue),
+  }));
+
   return (
     <ul>
-      {values.map((item) => (
+      {formattedValues.map((item) => (
         <li key={item.crypto} className="flex justify-between py-4">
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
@@ -39,7 +46,10 @@ export default function CoinsList({ values }: CoinsListProps) {
             </div>
           </div>
           <div className="gradient-brand text-right font-bold">
-            <span>${item.usdtValue.toFixed(2)}</span>
+            <span>
+              ${item.usdtValue.value}
+              {item.usdtValue.unit}
+            </span>
           </div>
         </li>
       ))}

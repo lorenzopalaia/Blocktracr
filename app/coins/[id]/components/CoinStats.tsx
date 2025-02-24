@@ -8,7 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import Image from "next/image";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-import { formatNumber } from "@/utils/price";
+import { formatPrice } from "@/utils/price";
 
 export default function CoinStats({ id }: { id: string }) {
   const { coin, loading, error } = useCoinData(id);
@@ -24,15 +24,15 @@ export default function CoinStats({ id }: { id: string }) {
   const stats = [
     {
       title: "Market Cap",
-      ...formatNumber(coin.market_data.market_cap.usd),
+      ...formatPrice(coin.market_data.market_cap.usd),
     },
     {
       title: "Volume",
-      ...formatNumber(coin.market_data.total_volume.usd),
+      ...formatPrice(coin.market_data.total_volume.usd),
     },
     {
       title: "Supply",
-      ...formatNumber(coin.market_data.total_supply),
+      ...formatPrice(coin.market_data.total_supply),
     },
     {
       title: "Vol/Cap",

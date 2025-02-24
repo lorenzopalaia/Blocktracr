@@ -1,6 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Coins, DollarSign, Lock, Unlock } from "lucide-react";
 
+import { formatPrice } from "@/utils/price";
+
 interface OverviewProps {
   values: {
     totalBalance: number;
@@ -30,6 +32,10 @@ export default function Overview({ values }: OverviewProps) {
     return ((value / values.totalBalance) * 100).toFixed(2);
   };
 
+  const totalBalanceFormatted = formatPrice(values.totalBalance ?? 0);
+  const usedBalanceFormatted = formatPrice(values.usedBalance ?? 0);
+  const freeBalanceFormatted = formatPrice(values.freeBalance ?? 0);
+
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card>
@@ -52,7 +58,8 @@ export default function Overview({ values }: OverviewProps) {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">
-            ${values.totalBalance?.toFixed(2) ?? "0.00"}
+            ${totalBalanceFormatted.value}
+            {totalBalanceFormatted.unit}
           </div>
         </CardContent>
       </Card>
@@ -63,7 +70,8 @@ export default function Overview({ values }: OverviewProps) {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">
-            ${values.usedBalance?.toFixed(2) ?? "0.00"}
+            ${usedBalanceFormatted.value}
+            {usedBalanceFormatted.unit}
           </div>
           <p className="text-muted-foreground text-xs">
             {getPercentage(values.usedBalance)}% of total balance
@@ -77,7 +85,8 @@ export default function Overview({ values }: OverviewProps) {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">
-            ${values.freeBalance?.toFixed(2) ?? "0.00"}
+            ${freeBalanceFormatted.value}
+            {freeBalanceFormatted.unit}
           </div>
           <p className="text-muted-foreground text-xs">
             {getPercentage(values.freeBalance)}% of total balance
