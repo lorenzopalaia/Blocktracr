@@ -10,7 +10,7 @@
     "postbuild": "npm run sitemap && npm run update-license",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write . --log-level warn",
+    "format": "npx prettier --write . --log-level warn",
     "knip": "knip",
     "sitemap": "next-sitemap",
     "update": "npx npm-check-updates -u && npm install",
