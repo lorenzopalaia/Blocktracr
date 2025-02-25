@@ -32,10 +32,17 @@ export async function updateSession(request: NextRequest) {
   );
 
   // refreshing the auth token
-  const user = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // if request is to sign in or sign up, redirect to dashboard if user is already signed in
+  if (user && ["/signin", "/signup"].includes(request.nextUrl.pathname)) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
 
   // protect routes
-  if (user.error && protectedPaths.includes(request.nextUrl.pathname)) {
+  if (!user && protectedPaths.includes(request.nextUrl.pathname)) {
     return NextResponse.redirect(new URL("/signin", request.url));
   }
 

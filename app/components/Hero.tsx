@@ -32,12 +32,7 @@ export default function Hero() {
     <Section className="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0">
       <div className="max-w-container mx-auto flex flex-col gap-12 pt-16 sm:gap-24">
         <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
-          <Link
-            href="/dashboard"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cursor-pointer"
-          >
+          <Link href="/dashboard" className="cursor-pointer">
             <AnimatedGradientText>
               🚀 <hr className="mx-2 h-4 w-px shrink-0 bg-gray-300" />{" "}
               <span

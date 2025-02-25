@@ -6,7 +6,7 @@ const testimonials = [
   {
     name: "Michael Chen",
     handle: "@cryptotrader_mike",
-    avatar: "/avatars/michael.jpg",
+    avatar: "michael",
     content:
       "Blocktracr has revolutionized how I manage my crypto portfolio. Real-time tracking and beautiful analytics make it my go-to platform.",
     url: "https://twitter.com/cryptotrader_mike",
@@ -14,7 +14,7 @@ const testimonials = [
   {
     name: "Sarah Williams",
     handle: "@crypto_sarah",
-    avatar: "/avatars/sarah.jpg",
+    avatar: "sarah",
     content:
       "As a day trader, I need reliable portfolio tracking. Blocktracr's clean interface and accurate data have made my trading life so much easier!",
     url: "https://twitter.com/crypto_sarah",
@@ -22,7 +22,7 @@ const testimonials = [
   {
     name: "Alex Parker",
     handle: "@defi_alex",
-    avatar: "/avatars/alex.jpg",
+    avatar: "alex",
     content:
       "Finally found a crypto tracker that actually works! The portfolio analytics are incredibly detailed and the UI is super intuitive.",
     url: "https://twitter.com/defi_alex",
@@ -30,7 +30,7 @@ const testimonials = [
   {
     name: "Elena Rodriguez",
     handle: "@elena_invests",
-    avatar: "/avatars/elena.jpg",
+    avatar: "elena",
     content:
       "Blocktracr helped me understand my crypto investments better. The performance metrics are just incredible!",
     url: "https://twitter.com/elena_invests",
@@ -38,7 +38,7 @@ const testimonials = [
   {
     name: "David Kim",
     handle: "@crypto_dave",
-    avatar: "/avatars/david.jpg",
+    avatar: "david",
     content:
       "The real-time alerts and portfolio insights from Blocktracr are game-changing. Best crypto tracking tool I've ever used.",
     url: "https://twitter.com/crypto_dave",
@@ -46,7 +46,7 @@ const testimonials = [
   {
     name: "Lisa Thompson",
     handle: "@lisacrypto",
-    avatar: "/avatars/lisa.jpg",
+    avatar: "lisa",
     content:
       "Managing multiple wallets was a nightmare until I found Blocktracr. Now I can track everything in one place. Absolutely essential for crypto investors!",
     url: "https://twitter.com/lisacrypto",
@@ -57,7 +57,7 @@ const testimonials2 = [
   {
     name: "James Wilson",
     handle: "@crypto_james",
-    avatar: "/avatars/james.jpg",
+    avatar: "james",
     content:
       "Blocktracr's portfolio analytics give me insights I couldn't find anywhere else. A must-have for serious crypto investors.",
     url: "https://twitter.com/crypto_james",
@@ -65,7 +65,7 @@ const testimonials2 = [
   {
     name: "Maria Garcia",
     handle: "@maria_trades",
-    avatar: "/avatars/maria.jpg",
+    avatar: "maria",
     content:
       "Love how Blocktracr lets me track my DeFi investments alongside my regular crypto holdings. The all-in-one solution I've been looking for!",
     url: "https://twitter.com/maria_trades",
@@ -73,7 +73,7 @@ const testimonials2 = [
   {
     name: "Tom Anderson",
     handle: "@tom_blockchain",
-    avatar: "/avatars/tom.jpg",
+    avatar: "tom",
     content:
       "The accuracy and speed of Blocktracr's tracking is unmatched. Perfect for both beginners and advanced traders.",
     url: "https://twitter.com/tom_blockchain",
@@ -81,7 +81,7 @@ const testimonials2 = [
   {
     name: "Sophie Lee",
     handle: "@sophie_defi",
-    avatar: "/avatars/sophie.jpg",
+    avatar: "sophie",
     content:
       "Blocktracr simplified my crypto portfolio management. The tax reporting features alone are worth it!",
     url: "https://twitter.com/sophie_defi",
@@ -89,7 +89,7 @@ const testimonials2 = [
   {
     name: "Ryan Martinez",
     handle: "@ryan_crypto",
-    avatar: "/avatars/ryan.jpg",
+    avatar: "ryan",
     content:
       "Clean interface, powerful features, and excellent support. Blocktracr is everything a crypto tracker should be.",
     url: "https://twitter.com/ryan_crypto",
@@ -97,7 +97,7 @@ const testimonials2 = [
   {
     name: "Emma Chang",
     handle: "@emma_invests",
-    avatar: "/avatars/emma.jpg",
+    avatar: "emma",
     content:
       "Switching to Blocktracr was the best decision for my crypto portfolio. The real-time tracking and analytics are exceptional!",
     url: "https://twitter.com/emma_invests",
@@ -133,7 +133,7 @@ export default function SocialProof() {
                     <div className="flex items-center gap-3">
                       <Avatar className="h-12 w-12">
                         <AvatarImage
-                          src={testimonial.avatar}
+                          src={`https://api.dicebear.com/9.x/adventurer-neutral/svg?seed=${testimonial.avatar}`}
                           alt={testimonial.name}
                         />
                         <AvatarFallback>
@@ -175,7 +175,7 @@ export default function SocialProof() {
                     <div className="flex items-center gap-3">
                       <Avatar className="h-12 w-12">
                         <AvatarImage
-                          src={testimonial.avatar}
+                          src={`https://api.dicebear.com/9.x/adventurer-neutral/svg?seed=${testimonial.avatar}`}
                           alt={testimonial.name}
                         />
                         <AvatarFallback>
