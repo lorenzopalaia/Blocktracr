@@ -11,6 +11,13 @@ import { Label } from "@/components/ui/label";
 
 import Link from "next/link";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign Up | Blocktracr",
+  description: "Sign up for a new Blocktracr account",
+};
+
 export default function SignupPage() {
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">

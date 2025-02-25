@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import { Section } from "@/components/ui/section";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -9,9 +8,11 @@ import Trades from "@/components/Trades";
 
 import { demoBalanceData, demoTrades } from "@/utils/demoData";
 
+import type { Metadata } from "next";
+
 export const metadata: Metadata = {
-  title: "Demo Dashboard",
-  description: "Example dashboard with demo data.",
+  title: "Demo | Blocktracr",
+  description: "View a demo dashboard of your portfolio and recent trades",
 };
 
 export default function DemoPage() {

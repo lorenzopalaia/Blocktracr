@@ -1,5 +1,3 @@
-import { Metadata } from "next";
-
 import { Section } from "@/components/ui/section";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -17,11 +15,14 @@ import Balance from "@/components/Balance";
 import Trades from "@/components/Trades";
 
 import { fetchAllBalances, fetchAllTrades } from "@/utils/exchange";
+
 import Link from "next/link";
 
+import type { Metadata } from "next";
+
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Example dashboard app built using the components.",
+  title: "Dashboard | Blocktracr",
+  description: "View an overview of your portfolio and recent trades",
 };
 
 export default async function DashboardPage() {

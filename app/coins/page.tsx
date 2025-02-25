@@ -3,6 +3,13 @@ import CoinsList from "@/app/coins/components/CoinsList";
 import GlobalMarketDataStats from "@/app/coins/components/GlobalMarketDataStats";
 import Trending from "@/app/coins/components/Trending";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Coins | Blocktracr",
+  description: "View the latest cryptocurrency prices",
+};
+
 export default function Coins() {
   return (
     <main>
