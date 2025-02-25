@@ -14,7 +14,8 @@ import PieChart from "@/components/PieChart";
 import Balance from "@/components/Balance";
 import Trades from "@/components/Trades";
 
-import { fetchAllBalances, fetchAllTrades } from "@/utils/exchange";
+import { useBalanceStore } from "@/stores/useBalanceStore";
+import { useTradesStore } from "@/stores/useTradesStore";
 
 import Link from "next/link";
 
@@ -30,7 +31,13 @@ export default async function DashboardPage() {
   const supabase = await createClient();
   const {
     data: { user },
+    error: userError,
   } = await supabase.auth.getUser();
+
+  if (userError) {
+    console.error(userError);
+    throw userError;
+  }
 
   const { data: userExchange, error: exchangeError } = await supabase
     .from("exchanges")
@@ -49,7 +56,7 @@ export default async function DashboardPage() {
     .single();
 
   if (profileError && status !== 406) {
-    console.error(profileError);
+    console.log(profileError);
     throw profileError;
   }
 
@@ -57,16 +64,20 @@ export default async function DashboardPage() {
   let trades = null;
   let apiError = null;
 
-  if (!exchangeError && userExchange) {
+  if (!exchangeError && user && userExchange) {
     try {
       // @ts-expect-error ccxt does not have types for all exchanges
       const exchange = new ccxt[userExchange.exchange_id]({
         apiKey: decrypt(userExchange.api_key),
         secret: decrypt(userExchange.api_secret),
       });
-      exchangeData = await fetchAllBalances(exchange);
+
+      await useBalanceStore.getState().fetchBalance(user.id, exchange);
+      exchangeData = useBalanceStore.getState().balanceByUser[user.id];
+
       const tickers = exchangeData.totalValues.map(({ crypto }) => crypto);
-      trades = await fetchAllTrades(exchange, tickers);
+      await useTradesStore.getState().fetchTrades(user.id, exchange, tickers);
+      trades = useTradesStore.getState().tradesByUser[user.id];
     } catch (error) {
       console.error("Error fetching exchange data:", error);
       toast.error("Error fetching exchange data");
