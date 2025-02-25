@@ -11,6 +11,8 @@ import { useCryptoListData } from "@/hooks/useCryptoListData";
 
 import Image from "next/image";
 
+import Blocktracr from "@/components/logos/blocktracr";
+
 const Circle = forwardRef<
   HTMLDivElement,
   { className?: string; children?: React.ReactNode }
@@ -105,12 +107,7 @@ export default function Features() {
                   className="dark:bg-muted-foreground/50 size-16 drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))]"
                   ref={div4Ref}
                 >
-                  <Image
-                    src="/images/logo.png"
-                    alt="Logo"
-                    width={32}
-                    height={32}
-                  />
+                  <Blocktracr className="h-8 w-8" />
                 </Circle>
                 <Circle
                   className="dark:bg-muted-foreground/50 drop-shadow-[2px_1px_12px_hsla(var(--brand-foreground))]"

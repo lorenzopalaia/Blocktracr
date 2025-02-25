@@ -17,6 +17,7 @@
     "components/**/*.{js,jsx,ts,tsx}",
     "hooks/**/*.{js,jsx,ts,tsx}",
     "lib/**/*.{js,jsx,ts,tsx}",
+    "public/images/**/*.{png,jpg,jpeg,gif,svg}",
     "scripts/**/*.{mjs}",
     "stores/**/*.{js,jsx,ts,tsx}",
     "types/**/*.{js,jsx,ts,tsx}",

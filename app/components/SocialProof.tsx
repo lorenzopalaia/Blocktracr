@@ -110,10 +110,10 @@ export default function SocialProof() {
       <div className="max-w-container mx-auto flex flex-col items-center gap-4 text-center sm:gap-16">
         <div className="flex flex-col items-center gap-4 px-4 sm:gap-8">
           <h2 className="max-w-[720px] text-3xl leading-tight font-semibold sm:text-5xl sm:leading-tight">
-            Loved by designers and developers across the planet
+            Trusted by thousands of crypto traders worldwide
           </h2>
           <p className="text-md text-muted-foreground max-w-[600px] font-medium sm:text-xl">
-            Here&apos;s what people are saying about Launch UI
+            Here&apos;s what people are saying about Blocktracr
           </p>
         </div>
 

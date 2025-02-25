@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/navbar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import LaunchUI from "@/components/logos/launch-ui";
+import Blocktracr from "@/components/logos/blocktracr";
 import Link from "next/link";
 import ThemeToggle from "@/app/components/Layout/ThemeToggle";
 
@@ -79,7 +79,7 @@ export default function Navbar() {
               href="/"
               className="flex items-center gap-2 text-xl font-bold"
             >
-              <LaunchUI />
+              <Blocktracr className="h-6 w-6" />
               Blocktracr
             </Link>
             <Navigation />

@@ -13,7 +13,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "./navigation-menu";
-import LaunchUI from "../logos/launch-ui";
+import Blocktracr from "@/components/logos/blocktracr";
 
 export default function Navigation() {
   return (
@@ -29,7 +29,7 @@ export default function Navigation() {
                     className="from-muted/30 to-muted/10 flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
                     href="/"
                   >
-                    <LaunchUI />
+                    <Blocktracr className="h-6 w-6" />
                     <div className="mt-4 mb-2 text-lg font-medium">
                       Blocktracr
                     </div>

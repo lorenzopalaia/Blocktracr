@@ -14,7 +14,7 @@ import {
   TextCursor,
   Wrench,
 } from "lucide-react";
-import LaunchUI from "@/components/logos/launch-ui";
+import Blocktracr from "@/components/logos/blocktracr";
 
 function Rocket() {
   return (
@@ -99,7 +99,7 @@ function Rocket() {
                                       <div className="glass-5 border-brand-foreground/50 dark:border-border flex h-full w-full items-center justify-center rounded-full p-2.5 shadow-md">
                                         <div className="after:-xl relative after:absolute after:inset-0 after:scale-[2] after:rounded-full after:bg-[radial-gradient(ellipse_at_center,_hsla(var(--brand)/.3)_10%,_hsla(var(--brand)/0)_60%)] after:opacity-70 after:content-['']">
                                           <div className="relative z-10">
-                                            <LaunchUI className="text-foreground h-16 w-16" />
+                                            <Blocktracr className="text-foreground h-16 w-16" />
                                           </div>
                                         </div>
                                       </div>
@@ -424,7 +424,7 @@ export default function BentoGrid() {
                   <div className="bg-accent/5 absolute top-0 left-0 z-10 flex w-full min-w-[680px] translate-y-0 overflow-hidden rounded-2xl p-2 transition-all duration-1000 ease-in-out group-hover:-translate-y-4">
                     <div className="border-border/70 dark:border-border/5 dark:border-t-border/15 relative z-10 flex overflow-hidden rounded-md border shadow-2xl">
                       <Image
-                        alt="Launch UI app screenshot"
+                        alt="Blocktracr App"
                         loading="lazy"
                         width="1340"
                         height="820"

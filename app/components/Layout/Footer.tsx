@@ -4,7 +4,7 @@ import {
   FooterBottom,
   FooterContent,
 } from "@/components/ui/footer";
-import LaunchUI from "@/components/logos/launch-ui";
+import Blocktracr from "@/components/logos/blocktracr";
 import Link from "next/link";
 import Github from "@/components/logos/github";
 
@@ -18,7 +18,7 @@ export default function FooterSection() {
           <FooterContent className="sm:grid-cols-2 md:grid-cols-3">
             <FooterColumn className="col-span-2 flex-row items-center justify-between gap-8 border-b pb-8 md:col-span-1 md:flex-col md:items-start md:justify-start md:border-b-0">
               <div className="flex items-center gap-2">
-                <LaunchUI />
+                <Blocktracr className="h-6 w-6" />
                 <h3 className="text-xl font-bold">Blocktracr</h3>
               </div>
               <div className="ml-2.5 flex gap-4 sm:ml-0">
