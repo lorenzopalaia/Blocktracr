@@ -25,7 +25,10 @@ export const useCoinStore = create<CoinStoreState>((set, get) => ({
     set({ loading: true, error: null, currentId: id });
     try {
       const response = await fetch(`/api/coins?id=${id}`);
-      if (!response.ok) throw new Error("Network response was not ok");
+      if (!response.ok) {
+        console.error("Network response was not ok:", response.statusText);
+        throw new Error("Network response was not ok");
+      }
       const data = await response.json();
       set((state) => ({
         coins: { ...state.coins, [id]: data },

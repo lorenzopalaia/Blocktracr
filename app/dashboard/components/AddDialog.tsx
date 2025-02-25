@@ -75,6 +75,7 @@ export default function AddDialog({
       }
     } catch (error) {
       console.error("Error loading exchange exchangeData:", error);
+      toast.error("Error loading exchange exchangeData!");
     } finally {
       setFetchLoading(false);
     }
@@ -102,7 +103,10 @@ export default function AddDialog({
         { onConflict: "user_id" },
       );
 
-      if (error) throw error;
+      if (error) {
+        console.error("Error saving exchange details:", error);
+        throw error;
+      }
       router.refresh();
       toast.success(
         action === "add"

@@ -6,11 +6,11 @@ export default function Stats() {
       <div className="max-w-container mx-auto flex flex-col gap-8 md:flex-row md:gap-20">
         <div className="flex flex-col gap-8">
           <h2 className="max-w-[500px] text-3xl leading-tight font-semibold sm:text-5xl sm:leading-tight">
-            A powerful React library for websites
+            The most advanced crypto tracking platform
           </h2>
           <p className="text-md text-muted-foreground max-w-[540px] font-medium text-pretty sm:text-xl">
-            A comprehensive collection of components written in modern React,
-            Typescript and Tailwind CSS.
+            We provide cutting-edge analytics, real-time tracking, and portfolio
+            snapshots to help you make the best decisions for your investments
           </p>
         </div>
         <div className="grid max-w-[500px] grid-cols-2 gap-8 p-4 md:gap-x-20 md:gap-y-12">

@@ -28,6 +28,7 @@ function useChart() {
   const context = React.useContext(ChartContext);
 
   if (!context) {
+    console.error("useChart must be used within a <ChartContainer />");
     throw new Error("useChart must be used within a <ChartContainer />");
   }
 

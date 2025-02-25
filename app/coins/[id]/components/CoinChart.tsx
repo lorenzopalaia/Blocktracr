@@ -55,8 +55,6 @@ export default function CoinChart({ id }: { id: string }) {
     volume: data.total_volumes[index][1],
   }));
 
-  console.log(combinedData);
-
   return (
     <div className="max-w-container mx-auto flex flex-col gap-12 pt-16 sm:gap-24">
       <div className="mb-4 flex items-center justify-end">

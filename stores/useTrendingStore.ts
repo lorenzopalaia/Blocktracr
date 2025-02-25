@@ -20,7 +20,10 @@ export const useTrendingStore = create<TrendingStoreState>((set) => ({
     set({ loading: true, error: null });
     try {
       const response = await fetch("/api/trending");
-      if (!response.ok) throw new Error("Network response was not ok");
+      if (!response.ok) {
+        console.error("Network response was not ok:", response.statusText);
+        throw new Error("Network response was not ok");
+      }
       const data = await response.json();
 
       const coins: TrendingCoin[] = data.coins.map((c: any) => ({

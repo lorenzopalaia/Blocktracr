@@ -16,7 +16,10 @@ export const useCryptoListStore = create<CryptoListStoreState>((set) => ({
     set({ loading: true, error: null });
     try {
       const response = await fetch("/api/crypto-list");
-      if (!response.ok) throw new Error("Network response was not ok");
+      if (!response.ok) {
+        console.error("Network response was not ok:", response.statusText);
+        throw new Error("Network response was not ok");
+      }
       const data = await response.json();
       set({ coins: data, loading: false });
     } catch (error) {

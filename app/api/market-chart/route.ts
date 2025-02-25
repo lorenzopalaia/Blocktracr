@@ -24,6 +24,7 @@ export async function GET(request: NextRequest) {
     });
 
     if (!response.ok) {
+      console.error("Market chart fetch error:", response.statusText);
       throw new Error(`CoinGecko API error: ${response.statusText}`);
     }
 

@@ -19,6 +19,7 @@ import { fetchAllBalances, fetchAllTrades } from "@/utils/exchange";
 import Link from "next/link";
 
 import type { Metadata } from "next";
+import { toast } from "sonner";
 
 export const metadata: Metadata = {
   title: "Dashboard | Blocktracr",
@@ -48,7 +49,7 @@ export default async function DashboardPage() {
     .single();
 
   if (profileError && status !== 406) {
-    console.log(profileError);
+    console.error(profileError);
     throw profileError;
   }
 
@@ -66,8 +67,9 @@ export default async function DashboardPage() {
       exchangeData = await fetchAllBalances(exchange);
       const tickers = exchangeData.totalValues.map(({ crypto }) => crypto);
       trades = await fetchAllTrades(exchange, tickers);
-    } catch (e) {
-      console.error("Error fetching exchange data:", e);
+    } catch (error) {
+      console.error("Error fetching exchange data:", error);
+      toast.error("Error fetching exchange data");
       apiError = true;
     }
   }
@@ -81,7 +83,7 @@ export default async function DashboardPage() {
               <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
               <AddDialog user={user} action={userExchange ? "edit" : "add"} />
             </div>
-            {/* Exchange non configurato */}
+            {/* Exchange not found */}
             {exchangeError && (
               <Card>
                 <CardHeader>
@@ -98,8 +100,7 @@ export default async function DashboardPage() {
                 </CardContent>
               </Card>
             )}
-
-            {/* Credenziali non valide */}
+            {/* API error */}
             {apiError && (
               <Card>
                 <CardHeader>
@@ -116,8 +117,7 @@ export default async function DashboardPage() {
                 </CardContent>
               </Card>
             )}
-
-            {/* Dati validi - mostra dashboard */}
+            {/* Valid data -> show dashboard */}
             {!exchangeError && !apiError && exchangeData && trades && (
               <>
                 <p className="text-muted-foreground">

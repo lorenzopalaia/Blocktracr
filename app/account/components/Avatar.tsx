@@ -32,13 +32,15 @@ export default function Avatar({
           .from("avatars")
           .download(path);
         if (error) {
+          console.error("Error downloading image: ", error);
           throw error;
         }
 
         const url = URL.createObjectURL(data);
         setAvatarUrl(url);
       } catch (error) {
-        console.log("Error downloading image: ", error);
+        console.error("Error downloading image: ", error);
+        toast.error("Error downloading image!");
       }
     }
 
@@ -52,6 +54,7 @@ export default function Avatar({
       setUploading(true);
 
       if (!event.target.files || event.target.files.length === 0) {
+        console.error("You must select an image to upload.");
         throw new Error("You must select an image to upload.");
       }
 
@@ -64,6 +67,7 @@ export default function Avatar({
         .upload(filePath, file);
 
       if (uploadError) {
+        console.error("Error uploading avatar:", uploadError);
         throw uploadError;
       }
 

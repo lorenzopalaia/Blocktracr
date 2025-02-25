@@ -20,7 +20,10 @@ export const useGlobalMarketDataStore = create<GlobalMarketDataStoreState>(
       set({ loading: true, error: null });
       try {
         const response = await fetch("/api/global-market-data");
-        if (!response.ok) throw new Error("Network response was not ok");
+        if (!response.ok) {
+          console.error("Network response was not ok:", response.statusText);
+          throw new Error("Network response was not ok");
+        }
         const responseData: GlobalMarketDataResponse = await response.json();
         set({ data: responseData.data, loading: false });
       } catch (error) {

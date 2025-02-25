@@ -37,7 +37,10 @@ export const useMarketChartStore = create<MarketChartStoreState>(
         const response = await fetch(
           `/api/market-chart?id=${id}&days=${timeRange}`,
         );
-        if (!response.ok) throw new Error("Network response was not ok");
+        if (!response.ok) {
+          console.error("Network response was not ok:", response.statusText);
+          throw new Error("Network response was not ok");
+        }
         const data = await response.json();
         set((state) => ({
           charts: {

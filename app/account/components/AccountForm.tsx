@@ -32,7 +32,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         .single();
 
       if (error && status !== 406) {
-        console.log(error);
+        console.error("Error loading user data:", error);
         throw error;
       }
 
@@ -75,7 +75,10 @@ export default function AccountForm({ user }: { user: User | null }) {
         avatar_url,
         updated_at: new Date().toISOString(),
       });
-      if (error) throw error;
+      if (error) {
+        console.error("Error updating the data:", error);
+        throw error;
+      }
       toast.success("Profile updated!");
     } catch (error) {
       console.error("Error updating the data:", error);

@@ -17,6 +17,8 @@ import { useEffect, useState, useCallback } from "react";
 
 import { createClient } from "@/utils/supabase/client";
 
+import { toast } from "sonner";
+
 interface Profile {
   full_name: string;
   username: string;
@@ -51,6 +53,7 @@ export default function Navbar() {
         .single();
 
       if (error && status !== 406) {
+        console.error("An error occurred while fetching user profile", error);
         throw error;
       }
 
@@ -59,6 +62,7 @@ export default function Navbar() {
       }
     } catch (error) {
       console.error("An error occurred while fetching user profile", error);
+      toast.error("An error occurred while fetching user profile");
       setProfile(null);
     } finally {
       setLoading(false);
