@@ -158,7 +158,7 @@ export default function Navbar() {
                     Sign In
                   </Link>
                   <Link
-                    href="/"
+                    href="/docs"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     Documentation
