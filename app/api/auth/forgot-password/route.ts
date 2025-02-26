@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   const siteUrl = process.env.SITE_URL || "https://blocktracr.lorenzopalaia.it";
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: siteUrl + "/reset-password",
+    redirectTo: new URL("/reset-password", siteUrl).toString(),
   });
 
   if (error) {

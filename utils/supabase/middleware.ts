@@ -36,6 +36,14 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // if request is to reset password and code is not present, redirect to sign in
+  if (request.nextUrl.pathname === "/reset-password") {
+    const requestUrl = new URL(request.url);
+    if (!requestUrl.searchParams.has("code")) {
+      return NextResponse.redirect(new URL("/signin", request.url));
+    }
+  }
+
   // if request is to sign in or sign up, redirect to dashboard if user is already signed in
   if (user && ["/signin", "/signup"].includes(request.nextUrl.pathname)) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
