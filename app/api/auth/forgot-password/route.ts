@@ -8,11 +8,10 @@ export async function POST(req: NextRequest) {
 
   const email = formData.get("email") as string;
 
-  const siteUrl =
-    process.env.SITE_URL || "https://www.blocktracr.lorenzopalaia.it";
+  const siteUrl = process.env.SITE_URL || "https://blocktracr.lorenzopalaia.it";
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: new URL("/reset-password", siteUrl).toString(),
+    redirectTo: siteUrl + "/reset-password",
   });
 
   if (error) {
