@@ -99,7 +99,7 @@ export default function FAQ() {
             </AccordionTrigger>
             <AccordionContent>
               <p className="text-muted-foreground mb-4 max-w-[580px]">
-                Absolutely! Join our beta program to help enhance blocktracr. In
+                Absolutely! Join our beta program to help enhance Blocktracr. In
                 return, you’ll enjoy exclusive discounts, early access to
                 features, and priority support.
               </p>

@@ -3,6 +3,9 @@ import { Section } from "@/components/ui/section";
 import Link from "next/link";
 
 export default function Privacy() {
+  const siteUrl =
+    process.env.SITE_URL || "https://www.blocktracr.lorenzopalaia.it";
+
   return (
     <Section>
       <div className="mx-auto max-w-4xl space-y-8 p-6">
@@ -14,10 +17,10 @@ export default function Privacy() {
             privacy regarding any information we may collect from you across our
             website,{" "}
             <Link
-              href="https://blocktracr.lorenzopalaia.it"
+              href={siteUrl}
               className="text-primary hover:text-primary/80 underline transition-colors"
             >
-              https://blocktracr.lorenzopalaia.it
+              {siteUrl}
             </Link>
             , and other sites we own and operate.
           </p>

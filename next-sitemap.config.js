@@ -1,3 +1,5 @@
+// TODO: dynamic coins sitemap based on coin id
+
 module.exports = {
   siteUrl: process.env.SITE_URL || "https://www.blocktracr.lorenzopalaia.it",
   generateRobotsTxt: true,
@@ -21,6 +23,8 @@ module.exports = {
     // ! Custom
     "/signin",
     "/signup",
+    "/forgot-password",
+    "/reset-password",
     "/dashboard",
     "/account",
   ],
