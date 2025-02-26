@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.blocktracr.lorenzopalaia.it
+Host: https://blocktracr.lorenzopalaia.it
 
 # Sitemaps
-Sitemap: https://www.blocktracr.lorenzopalaia.it/sitemap.xml
+Sitemap: https://blocktracr.lorenzopalaia.it/sitemap.xml

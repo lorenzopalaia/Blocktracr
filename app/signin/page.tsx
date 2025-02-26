@@ -1,3 +1,6 @@
+// TODO: use client for form submission -> implement loading state and error handling with toast (same for all auth forms)
+// ! Using client for form submission does not trigger navbar re-render
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
