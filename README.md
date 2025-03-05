@@ -21,6 +21,8 @@
   </p>
 </div>
 
+> ⚠️ **Disclaimer**: If the registration and dashboard features are not working, it's because Supabase blocks inactive instances after a period of time. You can view a demo of the dashboard or request the reactivation of the Supabase instance by sending me an email at [lorenzopalaia53@gmail.com](mailto:lorenzopalaia53@gmail.com).
+
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
