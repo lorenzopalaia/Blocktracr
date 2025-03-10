@@ -17,7 +17,7 @@
   <p align="center">
     A website that displays market data for each cryptocurrency and provides a detailed report of your wallet connected to a centralized exchange.
     <br />
-    <a href="https://blocktracr.lorenzopalaia.it/">View Demo</a>
+    <a href="https://blocktracr.lorenzopalaia.com/">View Demo</a>
   </p>
 </div>
 
@@ -27,7 +27,7 @@
 
 ## About The Project
 
-[![Project Preview][product-screenshot]](https://blocktracr.lorenzopalaia.it//)
+[![Project Preview][product-screenshot]](https://blocktracr.lorenzopalaia.com//)
 
 Second version of the project, originally developed as a university project for the "Web Languages and Technologies" course at Sapienza University of Rome. The current version has been completely revamped and enhanced with new features and improvements.
 

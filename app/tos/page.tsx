@@ -3,7 +3,8 @@ import { Section } from "@/components/ui/section";
 import Link from "next/link";
 
 export default function TOS() {
-  const siteUrl = process.env.SITE_URL || "https://blocktracr.lorenzopalaia.it";
+  const siteUrl =
+    process.env.SITE_URL || "https://blocktracr.lorenzopalaia.com";
 
   return (
     <Section>

@@ -1,6 +1,6 @@
 const config = {
   logos: {
-    lastUpdated: "Mar 5, 2025",
+    lastUpdated: "Mar 10, 2025",
   },
   footer: {
     year: 2025,
