@@ -128,7 +128,7 @@ export default function CoinStats({ id }: { id: string }) {
               {stats.map((stat, index) => (
                 <div key={index} className="flex flex-col">
                   <h3 className="text-muted-foreground">{stat.title}</h3>
-                  <h2 className="gradient-brand text-2xl font-bold">
+                  <h2 className="gradient-brand text-xl font-bold">
                     {stat.unit !== "%" ? "$" : ""}
                     {stat.value}
                     {stat.unit}

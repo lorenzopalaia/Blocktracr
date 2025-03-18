@@ -25,7 +25,7 @@ export default function Balance({ values }: CoinsListProps) {
   }));
 
   return (
-    <ul>
+    <ul className="w-full">
       {formattedValues.map((item) => (
         <li key={item.crypto} className="flex justify-between py-4">
           <div className="flex flex-col">
