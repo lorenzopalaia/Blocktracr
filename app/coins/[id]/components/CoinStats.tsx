@@ -23,7 +23,7 @@ export default function CoinStats({ id }: { id: string }) {
 
   const stats = [
     {
-      title: "Market Cap",
+      title: "M. Cap",
       ...formatPrice(coin.market_data.market_cap.usd),
     },
     {
@@ -47,8 +47,8 @@ export default function CoinStats({ id }: { id: string }) {
   return (
     <div className="max-w-container mx-auto flex flex-col gap-12 pt-16 sm:gap-24">
       <div className="flex flex-col gap-6 sm:gap-12">
-        <div className="flex gap-8">
-          <div className="w-1/2 space-y-4">
+        <div className="flex flex-col gap-8 md:flex-row">
+          <div className="w-full space-y-4 md:w-1/2">
             <div className="flex items-center gap-2">
               <Image
                 src={coin.image.large}
@@ -78,7 +78,7 @@ export default function CoinStats({ id }: { id: string }) {
               )}
             </div>
           </div>
-          <div className="w-1/2 space-y-4">
+          <div className="w-full space-y-4 md:w-1/2">
             <div className="flex items-center gap-2">
               <h2 className="gradient-brand text-4xl font-bold">
                 ${coin.market_data.current_price.usd.toLocaleString()}

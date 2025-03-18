@@ -135,7 +135,7 @@ function Chat() {
           <div className="glass-4 text-muted-foreground max-w-[280px] rounded-xl px-3 py-2 shadow-md">
             My portfolio is up 20% this month! The analytics are spot on
           </div>
-          <div className="border-brand-foreground bg-brand-foreground/70 group-hover:animate-hover-reverse dark:border-brand dark:bg-brand-foreground relative z-10 flex rounded-lg border px-2 py-0.5 shadow-lg">
+          <div className="border-brand-foreground bg-brand-foreground/70 md:group-hover:animate-hover-reverse animate-hover-reverse dark:border-brand dark:bg-brand-foreground relative z-10 flex rounded-lg border px-2 py-0.5 shadow-lg md:animate-none">
             Alex M.
             <div className="absolute -top-6 -right-3">
               <svg
@@ -161,7 +161,7 @@ function Chat() {
           <div className="glass-4 text-muted-foreground max-w-[280px] rounded-xl px-3 py-2 shadow-md">
             And zero wallet connection required - totally secure! 🔒
           </div>
-          <div className="group-hover:animate-hover relative z-10">
+          <div className="md:group-hover:animate-hover animate-hover relative z-10 md:animate-none">
             <div className="border-primary/80 bg-foreground dark:text-primary text-primary-foreground flex -translate-x-24 rounded-lg border px-2 py-0.5">
               Sarah K.
               <div className="absolute -top-6 -left-3">
@@ -181,7 +181,7 @@ function Chat() {
             </div>
           </div>
         </div>
-        <div className="absolute top-[50%] w-full scale-x-[1.5] opacity-20 transition-all duration-300 group-hover:opacity-30">
+        <div className="absolute top-[50%] w-full scale-x-[1.5] opacity-20 transition-all duration-300 md:opacity-20 md:group-hover:opacity-30">
           <div className="absolute left-1/2 h-[256px] w-[60%] -translate-x-1/2 -translate-y-1/2 scale-[2.5] rounded-[50%] bg-[radial-gradient(ellipse_at_center,_hsla(var(--brand-foreground)/.5)_10%,_hsla(var(--brand-foreground)/0)_60%)] opacity-20 sm:h-[512px] dark:opacity-100"></div>
           <div className="absolute left-1/2 h-[128px] w-[40%] -translate-x-1/2 -translate-y-1/2 scale-[2] rounded-[50%] bg-[radial-gradient(ellipse_at_center,_hsla(var(--brand)/.3)_10%,_hsla(var(--brand-foreground)/0)_60%)] opacity-20 sm:h-[256px] dark:opacity-100"></div>
         </div>
@@ -286,7 +286,7 @@ function Radar() {
                 }}
               ></div>
               <div
-                className="group-hover:animate-spin-slow absolute inset-0 h-full w-full rounded-full opacity-0 group-hover:opacity-100"
+                className="md:group-hover:animate-spin-slow animate-spin-slow absolute inset-0 h-full w-full rounded-full opacity-100 md:opacity-0 md:group-hover:opacity-100"
                 style={{
                   background:
                     "conic-gradient(transparent, transparent, transparent, transparent, hsla(var(--brand-foreground) / 0.4))",
@@ -294,11 +294,11 @@ function Radar() {
               ></div>
             </div>
           </div>
-          <div className="bg-brand absolute bottom-[20%] left-[30%] h-3 w-3 rounded-full opacity-50 shadow-[0_0_12px_4px_hsla(var(--brand-foreground)/1)] group-hover:animate-ping group-hover:opacity-100"></div>
+          <div className="bg-brand absolute bottom-[20%] left-[30%] h-3 w-3 animate-ping rounded-full opacity-100 shadow-[0_0_12px_4px_hsla(var(--brand-foreground)/1)] md:opacity-50 md:group-hover:animate-ping md:group-hover:opacity-100"></div>
           <div className="absolute bottom-[20%] left-[30%] h-3 w-3 rounded-full bg-white/80"></div>
-          <div className="bg-brand absolute right-[25%] bottom-[40%] h-3 w-3 rounded-full opacity-50 shadow-[0_0_12px_4px_hsla(var(--brand-foreground)/1)] group-hover:animate-ping group-hover:opacity-100"></div>
+          <div className="bg-brand absolute right-[25%] bottom-[40%] h-3 w-3 animate-ping rounded-full opacity-100 shadow-[0_0_12px_4px_hsla(var(--brand-foreground)/1)] md:opacity-50 md:group-hover:animate-ping md:group-hover:opacity-100"></div>
           <div className="absolute right-[25%] bottom-[40%] h-3 w-3 rounded-full bg-white/80"></div>
-          <div className="absolute top-[50%] w-full opacity-20 transition-all duration-300 group-hover:opacity-30">
+          <div className="absolute top-[50%] w-full opacity-30 transition-all duration-300 md:opacity-20 md:group-hover:opacity-30">
             <div className="absolute left-1/2 h-[256px] w-[60%] -translate-x-1/2 -translate-y-1/2 scale-[2.5] rounded-[50%] bg-[radial-gradient(ellipse_at_center,_hsla(var(--brand-foreground)/.5)_10%,_hsla(var(--brand-foreground)/0)_60%)] opacity-20 sm:h-[512px] dark:opacity-100"></div>
             <div className="absolute left-1/2 h-[128px] w-[40%] -translate-x-1/2 -translate-y-1/2 scale-[2] rounded-[50%] bg-[radial-gradient(ellipse_at_center,_hsla(var(--brand)/.3)_10%,_hsla(var(--brand-foreground)/0)_60%)] opacity-20 sm:h-[256px] dark:opacity-100"></div>
           </div>

@@ -99,7 +99,7 @@ export default function Docs() {
             <div>
               <h3 className="mb-2 text-xl font-semibold">Market Chart</h3>
               <pre className="bg-muted rounded-lg p-4">
-                <code>
+                <code className="break-words whitespace-pre-wrap">
                   GET /api/market-chart?id={"{coin_id}"}&days={"{days}"}
                 </code>
               </pre>

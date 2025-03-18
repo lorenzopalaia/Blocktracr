@@ -26,7 +26,7 @@ export default function Trending() {
             href={`/coins/${coin.id}`}
             className="flex flex-col items-center drop-shadow-[2px_1px_24px_hsla(var(--brand-foreground))]"
           >
-            <span className="from-foreground to-foreground dark:to-brand bg-linear-to-r bg-clip-text text-4xl font-bold text-transparent">
+            <span className="from-foreground to-foreground dark:to-brand bg-linear-to-r bg-clip-text text-2xl font-bold text-transparent sm:text-4xl">
               ${coin.current_price.toLocaleString()}
             </span>
             <div className="flex items-center gap-2">

@@ -12,7 +12,7 @@ export default function Trades({ values }: TradesProps) {
       {values.map((trade) => (
         <Card key={trade.id}>
           <CardContent className="p-4">
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
               {/* Trade Info & Symbol */}
               <div className="space-y-2">
                 <div className="flex items-center gap-2">

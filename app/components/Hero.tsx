@@ -32,15 +32,15 @@ export default function Hero() {
     <Section className="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0">
       <div className="max-w-container mx-auto flex flex-col gap-12 pt-16 sm:gap-24">
         <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
-          <Link href="/dashboard" className="cursor-pointer">
+          <Link href="/demo" className="cursor-pointer">
             <AnimatedGradientText>
-              🚀 <hr className="mx-2 h-4 w-px shrink-0 bg-gray-300" />{" "}
+              ⚠️ <hr className="mx-2 h-4 w-px shrink-0 bg-gray-300" />{" "}
               <span
                 className={cn(
                   `animate-gradient inline bg-linear-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`,
                 )}
               >
-                Experience live crypto tracking!
+                Check out the demo if signup is not enabled
               </span>
               <ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
             </AnimatedGradientText>

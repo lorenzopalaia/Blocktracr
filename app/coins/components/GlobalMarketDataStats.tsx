@@ -49,10 +49,10 @@ export default function GlobalMarketDataStats() {
             key={coin.title}
             className="flex flex-col items-center drop-shadow-[2px_1px_24px_hsla(var(--brand-foreground))]"
           >
-            <span className="from-foreground to-foreground dark:to-brand bg-linear-to-r bg-clip-text text-4xl font-bold text-transparent">
+            <span className="from-foreground to-foreground dark:to-brand bg-linear-to-r bg-clip-text text-2xl font-bold text-transparent sm:text-4xl">
               {coin.unit === "%" ? "" : "$"}
               {coin.value.toLocaleString()}
-              <span className="text-xl">{coin.unit}</span>
+              <span className="text-lg md:text-xl">{coin.unit}</span>
             </span>
             <span className="font-bold">{coin.title}</span>
           </div>
