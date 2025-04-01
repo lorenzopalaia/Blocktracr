@@ -41,6 +41,10 @@ Second version of the project, originally developed as a university project for 
 - [TypeScript](https://www.typescriptlang.org/)
 - [Supabase](https://www.supabase.com/)
 
+### System Design
+
+![System Design](./repo_assets/system-design.png)
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
