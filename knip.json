@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/knip@5.44.4/schema.json",
+  "$schema": "https://unpkg.com/knip/schema.json",
   "next": {
     "entry": [
       "next.config.{js,ts,cjs,mjs}",
@@ -18,19 +18,19 @@
     "hooks/**/*.{js,jsx,ts,tsx}",
     "lib/**/*.{js,jsx,ts,tsx}",
     "public/images/**/*.{png,jpg,jpeg,gif,svg}",
-    "scripts/**/*.{mjs}",
+    "scripts/**/*.{js,jsx,ts,tsx,mjs,cjs}",
     "stores/**/*.{js,jsx,ts,tsx}",
     "types/**/*.{js,jsx,ts,tsx}",
     "utils/**/*.{js,jsx,ts,tsx}"
   ],
-  "ignore": [],
+  "ignoreFiles": ["utils/supabase/middleware.ts"],
   "ignoreExportsUsedInFile": true,
   "ignoreDependencies": [
-    "eslint",
-    "eslint-config-next",
     "tailwindcss",
     "tailwindcss-animate",
     "shadcn",
-    "tree-cli"
+    "tree-cli",
+    "protobufjs",
+    "eslint-config-next"
   ]
 }
